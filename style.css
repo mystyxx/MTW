@@ -1,0 +1,13 @@
+body {
+    background-color: black;
+    color: aliceblue;
+    margin-left: 25%;
+}
+
+#words {
+    font-size: 35px;
+}
+
+#typeInput {
+    font-size: 25px;
+}

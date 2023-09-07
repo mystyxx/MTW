@@ -7,6 +7,7 @@ body {
     font-size: 35px;
     margin-left: 5em;
     margin-right: 5em;
+    background-color: darkgray;
 }
 
 #typeInput {

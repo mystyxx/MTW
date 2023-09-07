@@ -7,9 +7,17 @@ body {
     font-size: 35px;
     margin-left: 5em;
     margin-right: 5em;
+    background-color: rgb(48, 48, 48);
 }
 
 #typeInput {
     font-size: 25px;
     margin-left: 20em;
+}
+
+#score {
+    margin-left: 25em;
+    margin-top: 0;
+    display: flex;
+    align-items: flex-start;
 }

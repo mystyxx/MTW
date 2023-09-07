@@ -86,17 +86,13 @@ document.getElementById('words').innerHTML = merge(wordList);
 var i = 0;
 
 addEventListener('keydown', (nextWord)=> {
-    console.log(' ' + wordList[i])
     if(nextWord.isComposing || nextWord.keyCode === 32) {
-        if (input === ' ' + wordList[i]) {
-            correctWordNumber++;
-            scorebox.value += 1
+        if (input == ' ' + wordList[i]) {
+           scorebox.innerText++;
 
         }
-        console.log(input == wordList[i])
         inputbox.value = '';
         i++
-        console.log(scorebox.value);
 
     }
 });

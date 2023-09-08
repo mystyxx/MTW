@@ -3,11 +3,18 @@ body {
     color: aliceblue;
 }
 
+
 #words {
     font-size: 35px;
     margin-left: 5em;
     margin-right: 5em;
     background-color: rgb(48, 48, 48);
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+#words>span {
+    margin-right: 10px;
 }
 
 #typeInput {
@@ -15,9 +22,6 @@ body {
     margin-left: 20em;
 }
 
-#score {
-    margin-left: 25em;
-    margin-top: 0;
-    display: flex;
-    align-items: flex-start;
+.highlight {
+    background-color: rgba(0, 95, 0, 0.664);
 }

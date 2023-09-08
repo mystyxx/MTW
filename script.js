@@ -1,13 +1,13 @@
 var inputbox = document.getElementById('typeInput');
 var input = inputbox.value;
 var scorebox = document.getElementById('score');
+var wordsArea = document.getElementById('words')
 
 const frenchWords = [
     "Bonjour",
     "Merci",
     "Oui",
     "Non",
-    "Excusez-moi",
     "Manger",
     "Boire",
     "Maison",
@@ -36,7 +36,6 @@ const frenchWords = [
   "Jour",
   "Nuit",
   "Matin",
-  "Après-midi",
   "Soir",
   "Hôtel",
   "Restaurant",
@@ -82,17 +81,31 @@ function merge(array) {
 }
 
 var wordList = shuffle(frenchWords);
-document.getElementById('words').innerHTML = merge(wordList);
+
+//créer un span par mot
+for(i = 0; i < wordList.length;i++) {
+    var newtask = document.createElement('span');
+    newtask.innerHTML = wordList[i];
+    newtask.id = i;
+    document.body.appendChild(newtask);
+    document.getElementById('words').appendChild(newtask);
+
+}
+
+// document.getElementById('words').innerHTML = merge(wordList);
 var i = 0;
 
-addEventListener('keydown', (nextWord)=> {
+addEventListener('keyup', (nextWord)=> {
     if(nextWord.isComposing || nextWord.keyCode === 32) {
-        if (input == ' ' + wordList[i]) {
-           scorebox.innerText++;
+        if (inputbox.value == wordList[i] + ' ') {
+           scorebox.innerHTML++;
 
         }
         inputbox.value = '';
         i++
+        document.getElementById(i).className = 'highlight';
+        document.getElementById(i-1).className = '';
+
 
     }
 });

@@ -10,7 +10,16 @@ body {
     background-color: darkgray;
 }
 
+#words>span {
+    margin-right: 10px;
+    word-wrap: break-word;
+}
+
 #typeInput {
     font-size: 25px;
     margin-left: 20em;
+}
+
+.highlight {
+    background-color: rgba(0, 70, 0, 0.651);
 }

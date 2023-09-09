@@ -1,13 +1,14 @@
 var inputbox = document.getElementById('typeInput');
 var input = inputbox.innerHTML;
 var scorebox = document.getElementById('score');
+var timeBox = document.getElementById('time');
+var temps = timeBox.value;
 
 const frenchWords = [
     "Bonjour",
     "Merci",
     "Oui",
     "Non",
-    "Excusez-moi",
     "Manger",
     "Boire",
     "Maison",
@@ -36,7 +37,6 @@ const frenchWords = [
   "Jour",
   "Nuit",
   "Matin",
-  "Après-midi",
   "Soir",
   "Hôtel",
   "Restaurant",
@@ -53,6 +53,7 @@ const frenchWords = [
   "Poisson",
   "Dessert"
 ];
+
 
 
 function shuffle(array) {
@@ -81,20 +82,47 @@ function merge(array) {
     return merged;
 }
 
+function timer() {
+    timeBox.innertext = temps;
+    temps--;
+    if (timeBox.innertext == 0) {
+        testRunning = false;
+    }
+}
+
 var wordList = shuffle(frenchWords);
-document.getElementById('words').innerHTML = merge(wordList);
 var i = 0;
 
-addEventListener('keydown', (nextWord)=> {
-    if(nextWord.isComposing || nextWord.keyCode === 32) {
-        if (input === ' ' + wordList[i]) {
-            correctWordNumber++;
-            scorebox.value += 1
-            console.log(correctWordNumber);
-            inputbox.innerText = '';
-        }
-        i++
-        console.log(scorebox.value);
+//créer un span par mot
+for(i = 0; i < wordList.length;i++) {
+    var newtask = document.createElement('span');
+    newtask.innerHTML = wordList[i];
+    newtask.id = i;
+    document.body.appendChild(newtask);
+    document.getElementById('words').appendChild(newtask);
 
+}
+
+var i = 0;
+document.getElementById(0).className = 'highlight';
+
+addEventListener('keyup', (nextWord)=> {
+    if(nextWord.isComposing || nextWord.keyCode === 32) {
+        if (inputbox.value == wordList[i] + ' ') {
+           scorebox.innerHTML++;
+
+        }
+        inputbox.value = '';
+        i++
+        document.getElementById(i).className = 'highlight';
+        document.getElementById(i-1).className = '';
     }
 });
+
+var testRunning = true;
+setInterval(timer, 1000)
+
+
+if(testRunning == false) {
+    document.getElementById('wpm').innerText = scorebox.value/timeBox.value
+}

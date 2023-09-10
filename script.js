@@ -5,53 +5,40 @@ var timeBox = document.getElementById('time');
 var temps = timeBox.innertext;
 
 const frenchWords = [
-    "Bonjour",
-    "Merci",
-    "Oui",
-    "Non",
-    "Manger",
-    "Boire",
-    "Maison",
-    "Amour",
-  "Chien",
-  "Chat",
-  "Livre",
-  "École",
-  "Musique",
-  "Soleil",
-  "Lune",
-  "Étoile",
-  "Fleur",
-  "Arbre",
-  "Montagne",
-  "Plage",
-  "Rivière",
-  "Ville",
-  "Pays",
-  "Voiture",
-  "Train",
-  "Avion",
-  "Vélo",
-  "Temps",
-  "Heure",
-  "Jour",
-  "Nuit",
-  "Matin",
-  "Soir",
-  "Hôtel",
-  "Restaurant",
-  "Vin",
-  "Bière",
-  "Fromage",
-  "Pain",
-  "Eau",
-  "Café",
-  "Thé",
-  "Fruits",
-  "Légumes",
-  "Viande",
-  "Poisson",
-  "Dessert"
+  "bonjour",
+  "merci",
+  "plaisir",
+  "amour",
+  "chien",
+  "chat",
+  "livre",
+  "musique",
+  "soleil",
+  "lune",
+  "étoile",
+  "fleur",
+  "arbre",
+  "montagne",
+  "plage",
+  "ville",
+  "voiture",
+  "train",
+  "avion",
+  "temps",
+  "jour",
+  "nuit",
+  "matin",
+  "soir",
+  "hôtel",
+  "vin",
+  "pain",
+  "eau",
+  "café",
+  "fruits",
+  "légumes",
+  "viande",
+  "poisson",
+  "dessert"
 ];
 
 
@@ -75,7 +62,8 @@ function timer() {
         timeBox.textContent--;
     }
     if (timeBox.textContent == '0') {
-        document.getElementById('wpm').textContent = scorebox.textContent*4 + 'wpm';
+        document.getElementById('wpm').textContent = 'previous score : ' + correctWords*4 + ' wpm';
+        inputbox.style.display = 'none';
 
     }
 }
@@ -94,6 +82,7 @@ for(i = 0; i < wordList.length;i++) {
 }
 
 var i = 0;
+correctWords = 0;
 document.getElementById(0).className = 'highlight';
 
 var testRunning = false;
@@ -105,11 +94,12 @@ addEventListener('keyup', (nextWord)=> {
     }
     if(nextWord.isComposing || nextWord.keyCode === 32) {
         if (inputbox.value == wordList[i] + ' ') {
-            scorebox.innerHTML++;
+            correctWords++;
             
         }
+        i++;
+        scorebox.textContent = 'score : ' + correctWords + '/' + i
         inputbox.value = '';
-        i++
         document.getElementById(i).className = 'highlight';
         document.getElementById(i-1).className = '';
     }

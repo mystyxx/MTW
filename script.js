@@ -2,7 +2,7 @@ var inputbox = document.getElementById('typeInput');
 var input = inputbox.innerHTML;
 var scorebox = document.getElementById('score');
 var timeBox = document.getElementById('time');
-var temps = timeBox.value;
+var temps = timeBox.innertext;
 
 const frenchWords = [
     "Bonjour",
@@ -59,34 +59,24 @@ const frenchWords = [
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
     
-    // While there remain elements to shuffle.
     while (currentIndex > 0) {
         
-        // Pick a remaining element.
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
         
-        // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
     
     return array;
 }
 
-function merge(array) {
-    let merged = '';
-    
-    for(i = 0; i < array.length; i++) {
-        merged += array[i] + ' '
-    }
-    return merged;
-}
-
 function timer() {
-    timeBox.innertext = temps;
-    temps--;
-    if (timeBox.innertext == 0) {
-        testRunning = false;
+    if (timeBox.textContent > 0) {
+        timeBox.textContent--;
+    }
+    if (timeBox.textContent == '0') {
+        document.getElementById('wpm').textContent = scorebox.textContent*4 + 'wpm';
+
     }
 }
 
@@ -106,11 +96,17 @@ for(i = 0; i < wordList.length;i++) {
 var i = 0;
 document.getElementById(0).className = 'highlight';
 
+var testRunning = false;
+
 addEventListener('keyup', (nextWord)=> {
+    if (testRunning == false) {
+        testRunning = true;
+        setInterval(timer, 1000)
+    }
     if(nextWord.isComposing || nextWord.keyCode === 32) {
         if (inputbox.value == wordList[i] + ' ') {
-           scorebox.innerHTML++;
-
+            scorebox.innerHTML++;
+            
         }
         inputbox.value = '';
         i++
@@ -119,10 +115,3 @@ addEventListener('keyup', (nextWord)=> {
     }
 });
 
-var testRunning = true;
-setInterval(timer, 1000)
-
-
-if(testRunning == false) {
-    document.getElementById('wpm').innerText = scorebox.value/timeBox.value
-}

@@ -4,6 +4,7 @@ var scorebox = document.getElementById('score');
 var timeBox = document.getElementById('time');
 var temps = timeBox.innertext;
 var testTime = 15;
+inputbox.value = '';
 
 const frenchWords = [
   "bonjour",
@@ -59,7 +60,7 @@ function shuffle(array) {
 }
 
 function timer() {
-    if (testRunning == true) {
+    if (timeBox.textContent > 0) {
         timeBox.textContent--;
     }
     if (timeBox.textContent == '0') {
@@ -91,22 +92,6 @@ var correctCharacters = 0;
 document.getElementById(0).className = 'highlight';
 
 var testRunning = false;
-
-
-document.getElementById('retryButton').addEventListener('click', (retry)=> {
-    if (testRunning == true) {
-        i=0;
-        correctCharacters = 0;
-        correctWords = 0;
-        testRunning == false;
-        wordList = shuffle(wordList);
-        document.getElementById('words').innerHTML = '';
-        printWords(wordList);
-        timeBox.textContent = 15;
-    }
-})
-
-
 
 addEventListener('keyup', (nextWord)=> {
     if (testRunning == false) {

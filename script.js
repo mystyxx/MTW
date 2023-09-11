@@ -53,6 +53,7 @@ function shuffle(array) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
         
+        [array[0], array[randomIndex]] = [array[randomIndex], array[0]];
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
     

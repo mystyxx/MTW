@@ -3,6 +3,7 @@ var input = inputbox.innerHTML;
 var scorebox = document.getElementById('score');
 var timeBox = document.getElementById('time');
 var temps = timeBox.innertext;
+var testTime = 15;
 
 const frenchWords = [
   "bonjour",
@@ -46,7 +47,7 @@ const frenchWords = [
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
     
-    while (currentIndex > 0) {
+    while (currentIndex != testTime) {
         
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
@@ -58,35 +59,54 @@ function shuffle(array) {
 }
 
 function timer() {
-    if (timeBox.textContent > 0) {
+    if (testRunning == true) {
         timeBox.textContent--;
     }
     if (timeBox.textContent == '0') {
         document.getElementById('wpm').textContent = 'previous score : ' + (correctCharacters/5)*4 + ' wpm';
+        testRunning = false;
         inputbox.style.display = 'none';
 
     }
 }
 
 var wordList = shuffle(frenchWords);
-var i = 0;
+let i = 0;
 
-//créer un span par mot
-for(i = 0; i < wordList.length;i++) {
-    var newtask = document.createElement('span');
-    newtask.innerHTML = wordList[i];
-    newtask.id = i;
-    document.body.appendChild(newtask);
-    document.getElementById('words').appendChild(newtask);
+function printWords(wordList) {
+    //créer un span par mot
+    for(let i = 0; i < wordList.length;i++) {
+        var newtask = document.createElement('span');
+        newtask.innerHTML = wordList[i];
+        newtask.id = i;
+        document.body.appendChild(newtask);
+        document.getElementById('words').appendChild(newtask);
+    }
 
 }
 
-var i = 0;
+printWords(wordList);
 var correctWords = 0;
 var correctCharacters = 0;
 document.getElementById(0).className = 'highlight';
 
 var testRunning = false;
+
+
+document.getElementById('retryButton').addEventListener('click', (retry)=> {
+    if (testRunning == true) {
+        i=0;
+        correctCharacters = 0;
+        correctWords = 0;
+        testRunning == false;
+        wordList = shuffle(wordList);
+        document.getElementById('words').innerHTML = '';
+        printWords(wordList);
+        timeBox.textContent = 15;
+    }
+})
+
+
 
 addEventListener('keyup', (nextWord)=> {
     if (testRunning == false) {
@@ -98,6 +118,7 @@ addEventListener('keyup', (nextWord)=> {
             correctWords++;
             correctCharacters += wordList[i].length;
         }
+        
         i++;
         scorebox.textContent = 'score : ' + correctWords + '/' + i
         inputbox.value = '';

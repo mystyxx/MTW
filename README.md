@@ -5,7 +5,6 @@
 I hope you enjoy it :D If you have any issues or just want to contact me you can do it on discord, my username is mysty.xx
 
 ## Features incoming
-- restart button
 - better css
 - quote mode
 - random assets of words (currently, the words are always the same but not in the same order)

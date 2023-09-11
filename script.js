@@ -62,7 +62,7 @@ function timer() {
         timeBox.textContent--;
     }
     if (timeBox.textContent == '0') {
-        document.getElementById('wpm').textContent = 'previous score : ' + correctWords*4 + ' wpm';
+        document.getElementById('wpm').textContent = 'previous score : ' + (correctCharacters/5)*4 + ' wpm';
         inputbox.style.display = 'none';
 
     }
@@ -82,7 +82,8 @@ for(i = 0; i < wordList.length;i++) {
 }
 
 var i = 0;
-correctWords = 0;
+var correctWords = 0;
+var correctCharacters = 0;
 document.getElementById(0).className = 'highlight';
 
 var testRunning = false;
@@ -95,7 +96,7 @@ addEventListener('keyup', (nextWord)=> {
     if(nextWord.isComposing || nextWord.keyCode === 32) {
         if (inputbox.value == wordList[i] + ' ') {
             correctWords++;
-            
+            correctCharacters += wordList[i].length;
         }
         i++;
         scorebox.textContent = 'score : ' + correctWords + '/' + i

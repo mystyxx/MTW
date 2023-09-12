@@ -24,10 +24,7 @@ function shuffle(array) {
 }
 
 function timer() {
-<<<<<<< HEAD
-=======
     //this function is run each second once the first input is detected.
->>>>>>> 93562da6bc0dee43bbb25071175d7242f2f7c28f
     if (timeBox.textContent > 0 && testRunning === true) {
         timeBox.textContent--;
     }
@@ -40,12 +37,6 @@ function timer() {
 
 }
 
-<<<<<<< HEAD
-var wordList = shuffle(chooseList());
-let i = 0;
-
-=======
->>>>>>> 93562da6bc0dee43bbb25071175d7242f2f7c28f
 function printWords(wordList) {
     //create a span for each word
     for(let i = 0; i < wordList.length;i++) {
@@ -103,26 +94,22 @@ const keyCodes = {
 var currentWord = '';
 
 addEventListener('keyup', (nextWord)=> {
-<<<<<<< HEAD
-
-    currentWord += keyCodes[nextWord.keyCode];
-    console.log(currentWord)
-
-=======
     //test started when input detected
->>>>>>> 93562da6bc0dee43bbb25071175d7242f2f7c28f
     if (testRunning == false) {
         testRunning = true;
         setInterval(timer, 1000)
     }
+
+    if(keyCodes[nextWord.keyCode] != undefined) {
+        currentWord+=keyCodes[nextWord.keyCode];
+    }
+    console.log(currentWord)
+
+
     //if the spacebar is pressed,
     if(nextWord.isComposing || nextWord.keyCode === 32) {
-<<<<<<< HEAD
-        if (currentWord == wordList[i] + ' ') {
-=======
         //check if the word is correctly typed
-        if (inputbox.value == wordList[i] + ' ') {
->>>>>>> 93562da6bc0dee43bbb25071175d7242f2f7c28f
+        if (currentWord == wordList[i] + ' ') {
             correctWords++;
             correctCharacters += wordList[i].length;
         }

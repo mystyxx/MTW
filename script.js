@@ -8,6 +8,7 @@ inputbox.value = '';
 
 
 function shuffle(array) {
+    //this function shuffles the array to make the words in a different order each test.
     let currentIndex = array.length,  randomIndex;
     
     while (currentIndex != testTime) {
@@ -23,6 +24,10 @@ function shuffle(array) {
 }
 
 function timer() {
+<<<<<<< HEAD
+=======
+    //this function is run each second once the first input is detected.
+>>>>>>> 93562da6bc0dee43bbb25071175d7242f2f7c28f
     if (timeBox.textContent > 0 && testRunning === true) {
         timeBox.textContent--;
     }
@@ -35,11 +40,14 @@ function timer() {
 
 }
 
+<<<<<<< HEAD
 var wordList = shuffle(chooseList());
 let i = 0;
 
+=======
+>>>>>>> 93562da6bc0dee43bbb25071175d7242f2f7c28f
 function printWords(wordList) {
-    //créer un span par mot
+    //create a span for each word
     for(let i = 0; i < wordList.length;i++) {
         var newtask = document.createElement('span');
         newtask.innerHTML = wordList[i];
@@ -47,9 +55,12 @@ function printWords(wordList) {
         document.body.appendChild(newtask);
         document.getElementById('words').appendChild(newtask);
     }
-
+    
 }
 
+
+var wordList = shuffle(chooseList());
+var i = 0;
 printWords(wordList);
 var correctWords = 0;
 var correctCharacters = 0;
@@ -92,25 +103,35 @@ const keyCodes = {
 var currentWord = '';
 
 addEventListener('keyup', (nextWord)=> {
+<<<<<<< HEAD
 
     currentWord += keyCodes[nextWord.keyCode];
     console.log(currentWord)
 
+=======
+    //test started when input detected
+>>>>>>> 93562da6bc0dee43bbb25071175d7242f2f7c28f
     if (testRunning == false) {
         testRunning = true;
         setInterval(timer, 1000)
     }
+    //if the spacebar is pressed,
     if(nextWord.isComposing || nextWord.keyCode === 32) {
+<<<<<<< HEAD
         if (currentWord == wordList[i] + ' ') {
+=======
+        //check if the word is correctly typed
+        if (inputbox.value == wordList[i] + ' ') {
+>>>>>>> 93562da6bc0dee43bbb25071175d7242f2f7c28f
             correctWords++;
             correctCharacters += wordList[i].length;
         }
         currentWord = ''
         
-        i++;
-        scorebox.textContent = 'score : ' + correctWords + '/' + i
-        inputbox.value = '';
-        document.getElementById(i).className = 'highlight';
+        i++; //go to the next word
+        scorebox.textContent = 'score : ' + correctWords + '/' + i  //update the score
+        inputbox.value = '';                                        //clear the input 
+        document.getElementById(i).className = 'highlight';         //highlight the next word and remove it from the previous
         document.getElementById(i-1).className = '';
     }
 });

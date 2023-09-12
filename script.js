@@ -6,46 +6,9 @@ var temps = timeBox.innertext;
 var testTime = 15;
 inputbox.value = '';
 
-const frenchWords = [
-  "bonjour",
-  "merci",
-  "plaisir",
-  "amour",
-  "chien",
-  "chat",
-  "livre",
-  "musique",
-  "soleil",
-  "lune",
-  "étoile",
-  "fleur",
-  "arbre",
-  "montagne",
-  "plage",
-  "ville",
-  "voiture",
-  "train",
-  "avion",
-  "temps",
-  "jour",
-  "nuit",
-  "matin",
-  "soir",
-  "hôtel",
-  "vin",
-  "pain",
-  "eau",
-  "café",
-  "fruits",
-  "légumes",
-  "viande",
-  "poisson",
-  "dessert"
-];
-
-
 
 function shuffle(array) {
+    //this function shuffles the array to make the words in a different order each test.
     let currentIndex = array.length,  randomIndex;
     
     while (currentIndex != testTime) {
@@ -61,7 +24,8 @@ function shuffle(array) {
 }
 
 function timer() {
-    if (timeBox.textContent > 0) {
+    //this function is run each second once the first input is detected.
+    if (timeBox.textContent > 0 && testRunning === true) {
         timeBox.textContent--;
     }
     if (timeBox.textContent == '0') {
@@ -73,27 +37,8 @@ function timer() {
 
 }
 
-// fetch("myText.txt")
-//   .then((res) => res.text())
-//   .then((text) => {
-//     text.split('\n')
-//    })
-//   .catch((e) => console.error(e));
-
-function readWords() {
-    var f = new FileReader();
-
-    f.onloadend = function(){
-        console.log('feur')
-    }
-    f.readAsText('./words.txt');
-}
-
-var wordList = shuffle(chooseList());
-let i = 0;
-
 function printWords(wordList) {
-    //créer un span par mot
+    //create a span for each word
     for(let i = 0; i < wordList.length;i++) {
         var newtask = document.createElement('span');
         newtask.innerHTML = wordList[i];
@@ -101,9 +46,12 @@ function printWords(wordList) {
         document.body.appendChild(newtask);
         document.getElementById('words').appendChild(newtask);
     }
-
+    
 }
 
+
+var wordList = shuffle(chooseList());
+var i = 0;
 printWords(wordList);
 var correctWords = 0;
 var correctCharacters = 0;
@@ -112,20 +60,23 @@ document.getElementById(0).className = 'highlight';
 var testRunning = false;
 
 addEventListener('keyup', (nextWord)=> {
+    //test started when input detected
     if (testRunning == false) {
         testRunning = true;
         setInterval(timer, 1000)
     }
+    //if the spacebar is pressed,
     if(nextWord.isComposing || nextWord.keyCode === 32) {
+        //check if the word is correctly typed
         if (inputbox.value == wordList[i] + ' ') {
             correctWords++;
             correctCharacters += wordList[i].length;
         }
         
-        i++;
-        scorebox.textContent = 'score : ' + correctWords + '/' + i
-        inputbox.value = '';
-        document.getElementById(i).className = 'highlight';
+        i++; //go to the next word
+        scorebox.textContent = 'score : ' + correctWords + '/' + i  //update the score
+        inputbox.value = '';                                        //clear the input 
+        document.getElementById(i).className = 'highlight';         //highlight the next word and remove it from the previous
         document.getElementById(i-1).className = '';
     }
 });

@@ -6,44 +6,6 @@ var temps = timeBox.innertext;
 var testTime = 15;
 inputbox.value = '';
 
-const frenchWords = [
-  "bonjour",
-  "merci",
-  "plaisir",
-  "amour",
-  "chien",
-  "chat",
-  "livre",
-  "musique",
-  "soleil",
-  "lune",
-  "étoile",
-  "fleur",
-  "arbre",
-  "montagne",
-  "plage",
-  "ville",
-  "voiture",
-  "train",
-  "avion",
-  "temps",
-  "jour",
-  "nuit",
-  "matin",
-  "soir",
-  "hôtel",
-  "vin",
-  "pain",
-  "eau",
-  "café",
-  "fruits",
-  "légumes",
-  "viande",
-  "poisson",
-  "dessert"
-];
-
-
 
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
@@ -61,7 +23,7 @@ function shuffle(array) {
 }
 
 function timer() {
-    if (timeBox.textContent > 0) {
+    if (timeBox.textContent > 0 && testRunning === true) {
         timeBox.textContent--;
     }
     if (timeBox.textContent == '0') {
@@ -71,22 +33,6 @@ function timer() {
 
     }
 
-}
-
-// fetch("myText.txt")
-//   .then((res) => res.text())
-//   .then((text) => {
-//     text.split('\n')
-//    })
-//   .catch((e) => console.error(e));
-
-function readWords() {
-    var f = new FileReader();
-
-    f.onloadend = function(){
-        console.log('feur')
-    }
-    f.readAsText('./words.txt');
 }
 
 var wordList = shuffle(chooseList());
@@ -111,16 +57,55 @@ document.getElementById(0).className = 'highlight';
 
 var testRunning = false;
 
+const keyCodes = {
+  65: 'a',
+  66: 'b',
+  67: 'c',
+  68: 'd',
+  69: 'e',
+  70: 'f',
+  71: 'g',
+  72: 'h',
+  73: 'i',
+  74: 'j',
+  75: 'k',
+  76: 'l',
+  77: 'm',
+  78: 'n',
+  79: 'o',
+  80: 'p',
+  81: 'q',
+  82: 'r',
+  83: 's',
+  84: 't',
+  85: 'u',
+  86: 'v',
+  87: 'w',
+  88: 'x',
+  89: 'y',
+  90:'z',
+  32: ' ',
+};
+
+
+
+var currentWord = '';
+
 addEventListener('keyup', (nextWord)=> {
+
+    currentWord += keyCodes[nextWord.keyCode];
+    console.log(currentWord)
+
     if (testRunning == false) {
         testRunning = true;
         setInterval(timer, 1000)
     }
     if(nextWord.isComposing || nextWord.keyCode === 32) {
-        if (inputbox.value == wordList[i] + ' ') {
+        if (currentWord == wordList[i] + ' ') {
             correctWords++;
             correctCharacters += wordList[i].length;
         }
+        currentWord = ''
         
         i++;
         scorebox.textContent = 'score : ' + correctWords + '/' + i
@@ -129,4 +114,12 @@ addEventListener('keyup', (nextWord)=> {
         document.getElementById(i-1).className = '';
     }
 });
+
+document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
+    testRunning = false;
+    document.getElementById('words').textContent = '';
+    wordList = chooseQuote();
+    printWords(wordList);
+
+})
 

@@ -70,9 +70,26 @@ function timer() {
         inputbox.style.display = 'none';
 
     }
+
 }
 
-var wordList = shuffle(frenchWords);
+// fetch("myText.txt")
+//   .then((res) => res.text())
+//   .then((text) => {
+//     text.split('\n')
+//    })
+//   .catch((e) => console.error(e));
+
+function readWords() {
+    var f = new FileReader();
+
+    f.onloadend = function(){
+        console.log('feur')
+    }
+    f.readAsText('./words.txt');
+}
+
+var wordList = shuffle(chooseList());
 let i = 0;
 
 function printWords(wordList) {

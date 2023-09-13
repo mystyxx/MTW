@@ -29,12 +29,12 @@ function timer() {
         timeBox.textContent--;
     }
     if (timeBox.textContent == '0' || i===wordList.length) {
-        document.getElementById('wpm').textContent = 'previous score : ' + (correctCharacters/5)*(60/(15-timeBox.textContent)) + ' wpm';
+        document.getElementById('wpm').textContent = 'previous wpm : ' + (correctCharacters/5)*(60/(15-timeBox.textContent)) + ' wpm';
         testRunning = false;
-        inputbox.style.display = 'none';
-
+        document.getElementById('words').style.display = 'none';
+        
     }
-
+    
 }
 
 function printWords(wordList) {
@@ -61,29 +61,30 @@ var testRunning = false;
 
 addEventListener('keyup', (nextWord)=> {
     //test started when input detected
-    if (testRunning == false) {
+    if (testRunning == false && timeBox.textContent != 0) {
         testRunning = true;
         setInterval(timer, 1000)
     }
     //if the spacebar is pressed,
     if(nextWord.isComposing || nextWord.keyCode === 32) {
         var wordInput = inputbox.value.split(' ');                      //split the input to select only the first part of the input if a letter is pressed after the space
-
+        
         //check if the word is correctly typed
-        if (wordInput[0] == wordList[i]) {
+        if (wordInput[0] == wordList[i] && testRunning ==true) {
             correctWords++;
             correctCharacters += wordList[i].length;
+            document.getElementById(i).style.color = 'green';
         }
         
         if(testRunning === true) {
             i++; //go to the next word
-            scorebox.textContent = 'score : ' + correctWords + '/' + i  //update the score
+            scorebox.textContent = 'previous score : ' + correctWords + '/' + i  //update the score
             if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                 inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
-            }
-            else{inputbox.value = ''}
-            document.getElementById(i).className = 'highlight';         //highlight the next word and remove it from the previous
+            document.getElementById(i).className = 'highlight';         //highlight the next word
             document.getElementById(i-1).className = '';
+        }
+        else{inputbox.value = ''}
         }
         
     }

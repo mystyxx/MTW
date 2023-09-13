@@ -1,13 +1,13 @@
 body {
-    background-color: black;
-    color: aliceblue;
+    background-color: rgb(183, 229, 255);
+    color: rgb(0, 0, 0);
 }
 
 #words {
     font-size: 35px;
     margin-left: 5em;
     margin-right: 5em;
-    background-color: rgb(71, 71, 71);
+    background-color: rgb(255, 255, 255);
 }
 
 #words>span {
@@ -21,7 +21,7 @@ body {
 }
 
 .highlight {
-    background-color: rgba(0, 70, 0, 0.651);
+    background-color: rgba(77, 77, 77, 0.521);
 }
 
 #time {

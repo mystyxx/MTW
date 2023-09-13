@@ -2,10 +2,14 @@
 **Mystyxx'** typing website / a website to practice your **typing speed**
 
 --- 
-I hope you enjoy it :D If you have any issues or just want to contact me you can do it on discord, my username is mysty.xx
+I hope you enjoy it :D <br>
+If you have any issues or just want to contact me you can do it on discord, my username is mysty.xx <br>
+Thanks a lot to deysox for helping me so much !
 
-## Features incoming
+## Incoming features
 - better css
+- more stats shown
+- more quotes
 
 ## known issues
- - there are currently no known issues
+- the words are cut in half when they are at the end of the line

@@ -67,8 +67,10 @@ addEventListener('keyup', (nextWord)=> {
     }
     //if the spacebar is pressed,
     if(nextWord.isComposing || nextWord.keyCode === 32) {
+        var wordInput = inputbox.value.split(' ');                      //split the input to select only the first part of the input if a letter is pressed after the space
+
         //check if the word is correctly typed
-        if (inputbox.value == wordList[i] + ' ') {
+        if (wordInput[0] == wordList[i]) {
             correctWords++;
             correctCharacters += wordList[i].length;
         }
@@ -76,7 +78,10 @@ addEventListener('keyup', (nextWord)=> {
         if(testRunning === true) {
             i++; //go to the next word
             scorebox.textContent = 'score : ' + correctWords + '/' + i  //update the score
-            inputbox.value = '';                                        //clear the input 
+            if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
+                inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
+            }
+            else{inputbox.value = ''}
             document.getElementById(i).className = 'highlight';         //highlight the next word and remove it from the previous
             document.getElementById(i-1).className = '';
         }

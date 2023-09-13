@@ -27,3 +27,23 @@ body {
 #time {
     font-size: 35px;
 }
+
+
+#gamemodeBar {
+    text-align: center;
+}
+
+#gamemodeBar>p {
+    margin-right: 10px;
+}
+
+#wordsGamemodeButton{
+    display: inline-block;
+}
+#quoteGamemodeButton{
+    display: inline-block;
+}
+
+#gamemodeDivider {
+    display: inline-block;
+}

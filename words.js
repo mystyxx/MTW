@@ -71,6 +71,33 @@ const frenchWords2 = [
     'élégant',
 ]
 
+const quote1 = [
+    'dans',
+    'la',
+    'vie',
+    'on',
+    'ne',
+    'fait',
+    'pas',
+    'ce',
+    'que',
+    'l\'on',
+    'veut',
+    'mais',
+    'on',
+    'est',
+    'responsable',
+    'de',
+    'ce',
+    'que',
+    'l\'on',
+    'est.'
+];
+
+const quote2 = 'La vie est un mystère qu\'il faut vivre, et non un problème à résoudre.'.split(' ');
+
+
+
 function chooseList() {
     let feur = Math.floor(Math.random() * 2);
     if(feur==1){
@@ -79,4 +106,11 @@ function chooseList() {
     else {
         return frenchWords1;
     }
+}
+
+
+const quotelist = [quote1, quote2];
+function chooseQuote() {
+    let feur = Math.floor(Math.random() * quotelist.length);
+    return quotelist[feur];
 }

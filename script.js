@@ -28,8 +28,8 @@ function timer() {
     if (timeBox.textContent > 0 && testRunning === true) {
         timeBox.textContent--;
     }
-    if (timeBox.textContent == '0') {
-        document.getElementById('wpm').textContent = 'previous score : ' + (correctCharacters/5)*4 + ' wpm';
+    if (timeBox.textContent == '0' || i===wordList.length) {
+        document.getElementById('wpm').textContent = 'previous score : ' + (correctCharacters/5)*(60/(15-timeBox.textContent)) + ' wpm';
         testRunning = false;
         inputbox.style.display = 'none';
 
@@ -73,11 +73,31 @@ addEventListener('keyup', (nextWord)=> {
             correctCharacters += wordList[i].length;
         }
         
-        i++; //go to the next word
-        scorebox.textContent = 'score : ' + correctWords + '/' + i  //update the score
-        inputbox.value = '';                                        //clear the input 
-        document.getElementById(i).className = 'highlight';         //highlight the next word and remove it from the previous
-        document.getElementById(i-1).className = '';
+        if(testRunning === true) {
+            i++; //go to the next word
+            scorebox.textContent = 'score : ' + correctWords + '/' + i  //update the score
+            inputbox.value = '';                                        //clear the input 
+            document.getElementById(i).className = 'highlight';         //highlight the next word and remove it from the previous
+            document.getElementById(i-1).className = '';
+        }
+        
     }
 });
 
+
+document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
+    testRunning = false;
+    document.getElementById('words').textContent = '';
+    wordList = '';
+    wordList = chooseQuote();
+    printWords(wordList);
+
+});
+
+document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
+    testRunning = false;
+    document.getElementById('words').textContent = '';
+    wordList = shuffle(chooseList());
+    printWords(wordList);
+
+})

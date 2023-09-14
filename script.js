@@ -29,7 +29,8 @@ function timer() {
         timeBox.textContent--;
     }
     if (timeBox.textContent == '0' || i===wordList.length) {
-        document.getElementById('wpm').textContent = 'previous wpm : ' + (correctCharacters/5)*(60/(15-timeBox.textContent)) + ' wpm';
+        console.log(correctCharacters)
+        document.getElementById('wpm').textContent = 'previous wpm : ' + Math.floor((correctCharacters/5)*(60/(15-timeBox.textContent))) + ' wpm';
         testRunning = false;
         document.getElementById('words').style.display = 'none';
         
@@ -72,7 +73,8 @@ addEventListener('keyup', (nextWord)=> {
         //check if the word is correctly typed
         if (wordInput[0] == wordList[i] && testRunning ==true) {
             correctWords++;
-            correctCharacters += wordList[i].length;
+            correctCharacters += wordList[i].length + 1;
+            console.log(correctCharacters)
             document.getElementById(i).style.color = 'green';
         }
         

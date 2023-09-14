@@ -30,7 +30,8 @@ function timer() {
     }
     if (timeBox.textContent == '0' || i===wordList.length) {
         console.log(correctCharacters)
-        document.getElementById('wpm').textContent = 'previous wpm : ' + Math.floor((correctCharacters/5)*(60/(15-timeBox.textContent))) + ' wpm';
+        document.getElementById('wpm').textContent = 'previous wpm : ' + Math.floor((correctCharacters/5)*(60/(15-timeBox.textContent))) + ' wpm | raw : ' + correctWords + 'wpm';
+        document.getElementById('characters').textContent = 'characters :' + correctCharacters + ' | ' + wrongCharacters
         testRunning = false;
         document.getElementById('words').style.display = 'none';
         
@@ -74,9 +75,9 @@ addEventListener('keyup', (nextWord)=> {
         if (wordInput[0] == wordList[i] && testRunning ==true) {
             correctWords++;
             correctCharacters += wordList[i].length + 1;
-            console.log(correctCharacters)
             document.getElementById(i).style.color = 'green';
         }
+        else{wrongCharacters += wordInput[0].length}
         
         if(testRunning === true) {
             i++; //go to the next word

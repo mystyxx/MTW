@@ -3,8 +3,10 @@ var input = inputbox.innerHTML;
 var scorebox = document.getElementById('score');
 var timeBox = document.getElementById('time');
 var temps = timeBox.innertext;
+var wrongCharacters = 0;
 var testTime = 15;
 inputbox.value = '';
+
 
 
 function shuffle(array) {
@@ -30,8 +32,8 @@ function timer() {
     }
     if (timeBox.textContent == '0' || i===wordList.length) {
         console.log(correctCharacters)
-        document.getElementById('wpm').textContent = 'previous wpm : ' + Math.floor((correctCharacters/5)*(60/(15-timeBox.textContent))) + ' wpm | raw : ' + correctWords + 'wpm';
-        document.getElementById('characters').textContent = 'characters :' + correctCharacters + ' | ' + wrongCharacters
+        document.getElementById('wpm').textContent = 'previous wpm : ' + Math.floor((correctCharacters/5)*(60/(temps-timeBox.textContent))) + ' wpm';
+        document.getElementById('characters').textContent = 'characters : ' + correctCharacters + ' | ' + wrongCharacters;
         testRunning = false;
         document.getElementById('words').style.display = 'none';
         
@@ -99,6 +101,9 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
     document.getElementById('words').textContent = '';
     wordList = '';
     wordList = chooseQuote();
+    timeBox.style.display = 'none';
+    timeBox.textContent = '120';
+    temps = '120';
     printWords(wordList);
 
 });
@@ -107,6 +112,9 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
     testRunning = false;
     document.getElementById('words').textContent = '';
     wordList = shuffle(chooseList());
+    timeBox.style.display = 'block';
+    timeBox.textContent = '15';
+    temps = '15';
     printWords(wordList);
 
 })

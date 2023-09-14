@@ -95,6 +95,9 @@ const quote1 = [
 ];
 
 const quote2 = 'La vie est un mystère qu\'il faut vivre, et non un problème à résoudre.'.split(' ');
+const quote3 = 'Parfois, c\'est commpliqué de faire la différence entre détermination et obstination.'.split(' ');
+const quote4 = 'Malgré tout, ça reste toi.'.split(' ');
+const quote5 = 'Tu possèdes quelque chose qui s\'appelle la détermination. Donc du moment que tu t\'accroches, du moment que tu fais ce qui te tient à coeur, je crois que tu peux faire ce qui est juste.'.split(' ')
 
 
 
@@ -109,7 +112,7 @@ function chooseList() {
 }
 
 
-const quotelist = [quote1, quote2];
+const quotelist = [quote1, quote2, quote3, quote4, quote5];
 function chooseQuote() {
     let feur = Math.floor(Math.random() * quotelist.length);
     return quotelist[feur];

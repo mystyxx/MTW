@@ -1,10 +1,10 @@
 var inputbox = document.getElementById('typeInput');
-var input = inputbox.innerHTML;
+var input = inputbox.textContent;
 var scorebox = document.getElementById('score');
 var timeBox = document.getElementById('time');
-var temps = timeBox.innertext;
+var temps = timeBox.textContent;
 var wrongCharacters = 0;
-var testTime = 15;
+let testTime = 15;
 inputbox.value = '';
 
 
@@ -13,7 +13,7 @@ function shuffle(array) {
     //this function shuffles the array to make the words in a different order each test.
     let currentIndex = array.length,  randomIndex;
     
-    while (currentIndex != testTime) {
+    while (currentIndex != 0) {
         
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
@@ -32,7 +32,7 @@ function timer() {
     }
     if (timeBox.textContent == '0' || i===wordList.length) {
         console.log(correctCharacters)
-        document.getElementById('wpm').textContent = 'previous wpm : ' + Math.floor((correctCharacters/5)*(60/(temps-timeBox.textContent))) + ' wpm';
+        document.getElementById('wpm').textContent = 'previous wpm : ' + Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' wpm | raw : ' + Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm';
         document.getElementById('characters').textContent = 'characters : ' + correctCharacters + ' | ' + wrongCharacters;
         testRunning = false;
         document.getElementById('words').style.display = 'none';
@@ -102,6 +102,7 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
     wordList = '';
     wordList = chooseQuote();
     timeBox.style.display = 'none';
+    testTime = 120;
     timeBox.textContent = '120';
     temps = '120';
     printWords(wordList);
@@ -113,6 +114,7 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
     document.getElementById('words').textContent = '';
     wordList = shuffle(chooseList());
     timeBox.style.display = 'block';
+    testTime = 15;
     timeBox.textContent = '15';
     temps = '15';
     printWords(wordList);

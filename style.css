@@ -1,6 +1,7 @@
 body {
     background-color: rgb(183, 229, 255);
     color: rgb(0, 0, 0);
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 #words {
@@ -46,4 +47,33 @@ body {
 
 #gamemodeDivider {
     display: inline-block;
+}
+
+#resultCard {
+    background-color: aliceblue;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 15%;
+}
+
+#resultCard > #characters, #score, #raw {
+    text-align: end;
+    margin-right: 10px;
+}
+
+.margin-left {
+    margin-left: 10px;
+}
+
+#wpm {
+    color: green;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#container {
+    margin: 0 auto;
 }

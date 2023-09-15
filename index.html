@@ -16,9 +16,16 @@
         <input type="text" id="typeInput">
         <button onClick="window.location.reload();">Retry</button>
         <p id="time">15</p>
-        <p id="score"></p>
-        <p id="wpm"></p>
-        <p id="characters"></p>
+        
+        <div id="container">
+
+            <div id="resultCard" style="visibility: hidden;">
+                <p id="wpm"></p> <p></p>
+                <p class="margin-left">keystrokes : </p> <p id="characters"></p>
+                <p class="margin-left">Correct words : </p><p id="score"></p>
+                <p class="margin-left">raw wpm : </p><p id="raw"></p>
+            </div>
+        </div>
         
         <script src="words.js"></script>
         <script src="script.js"></script>

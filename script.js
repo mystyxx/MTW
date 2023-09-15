@@ -31,9 +31,10 @@ function timer() {
         timeBox.textContent--;
     }
     if (timeBox.textContent == '0' || i===wordList.length) {
-        console.log(correctCharacters)
-        document.getElementById('wpm').textContent = 'previous wpm : ' + Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' wpm | raw : ' + Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm';
-        document.getElementById('characters').textContent = 'characters : ' + correctCharacters + ' | ' + wrongCharacters;
+        document.getElementById('resultCard').style.visibility = 'visible';
+        document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
+        document.getElementById('characters').textContent = correctCharacters + ' | ' + wrongCharacters;
+        document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         testRunning = false;
         document.getElementById('words').style.display = 'none';
         
@@ -83,7 +84,7 @@ addEventListener('keyup', (nextWord)=> {
         
         if(testRunning === true) {
             i++; //go to the next word
-            scorebox.textContent = 'previous score : ' + correctWords + '/' + i  //update the score
+            scorebox.textContent = correctWords + '/' + i  //update the score
             if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                 inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
             document.getElementById(i).className = 'highlight';         //highlight the next word

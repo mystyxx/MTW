@@ -137,7 +137,6 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
     wordList = shuffle(chooseList());
     timeBox.style.display = 'block';
     changeTestTime(15);
-    printWords(wordList);
     document.getElementById('words15GamemodeButton').style.visibility= 'visible';
     document.getElementById('words30GamemodeButton').style.visibility= 'visible';
     document.getElementById('words60GamemodeButton').style.visibility= 'visible';

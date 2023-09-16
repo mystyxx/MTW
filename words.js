@@ -100,15 +100,10 @@ const quote4 = 'Malgré tout, ça reste toi.'.split(' ');
 const quote5 = 'Tu possèdes quelque chose qui s\'appelle la détermination. Donc du moment que tu t\'accroches, du moment que tu fais ce qui te tient à coeur, je crois que tu peux faire ce qui est juste.'.split(' ')
 
 
-
+const wordlistlist = [frenchWords1, frenchWords2]
 function chooseList() {
-    let feur = Math.floor(Math.random() * 2);
-    if(feur==1){
-        return frenchWords2;
-    }
-    else {
-        return frenchWords1;
-    }
+    let feur = Math.floor(Math.random() * wordlistlist.length);
+    return wordlistlist[feur]
 }
 
 

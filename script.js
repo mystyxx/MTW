@@ -1,11 +1,12 @@
-var inputbox = document.getElementById('typeInput');
-var input = inputbox.textContent;
-var scorebox = document.getElementById('score');
-var timeBox = document.getElementById('time');
-var temps = timeBox.textContent;
-var wrongCharacters = 0;
+let inputbox = document.getElementById('typeInput');
+let input = inputbox.textContent;
+let scorebox = document.getElementById('score');
+let timeBox = document.getElementById('time');
+let temps = timeBox.textContent;
+let wrongCharacters = 0;
 let testTime = 15;
 inputbox.value = '';
+let totalspacePress = 0;
 
 
 
@@ -30,7 +31,7 @@ function timer() {
     if (timeBox.textContent > 0 && testRunning === true) {
         timeBox.textContent--;
     }
-    if (timeBox.textContent == '0' || i===wordList.length) {
+    if ((timeBox.textContent == '0') || (i===wordList.length && testTime == 120)) {
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
         document.getElementById('characters').textContent = correctCharacters + ' | ' + wrongCharacters;
@@ -38,6 +39,11 @@ function timer() {
         testRunning = false;
         document.getElementById('words').style.display = 'none';
         
+    }
+    if (timeBox.textContent > 0 && i===wordList.length && testTime !=120) {
+        i = 0;
+        document.getElementById('words').textContent = '';
+        printWords(shuffle(chooseList()));
     }
     
 }
@@ -48,15 +54,27 @@ function printWords(wordList) {
         var newtask = document.createElement('span');
         newtask.innerHTML = wordList[i];
         newtask.id = i;
+        newtask.className = '';
         document.body.appendChild(newtask);
         document.getElementById('words').appendChild(newtask);
-    }
+}
     
+}
+
+function changeTestTime(time) {
+    testRunning = false;
+    document.getElementById('words').textContent = '';
+    printWords(shuffle(chooseList()));
+    document.getElementById(i).className = 'highlight';
+
+    testTime = time;
+    timeBox.textContent = time;
+    temps = time;
 }
 
 
 var wordList = shuffle(chooseList());
-var i = 0;
+let i = 0;
 printWords(wordList);
 var correctWords = 0;
 var correctCharacters = 0;
@@ -84,7 +102,8 @@ addEventListener('keyup', (nextWord)=> {
         
         if(testRunning === true) {
             i++; //go to the next word
-            scorebox.textContent = correctWords + '/' + i  //update the score
+            totalspacePress++;
+            scorebox.textContent = correctWords + '/' + totalspacePress;  //update the score
             if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                 inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
             document.getElementById(i).className = 'highlight';         //highlight the next word
@@ -107,7 +126,9 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
     timeBox.textContent = '120';
     temps = '120';
     printWords(wordList);
-
+    document.getElementById('words15GamemodeButton').style.visibility = 'hidden';
+    document.getElementById('words30GamemodeButton').style.visibility = 'hidden';
+    document.getElementById('words60GamemodeButton').style.visibility = 'hidden';
 });
 
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
@@ -115,9 +136,20 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
     document.getElementById('words').textContent = '';
     wordList = shuffle(chooseList());
     timeBox.style.display = 'block';
-    testTime = 15;
-    timeBox.textContent = '15';
-    temps = '15';
+    changeTestTime(15);
     printWords(wordList);
+    document.getElementById('words15GamemodeButton').style.visibility= 'visible';
+    document.getElementById('words30GamemodeButton').style.visibility= 'visible';
+    document.getElementById('words60GamemodeButton').style.visibility= 'visible';
 
+});
+
+document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
+    changeTestTime(15);
+})
+document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
+    changeTestTime(30);
+})
+document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
+    changeTestTime(60);
 })

@@ -13,7 +13,9 @@ body {
 
 #words>span {
     margin-right: 10px;
-    word-wrap: break-word;
+    word-wrap: normal;
+    text-wrap: balance;
+    display: inline-block;
 }
 
 #typeInput {
@@ -62,6 +64,7 @@ body {
 #resultCard > #characters, #score, #raw {
     text-align: end;
     margin-right: 10px;
+    grid-column: 3/3;
 }
 
 .margin-left {
@@ -70,8 +73,9 @@ body {
 
 #wpm {
     color: green;
-    font-size: x-large;
+    font-size: 20px;
     font-weight: bold;
+    grid-column: 4/2;
 }
 
 #container {

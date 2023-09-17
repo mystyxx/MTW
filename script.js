@@ -73,6 +73,14 @@ function changeTestTime(time) {
     temps = time;
 }
 
+function spacebarIsInput() {
+    for (let i = 0; i<inputbox.value.length;i++) {
+        if(inputbox.value[i] == ' '){
+            return true;
+        }
+    }
+}
+
 
 var wordList = shuffle(chooseList());
 let i = 0;
@@ -88,8 +96,9 @@ addEventListener('keyup', (nextWord)=> {
         testRunning = true;
         setInterval(timer, 1000)
     }
+    console.log(nextWord.keyCode)
     //if the spacebar is pressed,
-    if(nextWord.isComposing || nextWord.keyCode === 32) {
+    if(nextWord.isComposing || spacebarIsInput()) {
         var wordInput = inputbox.value.split(' ');                      //split the input to select only the first part of the input if a letter is pressed after the space
         
         //check if the word is correctly typed
@@ -106,8 +115,8 @@ addEventListener('keyup', (nextWord)=> {
             scorebox.textContent = correctWords + '/' + totalspacePress;  //update the score
             if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                 inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
-            document.getElementById(i).className = 'highlight';         //highlight the next word
             document.getElementById(i-1).className = '';
+            document.getElementById(i).className = 'highlight';         //highlight the next word
         }
         else{inputbox.value = ''}
         }

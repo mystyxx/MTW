@@ -11,6 +11,4 @@ Thanks a lot to deysox for helping me so much !
 - more quotes
 
 ## known issues
-- the words are cut in half when they are at the end of the line
-- if the spacebar is pressed even after the end of the test, the total of words typed will increase (count as incorrect word)
-- if the right alt key is pressed while the results are shown, the wpm value will decrease.
+- if you have typed the beginning of a word when the timer ends, it will count as incorrect keystrokes and incorrect word.

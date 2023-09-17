@@ -57,6 +57,7 @@ function printWords(wordList) {
         newtask.className = '';
         document.body.appendChild(newtask);
         document.getElementById('words').appendChild(newtask);
+        document.getElementById('0').className = 'highlight';
 }
     
 }
@@ -78,7 +79,6 @@ let i = 0;
 printWords(wordList);
 var correctWords = 0;
 var correctCharacters = 0;
-document.getElementById(0).className = 'highlight';
 
 var testRunning = false;
 

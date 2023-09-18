@@ -65,16 +65,15 @@ function printWords(wordList) {
 function changeTestTime(time) {
     testRunning = false;
     document.getElementById('words').textContent = '';
-    printWords(shuffle(chooseList()));
-    document.getElementById(i).className = 'highlight';
-
+    wordList = '';
+    wordList = shuffle(chooseList()) 
+    printWords(wordList)
     testTime = time;
     timeBox.textContent = time;
     temps = time;
 }
 
 function changeQuoteLength(size) {
-
     testRunning = false;
     document.getElementById('words').textContent = '';
     timeBox.style.display = 'none';
@@ -82,8 +81,8 @@ function changeQuoteLength(size) {
     timeBox.textContent = '120';
     temps = '120';
     wordList = '';
-    wordList = chooseQuote(quotelist);
-    printWords(chooseQuote(size))
+    wordList = chooseQuote(size);
+    printWords(wordList)
 }
 
 
@@ -107,10 +106,10 @@ var testRunning = false;
 addEventListener('keyup', (nextWord)=> {
     //test started when input detected
     if (testRunning == false && timeBox.textContent != 0) {
+        i=0;
         testRunning = true;
         setInterval(timer, 1000)
     }
-    console.log(nextWord.keyCode)
     //if the spacebar is pressed,
     if(nextWord.isComposing || spacebarIsInput()) {
         var wordInput = inputbox.value.split(' ');                      //split the input to select only the first part of the input if a letter is pressed after the space

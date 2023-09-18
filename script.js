@@ -71,6 +71,7 @@ function changeTestTime(time) {
     testTime = time;
     timeBox.textContent = time;
     temps = time;
+    timeBox.style.display = 'block';
 }
 
 function changeQuoteLength(size) {
@@ -115,12 +116,12 @@ addEventListener('keyup', (nextWord)=> {
         var wordInput = inputbox.value.split(' ');                      //split the input to select only the first part of the input if a letter is pressed after the space
         
         //check if the word is correctly typed
-        if (wordInput[0] == wordList[i] && testRunning ==true) {
+        if (wordInput[0] == wordList[i] && testRunning == true) {
             correctWords++;
             correctCharacters += wordList[i].length + 1;
             document.getElementById(i).style.color = 'green';
         }
-        else{wrongCharacters += wordInput[0].length}
+        if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
         
         if(testRunning === true) {
             i++; //go to the next word

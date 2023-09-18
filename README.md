@@ -11,4 +11,4 @@ Thanks a lot to deysox for helping me so much !
 - more quotes
 
 ## known issues
-- if you have typed the beginning of a word when the timer ends, it will count as incorrect keystrokes and incorrect word.
+- there are currently no known issues

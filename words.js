@@ -83,6 +83,14 @@ const quote9 = 'Y en a qui se la jouent viril, glorifiant la loi du plus fort, m
 const quote10 = 'Y en a qui disent \"j\'ai été trop gentil maintenant fini de sfaire avoir\" mais c\'est en disant ça qu\'ils rejoignent le troupeau des batards.'.split(' ')
 const quote11 = 'On est le flip flip crew, terroristes bienveillants, les autres trucs c\'est chiant, va falloir vous réveiller, car nous somme l\'understup, la ligue anti réactionnaire, le stup persévère, stoppera les guerres sur la Terre.'.split(' ');
 const quote12 = 'Fais confiance qu\'à ton coeur, avant d\'apprendre à rire on pleure, après la vie on meurt, lève-toi, prends les armes et bat toi pour tes valeurs.'.split(' ');
+const quote13 = 'Linus Benedict Torvalds, né le 28 décembre 1969 à Helsinki en Finlande, est un informaticien américano-finlandais connu notamment pour avoir créé le noyau Linux en 1991 (à 21 ans). Il continue d\'en diriger le développement, étant considéré comme le "dictateur bienveillant à vie" (Benevolent Dictator for Life) de celui-ci. Il a également créé le logicien de gestion de versions décentralisée Git et le logiciel d\'enregistrement et de planification des plongées Subsurface.'.split(' ');
+const quote14 = 'Le cinéma est un art du spectacle. En français, il est désigné commme le "septième art", d\'après l\'expression du critique Ricciotto Canudo dans les années 1920. L\'art cinématographique se caractérise par le spectacle proposé au public sous la forme d\'un film, c\'est à dire d\'un récit (fictionnel ou documentaire, véhiculé par un support (pellicule souple, bande magnétique, contenant numérique), qui est enregistré puis lu par un mécanisme continu ou intermittent qui crée l\'illusion d\'images en mouvements, ou par l\'enregistrement et la lecture continue de données informatiques.'.split(' ');
+const quote15 = 'Quoi que je fasse, quelle que soit ma détermination, ceux que j\'aime finiront toujours par payer.'.split(' ');
+const quote16 = 'Tu sais, si tu as l\'intention de voler des voitures, ne te déguise pas en voleur de voiture.'.split(' ');
+const quote17 = 'Nombreux sont les vivants qui mériteraient la mort, et les morts qui mériteraient la vie, pouvez-vous la leur rendre Frodon ? Alors ne soyez pas trop prompt à dispenser morts et jugements. Même les grands sages ne peuvent connaître toutes les fins.'.split(' ');
+const quote18 = 'C’était assurément une puissante citadelle, imprenable pour peu qu\'elle fût tenue par des gens en état de porter les armes, à moins que quelque ennemi ne pût venir par derrière, escalader les pentes inférieures du Mindolluin et parvenir ainsi sur l\'étroit épaulement qui joignait la Colline de la Garde à la masse de la montagne. Mais cet épaulement, qui s\'élevait à la hauteur du cinquième mur, était entouré de grands remparts jusqu\'au bord même du précipice qui surplombait son extrémité occidentale, et dans cet espace s\'élevaient les demeures et les tombeaux à dôme des rois et seigneurs du temps passé, à jamais silencieux entre la montagne et la tour.'.split(' ');
+const quote19 = 'Le quenya fut conçu par Tolkien comme dérivant d\'une langue originelle commune à toutes les langues elfiques qu\'il imagina. C\'est une langue à morphologie complexe, qui présente à la fois des traits flexionnels et agglutinants ; elle repose en grande partie sur l\'emploi d\'affixes, mais recourt aussi à l\'alternance vocalique. Le quenya est pourvu d\'une riche déclinaison et d\'une conjugaison de type synthétique. Le nombre de cas et la conjugaison ont varié avec les années au cours du développement de la langue par leur auteur. Le vocabulaire est essentiellement a priori, c\'est-à-dire créé indépendamment de celui des langues naturelles, mais il est en revanche apparenté à celui des autres langues elfiques imaginées par Tolkien.'.split(' ');
+
 
 const wordlistlist = [frenchWords1, frenchWords2]
 function chooseList() {
@@ -91,7 +99,7 @@ function chooseList() {
 }
 
 
-const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12];
+const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19];
 const shortQuoteList = []; const mediumQuoteList = []; const longQuoteList = [];
 
 for(let i=0; i<quotelist.length; i++) {

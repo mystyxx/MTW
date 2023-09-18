@@ -32,6 +32,7 @@ function timer() {
         timeBox.textContent--;
     }
     if ((timeBox.textContent == '0') || (i===wordList.length && testTime == 120)) {
+        clearInterval(TimerObject);
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
         document.getElementById('characters').textContent = correctCharacters + ' | ' + wrongCharacters;
@@ -43,7 +44,8 @@ function timer() {
     if (timeBox.textContent > 0 && i===wordList.length && testTime !=120) {
         i = 0;
         document.getElementById('words').textContent = '';
-        printWords(shuffle(chooseList()));
+        wordList = shuffle(chooseList());
+        printWords(wordList);
     }
     
 }
@@ -101,15 +103,15 @@ let i = 0;
 printWords(wordList);
 var correctWords = 0;
 var correctCharacters = 0;
-
 var testRunning = false;
+var TimerObject = setInterval(timer, 1000);
 
 addEventListener('keyup', (nextWord)=> {
     //test started when input detected
     if (testRunning == false && timeBox.textContent != 0) {
         i=0;
         testRunning = true;
-        setInterval(timer, 1000)
+
     }
     //if the spacebar is pressed,
     if(nextWord.isComposing || spacebarIsInput()) {

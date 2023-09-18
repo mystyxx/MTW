@@ -92,7 +92,22 @@ function chooseList() {
 
 
 const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12];
-function chooseQuote() {
-    let feur = Math.floor(Math.random() * quotelist.length);
-    return quotelist[feur];
+const shortQuoteList = []; const mediumQuoteList = []; const longQuoteList = [];
+
+for(let i=0; i<quotelist.length; i++) {
+    if(quotelist[i].length < 13) {
+        shortQuoteList.push(quotelist[i]);
+    }
+    if(quotelist[i].length < 35) {
+        mediumQuoteList.push(quotelist[i]);
+    }
+    else{longQuoteList.push(quotelist[i]);}
+}
+
+
+function chooseQuote(size) {
+    if(size == 'short') {return shortQuoteList[Math.floor(Math.random() * shortQuoteList.length)]}
+    if(size == 'medium') {return mediumQuoteList[Math.floor(Math.random() * mediumQuoteList.length)]}
+    if(size == 'long') {return longQuoteList[Math.floor(Math.random() * longQuoteList.length)]}
+    else{return quotelist[Math.floor(Math.random() * quotelist.length)]}
 }

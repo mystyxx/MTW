@@ -15,7 +15,7 @@ printWords(wordList);
 var correctWords = 0;
 var correctCharacters = 0;
 var testRunning = false;
-var TimerObject = setInterval(timer, 1000);
+var TimerObject; 
 
 
 //loads the previous gamemode
@@ -81,6 +81,7 @@ function timer() {
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
         document.getElementById('characters').textContent = correctCharacters + ' | ' + wrongCharacters;
+        scorebox.textContent = correctWords + '/' + totalspacePress;  //update the score
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         testRunning = false;
         document.getElementById('words').style.display = 'none';
@@ -112,6 +113,10 @@ function printWords(wordList) {
 function changeTestTime(time) {
     document.getElementById('words').style.display = 'block';
     inputbox.value = '';
+    totalspacePress = 0;
+    correctCharacters = 0;
+    correctWords = 0;
+    wrongCharacters = 0;
     testRunning = false;
     document.getElementById('words').textContent = '';
     wordList = '';
@@ -128,6 +133,10 @@ function changeQuoteLength(size) {
     document.getElementById('words').style.display = 'block';
     timeBox.style.display = 'none';
     inputbox.value = '';
+    totalspacePress = 0;
+    correctCharacters = 0;
+    correctWords = 0;
+    wrongCharacters = 0;
     testRunning = false;
     document.getElementById('words').textContent = '';
     timeBox.style.display = 'none';
@@ -158,6 +167,7 @@ addEventListener('keyup', (nextWord)=> {
     if (testRunning == false && timeBox.textContent != 0) {
         i=0;
         testRunning = true;
+        TimerObject = setInterval(timer, 1000)
 
     }
     //if the spacebar is pressed,
@@ -175,7 +185,6 @@ addEventListener('keyup', (nextWord)=> {
         if(testRunning === true) {
             i++; //go to the next word
             totalspacePress++;
-            scorebox.textContent = correctWords + '/' + totalspacePress;  //update the score
             if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                 inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
             document.getElementById(i-1).className = '';
@@ -195,6 +204,10 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
     testRunning = false;
     document.getElementById('words').textContent = '';
     wordList = '';
+    totalspacePress = 0;
+    correctCharacters = 0;
+    correctWords = 0;
+    wrongCharacters = 0;
     wordList = chooseQuote(quotelist);
     timeBox.style.display = 'none';
     testTime = 120;
@@ -227,6 +240,10 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
     timeBox.style.display = 'block';
     changeTestTime(15);
     inputbox.value = ''
+    totalspacePress = 0;
+    correctCharacters = 0;
+    correctWords = 0;
+    wrongCharacters = 0;
     inputbox.focus();
 });
 

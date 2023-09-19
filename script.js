@@ -65,6 +65,7 @@ function printWords(wordList) {
 }
 
 function changeTestTime(time) {
+    inputbox.value = '';
     testRunning = false;
     document.getElementById('words').textContent = '';
     wordList = '';
@@ -74,9 +75,11 @@ function changeTestTime(time) {
     timeBox.textContent = time;
     temps = time;
     timeBox.style.display = 'block';
+    inputbox.focus();
 }
 
 function changeQuoteLength(size) {
+    inputbox.value = '';
     testRunning = false;
     document.getElementById('words').textContent = '';
     timeBox.style.display = 'none';
@@ -86,6 +89,7 @@ function changeQuoteLength(size) {
     wordList = '';
     wordList = chooseQuote(size);
     printWords(wordList)
+    inputbox.focus();
 }
 
 
@@ -142,6 +146,7 @@ addEventListener('keyup', (nextWord)=> {
 
 
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
+    inputbox.value = '';
     testRunning = false;
     document.getElementById('words').textContent = '';
     wordList = '';
@@ -151,6 +156,7 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
     timeBox.textContent = '120';
     temps = '120';
     printWords(wordList);
+    inputbox.focus();
 });
 
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
@@ -163,12 +169,15 @@ document.getElementById('longQuoteGamemodeButton').addEventListener('click', (ch
     changeQuoteLength('long');
 })
 
+
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
     testRunning = false;
     document.getElementById('words').textContent = '';
     wordList = shuffle(chooseList());
     timeBox.style.display = 'block';
     changeTestTime(15);
+    inputbox.value = ''
+    inputbox.focus();
 });
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {

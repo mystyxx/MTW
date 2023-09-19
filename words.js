@@ -112,7 +112,7 @@ for(let i=0; i<quotelist.length; i++) {
     if(quotelist[i].length < 20) {
         shortQuoteList.push(quotelist[i]);
     }
-    if(quotelist[i].length < 50) {
+    if(quotelist[i].length < 50 && quotelist[i].length > 20) {
         mediumQuoteList.push(quotelist[i]);
     }
     else{longQuoteList.push(quotelist[i]);}

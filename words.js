@@ -95,7 +95,7 @@ const quote19 = 'Le quenya fut conçu par Tolkien comme dérivant d\'une langue 
 const quote20 = 'Xavier, Burno, Hervé Niel, né le 15 août 1967 à Maisons-Alfort (France), est un homme d\'affaires miliardaire français. Sa ofrtune est estimée à 8,6 miliards de dollars par le magazine américain Forbes au premier mars 2023. Il est le fondateur et actionnaire principal d\'Iliard, groupe de télécommunications français, maison mère du fournisseur d\'accès à internet Free et de l\'opérateur de téléphonie mobile FRee mobile. Il est à ce titre, au début des années 2000, le pionnier en France des offres du triple play et du concept de box. Xavier Niel est également, à titre personnel, copropriétaire du groupe Le monde (propriétaire du journal homonyme) et investisseur dans plusieurs secteurs d\'activité. Membre du Conseil national du numérique de 2011 à 2012, instigateur des établissements d\'autoformation en informatique 42, il est aussi à l\'origine du projet Station F à Paris.'.split(' ');
 const quote21 = 'L\'existence du kipferi, ancêtre du croissant, serait attestée dans les pays de l\'Europe de l\'Est depuis le XIIIe siècle, mais sans que l\'on en connaisse la recette (salée ou sucrée) et fait dans une pâte à brioche. On daterait son origine à 1683 où, pendant que les Turcs assiègent Vienne, un boulanger prénommé Adam Spiel donne l\'alerte au moment d\'une attaque ottomane à l\'aube qui permet de repousser l\'envahisseur. Pour commémorer cette victoire, de petits croissants appelés Hörnchen furent confectionnés par les boulangers de la ville, rappelant ainsi la forme du symbole ottoman.'.split(' ');
 const quote22 = 'Le Guide du voyageur galactique (titre original : The Hitchhiker\'s Guide to the Galaxy, abrégé notamment en H2G2) est une oeuvre de science-fiction humoristique mulidisciplinaire imaginée par l\'écrivain britannique Douglas Adams. Son nom provient de l\'object symbolique de la série : un livre électronnique intitulé Le Guide du vogateur galactique. Née en 1978 sous forme de feuilleton radiophonique, l\'oeuvre a depuis été déclinée dans de nombreux médias au cours de différentes adaptations : romans, pièces de théâtre, série télévisée, jeux vidéo, bande dessinée, long métrage pour le cinéma.'.split(' ');
-const quote23 = 'Il est écrit "Seul Link peut vaincre Ganon" !'
+const quote23 = 'Il est écrit "Seul Link peut vaincre Ganon" !'.split(' ');
 const quote24 = 'Dieu a-t-il fait l\'Homme à son image ou L\'Homme a-t-il fait Dieu à la sienne ? J\'ai mon avis. La religion traduit les aspirations profondes de la race humaine. Nulles qu\'elles n\'ont davantage façonné l\'histoire. Ce cycle nous tente à en tirer des leçons. Devenir de meilleurs croyants ou de meilleurs athées, ça signifie avant tout "regarder au plus profond de nous pour ne pas reproduire les erreurs du passé."'.split(' ');
 
 const wordlistlist = [frenchWords1, frenchWords2, frenchWords3]
@@ -109,10 +109,10 @@ const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote
 const shortQuoteList = []; const mediumQuoteList = []; const longQuoteList = [];
 
 for(let i=0; i<quotelist.length; i++) {
-    if(quotelist[i].length < 13) {
+    if(quotelist[i].length < 20) {
         shortQuoteList.push(quotelist[i]);
     }
-    if(quotelist[i].length < 35) {
+    if(quotelist[i].length < 50) {
         mediumQuoteList.push(quotelist[i]);
     }
     else{longQuoteList.push(quotelist[i]);}

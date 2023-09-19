@@ -7,6 +7,51 @@ let wrongCharacters = 0;
 let testTime = 15;
 inputbox.value = '';
 let totalspacePress = 0;
+var gamemode = localStorage.getItem('gm');
+
+var wordList = shuffle(chooseList());
+let i = 0;
+printWords(wordList);
+var correctWords = 0;
+var correctCharacters = 0;
+var testRunning = false;
+var TimerObject = setInterval(timer, 1000);
+
+
+//loads the previous gamemode
+switch (gamemode) {
+    case 'quote' :
+        wordList = '';
+        wordList = chooseQuote('quotelist');
+        timeBox.style.display = 'none';
+        testTime = 120;
+        timeBox.textContent = '120';
+        temps = '120';
+    printWords(wordList);
+    inputbox.focus();
+    case 'shortQuote':
+        changeQuoteLength('short');
+        break;
+    case 'mediumQuote':
+        changeQuoteLength('medium');
+        break;
+    case 'longQuote':
+        changeQuoteLength('long');
+        break;
+    case 'words15':
+        changeTestTime(15);
+        break;
+    case 'words30':
+        changeTestTime(30);
+        break;
+    case 'words60':
+        changeTestTime(60);
+        break;
+    default:
+        changeTestTime(15);
+        break;
+
+}
 
 
 
@@ -65,6 +110,7 @@ function printWords(wordList) {
 }
 
 function changeTestTime(time) {
+    document.getElementById('words').style.display = 'block';
     inputbox.value = '';
     testRunning = false;
     document.getElementById('words').textContent = '';
@@ -79,6 +125,8 @@ function changeTestTime(time) {
 }
 
 function changeQuoteLength(size) {
+    document.getElementById('words').style.display = 'block';
+    timeBox.style.display = 'none';
     inputbox.value = '';
     testRunning = false;
     document.getElementById('words').textContent = '';
@@ -102,13 +150,8 @@ function spacebarIsInput() {
 }
 
 
-var wordList = shuffle(chooseList());
-let i = 0;
-printWords(wordList);
-var correctWords = 0;
-var correctCharacters = 0;
-var testRunning = false;
-var TimerObject = setInterval(timer, 1000);
+
+
 
 addEventListener('keyup', (nextWord)=> {
     //test started when input detected
@@ -146,6 +189,8 @@ addEventListener('keyup', (nextWord)=> {
 
 
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
+    localStorage.setItem('gm', 'quote')
+    document.getElementById('words').style.display = 'block';
     inputbox.value = '';
     testRunning = false;
     document.getElementById('words').textContent = '';
@@ -160,17 +205,22 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
 });
 
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
+    localStorage.setItem('gm', 'shortQuote');
     changeQuoteLength('short');
 })
 document.getElementById('mediumQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
+    localStorage.setItem('gm', 'mediumQuote');
     changeQuoteLength('medium');
 })
 document.getElementById('longQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
+    localStorage.setItem('gm', 'longQuote')
     changeQuoteLength('long');
 })
 
 
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
+    localStorage.setItem('gm', 'words15')
+    document.getElementById('words').style.display = 'block';
     testRunning = false;
     document.getElementById('words').textContent = '';
     wordList = shuffle(chooseList());
@@ -181,11 +231,14 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
 });
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
+    localStorage.setItem('gm', 'words15')
     changeTestTime(15);
 })
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
+    localStorage.setItem('gm', 'words30');
     changeTestTime(30);
 })
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
+    localStorage.setItem('gm', 'words60');
     changeTestTime(60);
 })

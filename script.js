@@ -83,9 +83,10 @@ function timer() {
         clearInterval(TimerObject);
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
-        document.getElementById('characters').textContent = correctCharacters + ' | ' + wrongCharacters;
+        document.getElementById('characters').textContent = correctCharacters + ' | ' + wrongCharacters + ' (' + Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) + '%)';
         scorebox.textContent = correctWords + '/' + totalspacePress;  //update the score
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
+        document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
         testRunning = false;
         document.getElementById('words').style.display = 'none';
         
@@ -114,6 +115,7 @@ function printWords(wordList) {
 }
 
 function changeTestTime(time) {
+    clearInterval(TimerObject);
     document.getElementById('words').style.display = 'block';
     inputbox.value = '';
     totalspacePress = 0;
@@ -133,6 +135,7 @@ function changeTestTime(time) {
 }
 
 function changeQuoteLength(size) {
+    clearInterval(TimerObject);
     document.getElementById('words').style.display = 'block';
     timeBox.style.display = 'none';
     inputbox.value = '';
@@ -198,9 +201,10 @@ addEventListener('keyup', (nextWord)=> {
         //check if the word is correctly typed
         if (wordInput[0] == wordList[i] && testRunning == true) {
             correctWords++;
-            correctCharacters += wordList[i].length + 1;
+            correctCharacters += wordList[i].length;
             document.getElementById(i).style.color = localStorage.getItem('textColor');
         }
+        correctCharacters++;
         if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
         
         if(testRunning === true) {
@@ -219,6 +223,7 @@ addEventListener('keyup', (nextWord)=> {
 
 
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
+    clearInterval(TimerObject);
     localStorage.setItem('gm', 'quote')
     document.getElementById('words').style.display = 'block';
     inputbox.value = '';
@@ -253,6 +258,7 @@ document.getElementById('longQuoteGamemodeButton').addEventListener('click', (ch
 
 
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
+    clearInterval(TimerObject);
     localStorage.setItem('gm', 'words15')
     document.getElementById('words').style.display = 'block';
     testRunning = false;

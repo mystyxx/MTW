@@ -1,7 +1,7 @@
 body {
     background-color: rgb(183, 229, 255);
     color: rgb(0, 0, 0);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
 #words {
@@ -69,12 +69,12 @@ body {
     justify-content: center;
     margin: 0 auto;
     margin-top: 5%;
-    width: 15%;
+    width: 18%;
     outline: 1px solid;
     outline-color: white;
 }
 
-#resultCard > #characters, #score, #raw {
+#resultCard > .margin-right {
     text-align: end;
     margin-right: 10px;
     grid-column: 3/3;

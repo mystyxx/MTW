@@ -21,6 +21,12 @@ body {
 #typeInput {
     font-size: 25px;
     margin-left: 20em;
+    margin-right: 5px;
+}
+
+#retryButton {
+    width: max-content;
+    height: 30px;
 }
 
 .highlight {
@@ -29,6 +35,8 @@ body {
 
 #time {
     font-size: 35px;
+    display: inline;
+    margin:5px;
 }
 
 

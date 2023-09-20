@@ -125,7 +125,7 @@ function changeTestTime(time) {
     testTime = time;
     timeBox.textContent = time;
     temps = time;
-    timeBox.style.display = 'block';
+    timeBox.style.display = 'inline';
     inputbox.focus();
 }
 
@@ -237,7 +237,7 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
     testRunning = false;
     document.getElementById('words').textContent = '';
     wordList = shuffle(chooseList());
-    timeBox.style.display = 'block';
+    timeBox.style.display = 'inline';
     changeTestTime(15);
     inputbox.value = ''
     totalspacePress = 0;

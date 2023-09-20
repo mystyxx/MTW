@@ -20,7 +20,7 @@ const frenchWords1 = [
   "avion",
   "temps",
   "jour",
-  "nuit",
+  "sécurité",
   "matin",
   "soir",
   "hôtel",
@@ -41,7 +41,7 @@ const frenchWords2 = [
     'voix',
     'ciel',
     'petit',
-    'dans',
+    'sociologie',
     'entre',
     'comme',
     'maison',
@@ -54,9 +54,10 @@ const frenchWords2 = [
     'chambre',
     'depuis',
     'mais',
+    'scepticisme',
     'ne',
     'âme',
-    'sentir',
+    'scepticisme',
     'dieu',
     'mot',
     'chez',
@@ -71,7 +72,7 @@ const frenchWords2 = [
     'élégant',
 ]
 
-const frenchWords3 = 'abandonner question j\'ai obtenu ça mais déménagement pourquoi scepticisme obtenu géré administration cube stylo comment réseau sociologie mathématiques passant chanter angoisse sécurité relatif mépris encore clavier rat écran même si à où commentaire'.split(' ');
+const frenchWords3 = 'abandonner nuit question j\'ai obtenu ça mais déménagement pourquoi sentir obtenu géré administration cube stylo comment réseau dans passant chanter angoisse relatif mépris encore clavier rat écran même si à où commentaire vrai novembre utile urgent retrouver'.split(' ');
 
 const quote1 = 'Dans la vie, on ne fait pas ce que l\'on veut, mais on est responsable de ce que l\'on est.'.split(' ');
 const quote2 = 'La vie est un mystère qu\'il faut vivre, et non un problème à résoudre.'.split(' ');
@@ -100,8 +101,13 @@ const quote24 = 'Dieu a-t-il fait l\'Homme à son image ou L\'Homme a-t-il fait 
 
 const wordlistlist = [frenchWords1, frenchWords2, frenchWords3]
 function chooseList() {
-    let feur = Math.floor(Math.random() * wordlistlist.length);
-    return wordlistlist[feur]
+    let wordArray = [];
+    for(let i =0; i<40; i++) {
+        let feur = Math.floor(Math.random() * wordlistlist.length);
+        let word = Math.floor(Math.random() * wordlistlist[feur].length);
+        wordArray.push(wordlistlist[feur][word]);
+    }
+    return wordArray;
 }
 
 
@@ -112,10 +118,10 @@ for(let i=0; i<quotelist.length; i++) {
     if(quotelist[i].length < 20) {
         shortQuoteList.push(quotelist[i]);
     }
-    if(quotelist[i].length < 50 && quotelist[i].length > 20) {
+    else if(quotelist[i].length < 50 && quotelist[i].length > 20) {
         mediumQuoteList.push(quotelist[i]);
     }
-    else{longQuoteList.push(quotelist[i]);}
+    else if (quotelist[i].length > 50) {longQuoteList.push(quotelist[i]);}
 }
 
 

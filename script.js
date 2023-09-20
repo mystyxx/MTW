@@ -199,7 +199,7 @@ addEventListener('keyup', (nextWord)=> {
         if (wordInput[0] == wordList[i] && testRunning == true) {
             correctWords++;
             correctCharacters += wordList[i].length + 1;
-            document.getElementById(i).style.color = textColor;
+            document.getElementById(i).style.color = localStorage.getItem('textColor');
         }
         if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
         

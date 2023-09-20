@@ -8,6 +8,9 @@ let testTime = 15;
 inputbox.value = '';
 let totalspacePress = 0;
 var gamemode = localStorage.getItem('gm');
+var theme = localStorage.getItem('theme');
+var textColor = localStorage.getItem('textColor');
+changeClientTheme(theme);
 
 var wordList = shuffle(chooseList());
 let i = 0;
@@ -149,6 +152,27 @@ function changeQuoteLength(size) {
     inputbox.focus();
 }
 
+function changeClientTheme(theme) {
+    if(theme == 'dark') {
+        document.getElementById('switchThemeButton').textContent = 'switch to dark mode';
+        document.body.style.backgroundColor = 'rgb(183, 229, 255)';
+        document.body.style.color = 'black';
+        document.getElementById('words').style.backgroundColor = 'white';
+        document.getElementById('resultCard').style.backgroundColor = 'white';
+        document.getElementById('wpm').style.color = 'green';
+        localStorage.setItem('textColor', 'green');
+    }
+    else {
+        document.getElementById('switchThemeButton').textContent = 'switch to light mode';
+        document.body.style.backgroundColor = 'black';
+        document.body.style.color = 'white';
+        document.getElementById('words').style.backgroundColor= 'black';
+        document.getElementById('resultCard').style.backgroundColor = 'black';
+        document.getElementById('wpm').style.color = 'lightgreen';
+        localStorage.setItem('textColor', 'lightgreen');
+    }
+}
+
 
 function spacebarIsInput() {
     for (let i = 0; i<inputbox.value.length;i++) {
@@ -157,9 +181,6 @@ function spacebarIsInput() {
         }
     }
 }
-
-
-
 
 
 addEventListener('keyup', (nextWord)=> {
@@ -178,7 +199,7 @@ addEventListener('keyup', (nextWord)=> {
         if (wordInput[0] == wordList[i] && testRunning == true) {
             correctWords++;
             correctCharacters += wordList[i].length + 1;
-            document.getElementById(i).style.color = 'green';
+            document.getElementById(i).style.color = textColor;
         }
         if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
         
@@ -258,4 +279,15 @@ document.getElementById('words30GamemodeButton').addEventListener('click', (chan
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     localStorage.setItem('gm', 'words60');
     changeTestTime(60);
+})
+
+document.getElementById('switchThemeButton').addEventListener('click', (changeTheme)=> {
+    if(localStorage.getItem('theme') == 'light') {
+        changeClientTheme('dark');
+        localStorage.setItem('theme', 'dark');
+    }
+    else{
+        changeClientTheme('light');
+        localStorage.setItem('theme', 'light');
+    }
 })

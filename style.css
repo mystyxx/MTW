@@ -8,7 +8,10 @@ body {
     font-size: 35px;
     margin-left: 5em;
     margin-right: 5em;
+    padding:10px;
     background-color: rgb(255, 255, 255);
+    outline: 1px solid;
+    outline-color: white;
 }
 
 #words>span {
@@ -67,6 +70,8 @@ body {
     margin: 0 auto;
     margin-top: 5%;
     width: 15%;
+    outline: 1px solid;
+    outline-color: white;
 }
 
 #resultCard > #characters, #score, #raw {
@@ -93,4 +98,11 @@ body {
 #words15GamemodeButton, #words30GamemodeButton, #words60GamemodeButton, #shortQuoteGamemodeButton, #mediumQuoteGamemodeButton, #longQuoteGamemodeButton {
     text-align: end;
     display: inline;
+}
+
+#switchThemeButton {
+    bottom: 0;
+    position:fixed;
+    right: 5px;
+    text-decoration: underline;
 }

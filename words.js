@@ -1,79 +1,5 @@
-const frenchWords1 = [
-  "bonjour",
-  "merci",
-  "plaisir",
-  "amour",
-  "chien",
-  "chat",
-  "livre",
-  "musique",
-  "soleil",
-  "lune",
-  "étoile",
-  "fleur",
-  "arbre",
-  "montagne",
-  "plage",
-  "ville",
-  "voiture",
-  "train",
-  "avion",
-  "temps",
-  "jour",
-  "sécurité",
-  "matin",
-  "soir",
-  "hôtel",
-  "vin",
-  "pain",
-  "eau",
-  "café",
-  "fruits",
-  "légumes",
-  "viande",
-  "poisson",
-  "dessert",
-  "il"
-];
+const frenchWords = ["bonjour", "merci", "plaisir", "amour", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "plage", "ville", "voiture", "train", "avion", "temps", "jour", "sécurité", "matin", "soir", "hôtel", "vin", "pain", "eau", "café", "fruits", "légumes", "viande", "poisson", "dessert", "il", "que", "voix", "ciel", "petit", "sociologie", "entre", "comme", "maison", "répondre", "ici", "terre", "ça", "moins", "tant", "chambre", "depuis", "mais", "scepticisme", "ne", "âme", "scepticisme", "dieu", "mot", "chez", "coup", "autre", "heure", "tout", "chez", "commentaire", "philosophie", "pourquoi", "élégant", "abandonner", "nuit", "question", "j'ai", "obtenu", "ça", "mais", "déménagement", "pourquoi", "sentir", "obtenu", "géré", "cube", "stylo", "comment", "réseau", "dans", "passant", "chanter", "angoisse", "relatif", "mépris", "encore", "clavier", "rat", "écran", "même", "si", "à", "où", "commentaire", "vrai", "novembre", "utile", "urgent", "retrouver", "plage", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "ville", "voiture", "train", "temps", "soir", "hôtel", "eau", "café", "fruits", "poisson", "dessert", "rue", "pont", "bougie", "fenêtre", "cadeau", "fête", "chanson", "amitié", "sourire", "histoire", "espoir", "papillon", "regard", "pensée", "feu", "horrible", "gens", "manger", "mais", "vrai", "monde", "jeune", "vingt", "je", "quelque", "en", "tout", "chambre", "revenir"];
 
-const frenchWords2 = [
-    'que',
-    'voix',
-    'ciel',
-    'petit',
-    'sociologie',
-    'entre',
-    'comme',
-    'maison',
-    'répondre',
-    'ici',
-    'terre',
-    'ça',
-    'moins',
-    'tant',
-    'chambre',
-    'depuis',
-    'mais',
-    'scepticisme',
-    'ne',
-    'âme',
-    'scepticisme',
-    'dieu',
-    'mot',
-    'chez',
-    'coup',
-    'autre',
-    'heure',
-    'tout',
-    'chez',
-    'commentaire',
-    'philosophie',
-    'pourquoi',
-    'élégant',
-]
-
-const frenchWords3 = 'abandonner nuit question j\'ai obtenu ça mais déménagement pourquoi sentir obtenu géré administration cube stylo comment réseau dans passant chanter angoisse relatif mépris encore clavier rat écran même si à où commentaire vrai novembre utile urgent retrouver'.split(' ');
-const frenchWords4 = ["plage", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "ville", "voiture", "train", "temps", "soir", "hôtel", "eau", "café", "fruits", "poisson", "dessert", "rue", "pont", "bougie", "fenêtre", "cadeau", "fête", "chanson", "amitié", "sourire", "histoire", "espoir", "papillon", "regard", "pensée"];
 
 const quote1 = 'Dans la vie, on ne fait pas ce que l\'on veut, mais on est responsable de ce que l\'on est.'.split(' ');
 const quote2 = 'La vie est un mystère qu\'il faut vivre, et non un problème à résoudre.'.split(' ');
@@ -100,13 +26,11 @@ const quote22 = 'Le Guide du voyageur galactique (titre original : The Hitchhike
 const quote23 = 'Il est écrit "Seul Link peut vaincre Ganon" !'.split(' ');
 const quote24 = 'Dieu a-t-il fait l\'Homme à son image ou L\'Homme a-t-il fait Dieu à la sienne ? J\'ai mon avis. La religion traduit les aspirations profondes de la race humaine. Nulles qu\'elles n\'ont davantage façonné l\'histoire. Ce cycle nous tente à en tirer des leçons. Devenir de meilleurs croyants ou de meilleurs athées, ça signifie avant tout "regarder au plus profond de nous pour ne pas reproduire les erreurs du passé."'.split(' ');
 
-const wordlistlist = [frenchWords1, frenchWords2, frenchWords3, frenchWords4]
 function chooseList() {
-    let wordArray = [];
+    let wordArray = []
     for(let i =0; i<40; i++) {
-        let feur = Math.floor(Math.random() * wordlistlist.length);
-        let word = Math.floor(Math.random() * wordlistlist[feur].length);
-        wordArray.push(wordlistlist[feur][word]);
+        let feur = Math.floor(Math.random() * frenchWords.length);
+        wordArray.push(frenchWords[feur]);
     }
     return wordArray;
 }

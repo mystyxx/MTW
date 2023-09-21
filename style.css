@@ -23,13 +23,14 @@ body {
 
 #typeInput {
     font-size: 25px;
+    margin-top: 5px;
     margin-left: 20em;
     margin-right: 5px;
 }
 
 #retryButton {
-    width: max-content;
-    height: 30px;
+    width: 65px;
+    height: 35px;
 }
 
 .highlight {

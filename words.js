@@ -73,14 +73,15 @@ const frenchWords2 = [
 ]
 
 const frenchWords3 = 'abandonner nuit question j\'ai obtenu ça mais déménagement pourquoi sentir obtenu géré administration cube stylo comment réseau dans passant chanter angoisse relatif mépris encore clavier rat écran même si à où commentaire vrai novembre utile urgent retrouver'.split(' ');
+const frenchWords4 = ["plage", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "ville", "voiture", "train", "temps", "soir", "hôtel", "eau", "café", "fruits", "poisson", "dessert", "rue", "pont", "bougie", "fenêtre", "cadeau", "fête", "chanson", "amitié", "sourire", "histoire", "espoir", "papillon", "regard", "pensée"];
 
 const quote1 = 'Dans la vie, on ne fait pas ce que l\'on veut, mais on est responsable de ce que l\'on est.'.split(' ');
 const quote2 = 'La vie est un mystère qu\'il faut vivre, et non un problème à résoudre.'.split(' ');
 const quote3 = 'Parfois, c\'est compliqué de faire la différence entre détermination et obstination.'.split(' ');
 const quote4 = 'Malgré tout, ça reste toi.'.split(' ');
-const quote5 = 'Tu possèdes quelque chose qui s\'appelle la détermination. Donc du moment que tu t\'accroches, du moment que tu fais ce qui te tient à coeur, je crois que tu peux faire ce qui est juste.'.split(' ')
+const quote5 = 'Tu possèdes quelque chose qui s\'appelle la détermination. Donc du moment que tu t\'accroches, du moment que tu fais ce qui te tient à coeur, je crois que tu peux faire ce qui est juste.'.split(' ')
 const quote6 = 'Be proud of you, because we can be do what we want to do.'.split(' ');
-const quote7 = 'Ne voyez-vous pas que le véritable but du novlangue est de restreindre les limites de la pensée ? À la fin, nous rendrons littéralement impossible le crime par la pensée car il n’y aura plus de mots pour l’exprimer. Tous les concepts nécessaires seront exprimés chacunexactement par un seul mot dont le sens sera délimité. Toutes les significations subsidiaires seront supprimées et oubliées. Déjà, dans la onzième édition, nous ne sommes pas loin de ce résultat. Mais le processus continuera encore longtemps après que vous et moi nous serons morts.'.split(' ');
+const quote7 = 'Ne voyez-vous pas que le véritable but du novlangue est de restreindre les limites de la pensée ? À la fin, nous rendrons littéralement impossible le crime par la pensée car il n\'y aura plus de mots pour l\'exprimer. Tous les concepts nécessaires seront exprimés chacunexactement par un seul mot dont le sens sera délimité. Toutes les significations subsidiaires seront supprimées et oubliées. Déjà, dans la onzième édition, nous ne sommes pas loin de ce résultat. Mais le processus continuera encore longtemps après que vous et moi nous serons morts.'.split(' ');
 const quote8 = 'Quelle est la différence entre toi et moi ? C\'est que moi je compte encore les jours et toi je sais bien que tu les comptes pas.'.split(' ');
 const quote9 = 'Y en a qui se la jouent viril, glorifiant la loi du plus fort, mais leur connerie est sidérale, ça pédale dans la semoule, dans l\'aigreur intersidérale. Y en a qui rabaissent les meufs, voudraient les voir dans la cuisine, ça rassure leur égo quand ils les voient courber l\'échine.'.split(' ');
 const quote10 = 'Y en a qui disent \"j\'ai été trop gentil maintenant fini de sfaire avoir\" mais c\'est en disant ça qu\'ils rejoignent le troupeau des batards.'.split(' ')
@@ -99,7 +100,7 @@ const quote22 = 'Le Guide du voyageur galactique (titre original : The Hitchhike
 const quote23 = 'Il est écrit "Seul Link peut vaincre Ganon" !'.split(' ');
 const quote24 = 'Dieu a-t-il fait l\'Homme à son image ou L\'Homme a-t-il fait Dieu à la sienne ? J\'ai mon avis. La religion traduit les aspirations profondes de la race humaine. Nulles qu\'elles n\'ont davantage façonné l\'histoire. Ce cycle nous tente à en tirer des leçons. Devenir de meilleurs croyants ou de meilleurs athées, ça signifie avant tout "regarder au plus profond de nous pour ne pas reproduire les erreurs du passé."'.split(' ');
 
-const wordlistlist = [frenchWords1, frenchWords2, frenchWords3]
+const wordlistlist = [frenchWords1, frenchWords2, frenchWords3, frenchWords4]
 function chooseList() {
     let wordArray = [];
     for(let i =0; i<40; i++) {

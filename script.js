@@ -2,18 +2,18 @@ let inputbox = document.getElementById('typeInput');
 let input = inputbox.textContent;
 let scorebox = document.getElementById('score');
 let timeBox = document.getElementById('time');
-let wordBox = document.getElementById('words');
 let temps = timeBox.textContent;
-let wrongCharacters = 0;
-let testTime = 15;
-inputbox.value = '';
-let totalspacePress = 0;
+let wordBox = document.getElementById('words');
 var gamemode = localStorage.getItem('gm');
 var theme = localStorage.getItem('theme');
 var textColor = localStorage.getItem('textColor');
 changeClientTheme(theme);
 
 var wordList = shuffle(chooseList());
+let wrongCharacters = 0;
+inputbox.value = '';
+let totalspacePress = 0;
+let testTime = 15;
 let i = 0;
 printWords(wordList);
 var correctWords = 0;
@@ -25,12 +25,7 @@ var TimerObject;
 //loads the previous gamemode
 switch (gamemode) {
     case 'quote' :
-        wordList = '';
-        wordList = chooseQuote('quotelist');
-        timeBox.style.display = 'none';
-        testTime = 120;
-        timeBox.textContent = '120';
-        temps = '120';
+        changeQuoteLength()
     printWords(wordList);
     inputbox.focus();
     case 'shortQuote':
@@ -57,8 +52,6 @@ switch (gamemode) {
 
 }
 
-
-
 function shuffle(array) {
     //this function shuffles the array to make the words in a different order each test.
     let currentIndex = array.length,  randomIndex;
@@ -76,7 +69,7 @@ function shuffle(array) {
 }
 
 function timer() {
-    //this function is run each second once the first input is detected.
+    //this function runs when a test is in progress.
     if (timeBox.textContent > 0 && testRunning === true) {
         timeBox.textContent--;
     }
@@ -115,16 +108,17 @@ function printWords(wordList) {
     
 }
 
-function changeTestTime(time) {
+function changeGamemode() {
     clearInterval(TimerObject);
-    inputbox.style.visibility = 'visible';
-    inputbox.value = '';
-    totalspacePress = 0;
-    correctCharacters = 0;
-    correctWords = 0;
-    wrongCharacters = 0;
+    inputbox.style.display = 'relative';
     testRunning = false;
     wordBox.textContent = '';
+    inputbox.value = ''
+    totalspacePress = 0; correctCharacters = 0; correctWords = 0; wrongCharacters = 0;
+    inputbox.focus();
+}
+function changeTestTime(time) {
+    changeGamemode();
     wordList = '';
     wordList = shuffle(chooseList()) 
     printWords(wordList)
@@ -132,28 +126,16 @@ function changeTestTime(time) {
     timeBox.textContent = time;
     temps = time;
     timeBox.style.display = 'inline';
-    inputbox.focus();
 }
 
 function changeQuoteLength(size) {
-    clearInterval(TimerObject);
-    inputbox.style.display = 'inline';
+    changeGamemode();
     timeBox.style.display = 'none';
-    inputbox.value = '';
-    totalspacePress = 0;
-    correctCharacters = 0;
-    correctWords = 0;
-    wrongCharacters = 0;
-    testRunning = false;
-    wordBox.textContent = '';
-    timeBox.style.display = 'none';
-    testTime = 120;
     timeBox.textContent = '120';
+    testTime = 120;
     temps = '120';
-    wordList = '';
     wordList = chooseQuote(size);
     printWords(wordList)
-    inputbox.focus();
 }
 
 function changeClientTheme(theme) {
@@ -176,7 +158,6 @@ function changeClientTheme(theme) {
         localStorage.setItem('textColor', 'lightgreen');
     }
 }
-
 
 function spacebarIsInput() {
     for (let i = 0; i<inputbox.value.length;i++) {
@@ -205,15 +186,15 @@ addEventListener('keyup', (nextWord)=> {
             correctCharacters += wordList[i].length;
             document.getElementById(i).style.color = localStorage.getItem('textColor');
         }
-        correctCharacters++;
+        correctCharacters++;                                            //even if the word is incorrect, the space is typed and is count
         if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
         
         if(testRunning === true) {
-            i++; //go to the next word
+            i++;                                                        //go to the next word
             totalspacePress++;
             if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                 inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
-            document.getElementById(i-1).className = '';
+            document.getElementById(i-1).className = '';                //clear the highlight
             document.getElementById(i).className = 'highlight';         //highlight the next word
         }
         else{inputbox.value = ''}
@@ -224,25 +205,26 @@ addEventListener('keyup', (nextWord)=> {
 
 
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
-    clearInterval(TimerObject);
+    changeGamemode();
     localStorage.setItem('gm', 'quote')
     inputbox.style.display = 'inline';
-    inputbox.value = '';
-    testRunning = false;
-    wordBox.textContent = '';
-    wordList = '';
-    totalspacePress = 0;
-    correctCharacters = 0;
-    correctWords = 0;
-    wrongCharacters = 0;
     wordList = chooseQuote(quotelist);
     timeBox.style.display = 'none';
     testTime = 120;
     timeBox.textContent = '120';
     temps = '120';
     printWords(wordList);
-    inputbox.focus();
 });
+
+document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
+    changeGamemode()
+    localStorage.setItem('gm', 'words15')
+    inputbox.style.display = 'reative';
+    wordList = shuffle(chooseList());
+    timeBox.style.display = 'inline';
+    changeTestTime(15);
+});
+
 
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     localStorage.setItem('gm', 'shortQuote');
@@ -256,24 +238,6 @@ document.getElementById('longQuoteGamemodeButton').addEventListener('click', (ch
     localStorage.setItem('gm', 'longQuote')
     changeQuoteLength('long');
 })
-
-
-document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
-    clearInterval(TimerObject);
-    localStorage.setItem('gm', 'words15')
-    inputbox.style.display = 'reative';
-    testRunning = false;
-    wordBox.textContent = '';
-    wordList = shuffle(chooseList());
-    timeBox.style.display = 'inline';
-    changeTestTime(15);
-    inputbox.value = ''
-    totalspacePress = 0;
-    correctCharacters = 0;
-    correctWords = 0;
-    wrongCharacters = 0;
-    inputbox.focus();
-});
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     localStorage.setItem('gm', 'words15')

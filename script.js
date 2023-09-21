@@ -2,6 +2,7 @@ let inputbox = document.getElementById('typeInput');
 let input = inputbox.textContent;
 let scorebox = document.getElementById('score');
 let timeBox = document.getElementById('time');
+let wordBox = document.getElementById('words');
 let temps = timeBox.textContent;
 let wrongCharacters = 0;
 let testTime = 15;
@@ -88,12 +89,12 @@ function timer() {
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
         testRunning = false;
-        document.getElementById('words').style.display = 'none';
+        inputbox.style.visibility = 'hidden';
         
     }
     if (timeBox.textContent > 0 && i===wordList.length && testTime !=120) {
         i = 0;
-        document.getElementById('words').textContent = '';
+        wordBox.textContent = '';
         wordList = shuffle(chooseList());
         printWords(wordList);
     }
@@ -108,7 +109,7 @@ function printWords(wordList) {
         newtask.id = i;
         newtask.className = '';
         document.body.appendChild(newtask);
-        document.getElementById('words').appendChild(newtask);
+        wordBox.appendChild(newtask);
         document.getElementById('0').className = 'highlight';
     }
     
@@ -116,14 +117,14 @@ function printWords(wordList) {
 
 function changeTestTime(time) {
     clearInterval(TimerObject);
-    document.getElementById('words').style.display = 'block';
+    inputbox.style.visibility = 'visible';
     inputbox.value = '';
     totalspacePress = 0;
     correctCharacters = 0;
     correctWords = 0;
     wrongCharacters = 0;
     testRunning = false;
-    document.getElementById('words').textContent = '';
+    wordBox.textContent = '';
     wordList = '';
     wordList = shuffle(chooseList()) 
     printWords(wordList)
@@ -136,7 +137,7 @@ function changeTestTime(time) {
 
 function changeQuoteLength(size) {
     clearInterval(TimerObject);
-    document.getElementById('words').style.display = 'block';
+    inputbox.style.display = 'inline';
     timeBox.style.display = 'none';
     inputbox.value = '';
     totalspacePress = 0;
@@ -144,7 +145,7 @@ function changeQuoteLength(size) {
     correctWords = 0;
     wrongCharacters = 0;
     testRunning = false;
-    document.getElementById('words').textContent = '';
+    wordBox.textContent = '';
     timeBox.style.display = 'none';
     testTime = 120;
     timeBox.textContent = '120';
@@ -160,7 +161,7 @@ function changeClientTheme(theme) {
         document.getElementById('switchThemeButton').textContent = 'switch to dark mode';
         document.body.style.backgroundColor = 'rgb(183, 229, 255)';
         document.body.style.color = 'black';
-        document.getElementById('words').style.backgroundColor = 'white';
+        wordBox.style.backgroundColor = 'white';
         document.getElementById('resultCard').style.backgroundColor = 'white';
         document.getElementById('wpm').style.color = 'green';
         localStorage.setItem('textColor', 'green');
@@ -169,7 +170,7 @@ function changeClientTheme(theme) {
         document.getElementById('switchThemeButton').textContent = 'switch to light mode';
         document.body.style.backgroundColor = 'black';
         document.body.style.color = 'white';
-        document.getElementById('words').style.backgroundColor= 'black';
+        wordBox.style.backgroundColor= 'black';
         document.getElementById('resultCard').style.backgroundColor = 'black';
         document.getElementById('wpm').style.color = 'lightgreen';
         localStorage.setItem('textColor', 'lightgreen');
@@ -225,10 +226,10 @@ addEventListener('keyup', (nextWord)=> {
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
     clearInterval(TimerObject);
     localStorage.setItem('gm', 'quote')
-    document.getElementById('words').style.display = 'block';
+    inputbox.style.display = 'inline';
     inputbox.value = '';
     testRunning = false;
-    document.getElementById('words').textContent = '';
+    wordBox.textContent = '';
     wordList = '';
     totalspacePress = 0;
     correctCharacters = 0;
@@ -260,9 +261,9 @@ document.getElementById('longQuoteGamemodeButton').addEventListener('click', (ch
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
     clearInterval(TimerObject);
     localStorage.setItem('gm', 'words15')
-    document.getElementById('words').style.display = 'block';
+    inputbox.style.display = 'reative';
     testRunning = false;
-    document.getElementById('words').textContent = '';
+    wordBox.textContent = '';
     wordList = shuffle(chooseList());
     timeBox.style.display = 'inline';
     changeTestTime(15);

@@ -84,7 +84,7 @@ function timer() {
         inputbox.style.visibility = 'hidden';
         
     }
-    if (timeBox.textContent > 0 && i===wordList.length && testTime !=500) {
+    if (testRunning == true && i===wordList.length && testTime !=500) {
         i = 0;
         wordBox.textContent = '';
         wordList = shuffle(chooseList());
@@ -166,16 +166,16 @@ function spacebarIsInput() {
 
 
 addEventListener('keyup', (nextWord)=> {
-    let wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
-    if(wordInput != wordList[i].slice(0, wordInput[0].length + '')) {document.getElementById(i).className = 'redhighlight'}
-    else{document.getElementById(i).className = 'highlight'}
     //test started when input detected
     if (testRunning == false && timeBox.textContent != 0) {
         i=0;
         testRunning = true;
         TimerObject = setInterval(timer, 1000)
-
+        
     }
+    let wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
+    if(wordInput != wordList[i].slice(0, wordInput[0].length + '')) {document.getElementById(i).className = 'redhighlight'}
+    else{document.getElementById(i).className = 'highlight'}
     //if the spacebar is pressed,
     if(nextWord.isComposing || spacebarIsInput()) {
         wordInput = inputbox.value.replace(' ', ' ').split(' ');

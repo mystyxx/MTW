@@ -166,13 +166,14 @@ function spacebarIsInput() {
 
 
 addEventListener('keyup', (nextWord)=> {
+    let wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
+    if(wordInput != wordList[i].slice(0, wordInput[0].length + '')) {document.getElementById(i).className = 'redhighlight'}
+    else{document.getElementById(i).className = 'highlight'}
     //test started when input detected
     if (testRunning == false && timeBox.textContent != 0) {
         i=0;
         testRunning = true;
         TimerObject = setInterval(timer, 1000)
-        // var wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
-        // if(wordInput != wordList[i][wordInput.length]) {document.getElementById(i).style.backgroundColor = 'rgba(255, 69, 69, 0.541)'}
 
     }
     //if the spacebar is pressed,
@@ -188,7 +189,7 @@ addEventListener('keyup', (nextWord)=> {
         if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
         
         if(testRunning === true && wordInput[0] != ' ') {
-            if(document.getElementById(i).style.color != localStorage.getItem('textColor')) {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'}
+            if(document.getElementById(i).style.color != localStorage.getItem('textColor')) {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'; document.getElementById(i).style.backgroundColor = 'rgba(0, 0, 0, 0.0)'}
             correctCharacters++;                                        //even if the word is incorrect, the space is typed and is count
             i++;                                                        //go to the next word
             totalspacePress++;

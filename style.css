@@ -39,6 +39,11 @@ body {
     border-radius: 10px;
 }
 
+.redhighlight {
+    background-color:rgba(255, 69, 69, 1);
+    border-radius: 10px;
+}
+
 #time {
     font-size: 35px;
     display: inline-block;

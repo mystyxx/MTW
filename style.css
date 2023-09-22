@@ -15,7 +15,8 @@ body {
 }
 
 #words>span {
-    margin-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
     word-wrap: normal;
     text-wrap: balance;
     display: inline-block;
@@ -35,14 +36,14 @@ body {
 
 .highlight {
     background-color: rgba(77, 77, 77, 0.521);
+    border-radius: 10px;
 }
 
 #time {
     font-size: 35px;
-    display: inline;
+    display: inline-block;
     margin:5px;
 }
-
 
 #gamemodeBar {
     text-align: center;

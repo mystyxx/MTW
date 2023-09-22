@@ -171,23 +171,25 @@ addEventListener('keyup', (nextWord)=> {
         i=0;
         testRunning = true;
         TimerObject = setInterval(timer, 1000)
+        // var wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
+        // if(wordInput != wordList[i][wordInput.length]) {document.getElementById(i).style.backgroundColor = 'rgba(255, 69, 69, 0.541)'}
 
     }
     //if the spacebar is pressed,
     if(nextWord.isComposing || spacebarIsInput()) {
-        var wordInput = inputbox.value.replace(' ', ' ').split(' ');                        //split the input to select only the first part of the input if a letter is pressed after the space
-        // wordInput = wordInput.split(' ');
-        
+        wordInput = inputbox.value.replace(' ', ' ').split(' ');
+
         //check if the word is correctly typed
         if (wordInput[0] == wordList[i] && testRunning == true) {
             correctWords++;
             correctCharacters += wordList[i].length;
             document.getElementById(i).style.color = localStorage.getItem('textColor');
         }
-        correctCharacters++;                                            //even if the word is incorrect, the space is typed and is count
         if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
         
         if(testRunning === true && wordInput[0] != ' ') {
+            if(document.getElementById(i).style.color != localStorage.getItem('textColor')) {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'}
+            correctCharacters++;                                        //even if the word is incorrect, the space is typed and is count
             i++;                                                        //go to the next word
             totalspacePress++;
             if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)

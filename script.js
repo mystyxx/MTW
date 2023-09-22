@@ -2,7 +2,6 @@ let inputbox = document.getElementById('typeInput');
 let input = inputbox.textContent;
 let scorebox = document.getElementById('score');
 let timeBox = document.getElementById('time');
-let temps = timeBox.textContent;
 let wordBox = document.getElementById('words');
 var gamemode = localStorage.getItem('gm');
 var theme = localStorage.getItem('theme');
@@ -73,7 +72,7 @@ function timer() {
     if (timeBox.textContent > 0 && testRunning === true) {
         timeBox.textContent--;
     }
-    if ((timeBox.textContent == '0') || (i===wordList.length && testTime == 120)) {
+    if ((timeBox.textContent == '0') || (i===wordList.length && testTime == 500)) {
         clearInterval(TimerObject);
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
@@ -85,7 +84,7 @@ function timer() {
         inputbox.style.visibility = 'hidden';
         
     }
-    if (timeBox.textContent > 0 && i===wordList.length && testTime !=120) {
+    if (timeBox.textContent > 0 && i===wordList.length && testTime !=500) {
         i = 0;
         wordBox.textContent = '';
         wordList = shuffle(chooseList());
@@ -124,16 +123,14 @@ function changeTestTime(time) {
     printWords(wordList)
     testTime = time;
     timeBox.textContent = time;
-    temps = time;
     timeBox.style.display = 'inline';
 }
 
 function changeQuoteLength(size) {
     changeGamemode();
     timeBox.style.display = 'none';
-    timeBox.textContent = '120';
-    testTime = 120;
-    temps = '120';
+    testTime = 500;
+    timeBox.textContent = '500';
     wordList = chooseQuote(size);
     printWords(wordList)
 }
@@ -161,7 +158,7 @@ function changeClientTheme(theme) {
 
 function spacebarIsInput() {
     for (let i = 0; i<inputbox.value.length;i++) {
-        if(inputbox.value[i] == ' '){
+        if(inputbox.value[i] == ' ' || inputbox.value[i] == ' '){
             return true;
         }
     }
@@ -178,7 +175,8 @@ addEventListener('keyup', (nextWord)=> {
     }
     //if the spacebar is pressed,
     if(nextWord.isComposing || spacebarIsInput()) {
-        var wordInput = inputbox.value.split(' ');                      //split the input to select only the first part of the input if a letter is pressed after the space
+        var wordInput = inputbox.value.replace(' ', ' ').split(' ');                        //split the input to select only the first part of the input if a letter is pressed after the space
+        // wordInput = wordInput.split(' ');
         
         //check if the word is correctly typed
         if (wordInput[0] == wordList[i] && testRunning == true) {
@@ -189,7 +187,7 @@ addEventListener('keyup', (nextWord)=> {
         correctCharacters++;                                            //even if the word is incorrect, the space is typed and is count
         if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
         
-        if(testRunning === true) {
+        if(testRunning === true && wordInput[0] != ' ') {
             i++;                                                        //go to the next word
             totalspacePress++;
             if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
@@ -210,9 +208,8 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
     inputbox.style.display = 'inline';
     wordList = chooseQuote(quotelist);
     timeBox.style.display = 'none';
-    testTime = 120;
-    timeBox.textContent = '120';
-    temps = '120';
+    testTime = 500;
+    timeBox.textContent = '500';
     printWords(wordList);
 });
 

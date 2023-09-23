@@ -3,10 +3,14 @@ let input = inputbox.textContent;
 let scorebox = document.getElementById('score');
 let timeBox = document.getElementById('time');
 let wordBox = document.getElementById('words');
-var gamemode = localStorage.getItem('gm');
-var theme = localStorage.getItem('theme');
-var textColor = localStorage.getItem('textColor');
+
+let gamemode = sessionStorage.getItem('gm');
+let theme = localStorage.getItem('theme');
+let textColor = localStorage.getItem('textColor');
 changeClientTheme(theme);
+if (window.sessionStorage.getItem('sesionWpmArray') == undefined && sessionStorage.getItem('sessionWpmArray') == null) {
+    window.sessionStorage.setItem('sessionWpmArray', '');
+}
 
 var wordList = shuffle(chooseList());
 let wrongCharacters = 0;
@@ -15,10 +19,10 @@ let totalspacePress = 0;
 let testTime = 15;
 let i = 0;
 printWords(wordList);
-var correctWords = 0;
-var correctCharacters = 0;
-var testRunning = false;
-var TimerObject; 
+let correctWords = 0;
+let correctCharacters = 0;
+let testRunning = false;
+let TimerObject; 
 
 
 //loads the previous gamemode
@@ -51,6 +55,14 @@ switch (gamemode) {
 
 }
 
+function avg(array) {
+    let sum = 0;
+    for (let i=0; i<array.length-1; i++) {
+        sum = sum + Number(array[i])
+    }
+    return sum/(array.length-1);
+}
+
 function shuffle(array) {
     //this function shuffles the array to make the words in a different order each test.
     let currentIndex = array.length,  randomIndex;
@@ -80,6 +92,9 @@ function timer() {
         scorebox.textContent = correctWords + '/' + totalspacePress;  //update the score
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
+        let zizi = sessionStorage.getItem('sessionWpmArray')
+        sessionStorage.setItem('sessionWpmArray', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) +'~' + zizi);
+        document.getElementById('sessionSpeedAverage').textContent = Math.floor(avg(sessionStorage.getItem('sessionWpmArray').split('~')));
         testRunning = false;
         inputbox.style.visibility = 'hidden';
         
@@ -109,7 +124,7 @@ function printWords(wordList) {
 
 function changeGamemode() {
     clearInterval(TimerObject);
-    inputbox.style.display = 'relative';
+    inputbox.style.visibility = 'visible';
     testRunning = false;
     wordBox.textContent = '';
     inputbox.value = ''
@@ -188,7 +203,7 @@ addEventListener('keyup', (nextWord)=> {
         }
         if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
         
-        if(testRunning === true && wordInput[0] != ' ') {
+        if(testRunning === true && wordInput[0] != '') {
             if(document.getElementById(i).style.color != localStorage.getItem('textColor')) {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'; document.getElementById(i).style.backgroundColor = 'rgba(0, 0, 0, 0.0)'}
             correctCharacters++;                                        //even if the word is incorrect, the space is typed and is count
             i++;                                                        //go to the next word
@@ -207,7 +222,7 @@ addEventListener('keyup', (nextWord)=> {
 
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
     changeGamemode();
-    localStorage.setItem('gm', 'quote')
+    sessionStorage.setItem('gm', 'quote')
     inputbox.style.display = 'inline';
     wordList = chooseQuote(quotelist);
     timeBox.style.display = 'none';
@@ -218,7 +233,7 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
 
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
     changeGamemode()
-    localStorage.setItem('gm', 'words15')
+    sessionStorage.setItem('gm', 'words15')
     inputbox.style.display = 'reative';
     wordList = shuffle(chooseList());
     timeBox.style.display = 'inline';
@@ -227,28 +242,28 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
 
 
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
-    localStorage.setItem('gm', 'shortQuote');
+    sessionStorage.setItem('gm', 'shortQuote');
     changeQuoteLength('short');
 })
 document.getElementById('mediumQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
-    localStorage.setItem('gm', 'mediumQuote');
+    sessionStorage.setItem('gm', 'mediumQuote');
     changeQuoteLength('medium');
 })
 document.getElementById('longQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
-    localStorage.setItem('gm', 'longQuote')
+    sessionStorage.setItem('gm', 'longQuote')
     changeQuoteLength('long');
 })
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
-    localStorage.setItem('gm', 'words15')
+    sessionStorage.setItem('gm', 'words15')
     changeTestTime(15);
 })
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
-    localStorage.setItem('gm', 'words30');
+    sessionStorage.setItem('gm', 'words30');
     changeTestTime(30);
 })
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
-    localStorage.setItem('gm', 'words60');
+    sessionStorage.setItem('gm', 'words60');
     changeTestTime(60);
 })
 

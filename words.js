@@ -55,10 +55,10 @@ let lastquote;
 let lastquoteIndex;
 function chooseQuote(size) {
     if(size == 'short') {
+        lastquoteIndex = Math.floor(Math.random() * shortQuoteList.length)
         if (lastquote !== undefined) {
             shortQuoteList.push(lastquote)
         }
-        lastquoteIndex = Math.floor(Math.random() * shortQuoteList.length)
         lastquote = shortQuoteList[lastquoteIndex]
         let index = shortQuoteList.indexOf(shortQuoteList[lastquoteIndex]);
         if (index > -1) { // only splice array when item is found
@@ -66,10 +66,10 @@ function chooseQuote(size) {
         }
         return lastquote}
     if(size == 'medium') {
+        lastquoteIndex = Math.floor(Math.random() * mediumQuoteList.length)
         if (lastquote !== undefined) {
             mediumQuoteList.push(lastquote)
         }
-        lastquoteIndex = Math.floor(Math.random() * mediumQuoteList.length)
         lastquote = mediumQuoteList[lastquoteIndex]
         let index = mediumQuoteList.indexOf(mediumQuoteList[lastquoteIndex]);
         if (index > -1) { // only splice array when item is found
@@ -78,10 +78,10 @@ function chooseQuote(size) {
         return lastquote
     }
     if(size == 'long') {
+        lastquoteIndex = Math.floor(Math.random() * longQuoteList.length)
         if (lastquote !== undefined) {
             longQuoteList.push(lastquote)
         }
-        lastquoteIndex = Math.floor(Math.random() * longQuoteList.length)
         lastquote = longQuoteList[lastquoteIndex]
         let index = longQuoteList.indexOf(longQuoteList[lastquoteIndex]);
         if (index > -1) { // only splice array when item is found
@@ -90,10 +90,10 @@ function chooseQuote(size) {
         return lastquote
     }
     else{
+        lastquoteIndex = Math.floor(Math.random() * quotelist.length)
         if (lastquote !== undefined) {
             quotelist.push(lastquote)
         }
-        lastquoteIndex = Math.floor(Math.random() * quotelist.length)
         lastquote = quotelist[lastquoteIndex]
         let index = quotelist.indexOf(quotelist[lastquoteIndex]);
         if (index > -1) { // only splice array when item is found

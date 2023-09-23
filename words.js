@@ -1,5 +1,4 @@
-const frenchWords = ["bonjour", "merci", "plaisir", "amour", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "plage", "ville", "voiture", "train", "avion", "temps", "jour", "sécurité", "matin", "soir", "hôtel", "vin", "pain", "eau", "café", "fruits", "légumes", "viande", "poisson", "dessert", "il", "que", "voix", "ciel", "petit", "sociologie", "entre", "comme", "maison", "répondre", "ici", "terre", "ça", "moins", "tant", "chambre", "depuis", "mais", "scepticisme", "ne", "âme", "scepticisme", "dieu", "mot", "chez", "coup", "autre", "heure", "tout", "chez", "commentaire", "philosophie", "pourquoi", "élégant", "abandonner", "nuit", "question", "j'ai", "obtenu", "ça", "mais", "déménagement", "pourquoi", "sentir", "obtenu", "géré", "cube", "stylo", "comment", "réseau", "dans", "passant", "chanter", "angoisse", "relatif", "mépris", "encore", "clavier", "rat", "écran", "même", "si", "à", "où", "commentaire", "vrai", "novembre", "utile", "urgent", "retrouver", "plage", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "ville", "voiture", "train", "temps", "soir", "hôtel", "eau", "café", "fruits", "poisson", "dessert", "rue", "pont", "bougie", "fenêtre", "cadeau", "fête", "chanson", "amitié", "sourire", "histoire", "espoir", "papillon", "regard", "pensée", "feu", "horrible", "gens", "manger", "mais", "vrai", "monde", "jeune", "vingt", "je", "quelque", "en", "tout", "chambre", "revenir"];
-
+const frenchWords = ["bonjour", "merci", "plaisir", "amour", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "plage", "ville", "voiture", "train", "avion", "temps", "jour", "sécurité", "matin", "soir", "hôtel", "vin", "pain", "eau", "café", "fruits", "légumes", "viande", "poisson", "dessert", "il", "que", "voix", "ciel", "petit", "entre", "comme", "maison", "répondre", "ici", "terre", "ça", "moins", "tant", "chambre", "depuis", "mais", "ne", "âme", "dieu", "mot", "chez", "coup", "autre", "heure", "tout", "chez", "commentaire", "philosophie", "pourquoi", "élégant", "abandonner", "nuit", "question", "j'ai", "obtenu", "ça", "mais", "pourquoi", "sentir", "obtenu", "géré", "cube", "stylo", "comment", "réseau", "dans", "passant", "chanter", "angoisse", "relatif", "mépris", "encore", "clavier", "rat", "écran", "même", "si", "à", "où", "commentaire", "vrai", "novembre", "utile", "urgent", "retrouver", "plage", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "opposition", "odeur", "annoncer", "choisir", "pays", "vent", "puisque", "lutte", "propre", "durant", "ligne", "animal", "deux", "tout", "pourrait"];
 
 const quote1 = 'Dans la vie, on ne fait pas ce que l\'on veut, mais on est responsable de ce que l\'on est.'.split(' ');
 const quote2 = 'La vie est un mystère qu\'il faut vivre, et non un problème à résoudre.'.split(' ');
@@ -25,8 +24,9 @@ const quote21 = 'L\'existence du kipferi, ancêtre du croissant, serait attesté
 const quote22 = 'Le Guide du voyageur galactique (titre original : The Hitchhiker\'s Guide to the Galaxy, abrégé notamment en H2G2) est une oeuvre de science-fiction humoristique mulidisciplinaire imaginée par l\'écrivain britannique Douglas Adams. Son nom provient de l\'object symbolique de la série : un livre électronnique intitulé Le Guide du vogateur galactique. Née en 1978 sous forme de feuilleton radiophonique, l\'oeuvre a depuis été déclinée dans de nombreux médias au cours de différentes adaptations : romans, pièces de théâtre, série télévisée, jeux vidéo, bande dessinée, long métrage pour le cinéma.'.split(' ');
 const quote23 = 'Il est écrit "Seul Link peut vaincre Ganon" !'.split(' ');
 const quote24 = 'Dieu a-t-il fait l\'Homme à son image ou L\'Homme a-t-il fait Dieu à la sienne ? J\'ai mon avis. La religion traduit les aspirations profondes de la race humaine. Nulles qu\'elles n\'ont davantage façonné l\'histoire. Ce cycle nous tente à en tirer des leçons. Devenir de meilleurs croyants ou de meilleurs athées, ça signifie avant tout "regarder au plus profond de nous pour ne pas reproduire les erreurs du passé."'.split(' ');
-const quote25 = 'Si la jeunesse n\'a pas toujours raison, la société la méconnaît et qui la frappe à toujours tort.'.split(' ');
+const quote25 = 'Si la jeunesse n\'a pas toujours raison, la société qui la méconnaît et qui la frappe a toujours tort.'.split(' ');
 const quote26 = 'Vous avez tout à fait raison, Monsieur le Premier Ministre...'.split(' ');
+const quote27 = ''
 
 function chooseList() {
     let wordArray = []
@@ -38,7 +38,7 @@ function chooseList() {
 }
 
 
-const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24];
+const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, ];
 const shortQuoteList = []; const mediumQuoteList = []; const longQuoteList = [];
 
 for(let i=0; i<quotelist.length; i++) {

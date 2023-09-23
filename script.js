@@ -25,35 +25,37 @@ let testRunning = false;
 let TimerObject; 
 
 
-//loads the previous gamemode
-switch (gamemode) {
-    case 'quote' :
-        changeQuoteLength()
-    printWords(wordList);
-    inputbox.focus();
-    case 'shortQuote':
-        changeQuoteLength('short');
-        break;
-    case 'mediumQuote':
-        changeQuoteLength('medium');
-        break;
-    case 'longQuote':
-        changeQuoteLength('long');
-        break;
-    case 'words15':
-        changeTestTime(15);
-        break;
-    case 'words30':
-        changeTestTime(30);
-        break;
-    case 'words60':
-        changeTestTime(60);
-        break;
-    default:
-        changeTestTime(15);
-        break;
-
+function switchGamemode() {
+    //loads the previous gamemode
+    switch (gamemode) {
+        case 'quote' :
+            changeQuoteLength()
+        printWords(wordList);
+        inputbox.focus();
+        case 'shortQuote':
+            changeQuoteLength('short');
+            break;
+        case 'mediumQuote':
+            changeQuoteLength('medium');
+            break;
+        case 'longQuote':
+            changeQuoteLength('long');
+            break;
+        case 'words15':
+            changeTestTime(15);
+            break;
+        case 'words30':
+            changeTestTime(30);
+            break;
+        case 'words60':
+            changeTestTime(60);
+            break;
+        default:
+            changeTestTime(15);
+            break;
+    }
 }
+switchGamemode();
 
 function avg(array) {
     let sum = 0;

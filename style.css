@@ -72,30 +72,39 @@ body {
 #resultCard {
     background-color: aliceblue;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+    'speed speed speed'
+    'name name info'
+    'name name info'
+    'name name info'
+    'name name info'
+    'name name info';
     justify-content: center;
     margin: 0 auto;
     margin-top: 5%;
     width: 18%;
     outline: 1px solid;
     outline-color: white;
+    inset-inline-start: 5px;
 }
 
 #resultCard > .margin-right {
     text-align: end;
-    margin-right: 10px;
     grid-column: 3/3;
 }
 
 .margin-left {
-    margin-left: 10px;
+    /* margin-top: 20px; */
 }
 
 #wpm {
     color: green;
     font-size: 20px;
     font-weight:bolder;
-    grid-column: 4/2;
+    grid-area: speed;
+    margin-top: 10px;
+    text-align: center;
+
 }
 
 #container {

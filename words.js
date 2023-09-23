@@ -10,7 +10,7 @@ const quote7 = 'Ne voyez-vous pas que le véritable but du novlangue est de rest
 const quote8 = 'Quelle est la différence entre toi et moi ? C\'est que moi je compte encore les jours et toi je sais bien que tu les comptes pas.'.split(' ');
 const quote9 = 'Y en a qui se la jouent viril, glorifiant la loi du plus fort, mais leur connerie est sidérale, ça pédale dans la semoule, dans l\'aigreur intersidérale. Y en a qui rabaissent les meufs, voudraient les voir dans la cuisine, ça rassure leur égo quand ils les voient courber l\'échine.'.split(' ');
 const quote10 = 'Y en a qui disent \"j\'ai été trop gentil maintenant fini de sfaire avoir\" mais c\'est en disant ça qu\'ils rejoignent le troupeau des batards.'.split(' ')
-const quote11 = 'On est le flip flip crew, terroristes bienveillants, les autres trucs c\'est chiant, va falloir vous réveiller, car nous somme l\'understup, la ligue anti réactionnaire, le stup persévère, stoppera les guerres sur la Terre.'.split(' ');
+const quote11 = 'On est le flip flip crew, terroristes bienveillants, les autres trucs c\'est chiant, va falloir vous réveiller, car nous sommes l\'understup, la ligue anti-réactionnaire, le stup persévère, stoppera les guerres sur la Terre.'.split(' ');
 const quote12 = 'Fais confiance qu\'à ton coeur, avant d\'apprendre à rire on pleure, après la vie on meurt, lève-toi, prends les armes et bat toi pour tes valeurs.'.split(' ');
 const quote13 = 'Linus Benedict Torvalds, né le 28 décembre 1969 à Helsinki en Finlande, est un informaticien américano-finlandais connu notamment pour avoir créé le noyau Linux en 1991 (à 21 ans). Il continue d\'en diriger le développement, étant considéré comme le "dictateur bienveillant à vie" (Benevolent Dictator for Life) de celui-ci. Il a également créé le logiciel de gestion de versions décentralisé Git et le logiciel d\'enregistrement et de planification des plongées Subsurface.'.split(' ');
 const quote14 = 'Le cinéma est un art du spectacle. En français, il est désigné commme le "septième art", d\'après l\'expression du critique Ricciotto Canudo dans les années 1920. L\'art cinématographique se caractérise par le spectacle proposé au public sous la forme d\'un film, c\'est à dire d\'un récit (fictionnel ou documentaire, véhiculé par un support (pellicule souple, bande magnétique, contenant numérique), qui est enregistré puis lu par un mécanisme continu ou intermittent qui crée l\'illusion d\'images en mouvements, ou par l\'enregistrement et la lecture continue de données informatiques.'.split(' ');
@@ -51,10 +51,53 @@ for(let i=0; i<quotelist.length; i++) {
     else if (quotelist[i].length > 50) {longQuoteList.push(quotelist[i]);}
 }
 
-
+let lastquote;
+let lastquoteIndex;
 function chooseQuote(size) {
-    if(size == 'short') {return shortQuoteList[Math.floor(Math.random() * shortQuoteList.length)]}
-    if(size == 'medium') {return mediumQuoteList[Math.floor(Math.random() * mediumQuoteList.length)]}
-    if(size == 'long') {return longQuoteList[Math.floor(Math.random() * longQuoteList.length)]}
-    else{return quotelist[Math.floor(Math.random() * quotelist.length)]}
+    if(size == 'short') {
+        if (lastquote !== undefined) {
+            shortQuoteList.push(lastquote)
+        }
+        lastquoteIndex = Math.floor(Math.random() * shortQuoteList.length)
+        lastquote = shortQuoteList[lastquoteIndex]
+        let index = shortQuoteList.indexOf(shortQuoteList[lastquoteIndex]);
+        if (index > -1) { // only splice array when item is found
+            shortQuoteList.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        return lastquote}
+    if(size == 'medium') {
+        if (lastquote !== undefined) {
+            mediumQuoteList.push(lastquote)
+        }
+        lastquoteIndex = Math.floor(Math.random() * mediumQuoteList.length)
+        lastquote = mediumQuoteList[lastquoteIndex]
+        let index = mediumQuoteList.indexOf(mediumQuoteList[lastquoteIndex]);
+        if (index > -1) { // only splice array when item is found
+            mediumQuoteList.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        return lastquote
+    }
+    if(size == 'long') {
+        if (lastquote !== undefined) {
+            longQuoteList.push(lastquote)
+        }
+        lastquoteIndex = Math.floor(Math.random() * longQuoteList.length)
+        lastquote = longQuoteList[lastquoteIndex]
+        let index = longQuoteList.indexOf(longQuoteList[lastquoteIndex]);
+        if (index > -1) { // only splice array when item is found
+            longQuoteList.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        return lastquote
+    }
+    else{
+        if (lastquote !== undefined) {
+            quotelist.push(lastquote)
+        }
+        lastquoteIndex = Math.floor(Math.random() * quotelist.length)
+        lastquote = quotelist[lastquoteIndex]
+        let index = quotelist.indexOf(quotelist[lastquoteIndex]);
+        if (index > -1) { // only splice array when item is found
+            quotelist.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        return lastquote}
 }

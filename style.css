@@ -54,8 +54,13 @@ body {
     text-align: center;
 }
 
+#gamemodeBar::selection, #gamemodeBar>p::selection {
+    background-color: none;
+}
+
 #gamemodeBar>p {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 #wordsGamemodeButton{

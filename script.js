@@ -89,7 +89,7 @@ function timer() {
         correctWords++;
         correctCharacters += wordList[i].length;
         document.getElementById(i).style.color = localStorage.getItem('textColor');}
-    if ((timeBox.textContent == '0') || (i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length)) {
+    if ((timeBox.textContent == '0') || (i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) || (i===wordList.length && testTime == 500) ) {
         clearInterval(TimerObject);
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
@@ -128,6 +128,7 @@ function printWords(wordList) {
 }
 
 function changeGamemode() {
+    i=0;
     clearInterval(TimerObject);
     inputbox.style.visibility = 'visible';
     testRunning = false;
@@ -187,7 +188,7 @@ function spacebarIsInput() {
 
 addEventListener('keyup', (nextWord)=> {
     //test started when input detected
-    if (testRunning == false && timeBox.textContent != 0) {
+    if (testRunning == false && timeBox.textContent != 0 && i==0) {
         i=0;
         testRunning = true;
         TimerObject = setInterval(timer, 1000)

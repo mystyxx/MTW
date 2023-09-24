@@ -27,6 +27,17 @@ const quote24 = 'Dieu a-t-il fait l\'Homme à son image ou L\'Homme a-t-il fait 
 const quote25 = 'Si la jeunesse n\'a pas toujours raison, la société qui la méconnaît et qui la frappe a toujours tort.'.split(' ');
 const quote26 = 'Vous avez tout à fait raison, Monsieur le Premier Ministre...'.split(' ');
 const quote27 = ''
+const philoquote1 = 'La simplicité véritable allie la bonté à la beauté.'.split(' ');
+const philoquote2 = 'La justice de l\'intelligence est la sagesse. le sage n\'est pas celui qui sait beaucoup de choses, mais celui qui voit leur juste mesure.'.split(' ');
+const philoquote3 = 'La victoire sur soi est la plus grande des victoire.'.split(' ');
+const philoquote4 = 'Celui qui progresse ne blâme personne, ne loue personne, ne critique personne, n\'incrimine personne. Il ne dit rien, ni de son importance, ni de son savoir.'.split(' ');
+const philoquote5 = 'Lorsque donc quelqu\'un te met en colère, sache que c\'est ton jugement qui te met en colère.'.split(' ');
+const philoquote6 = 'Il ne dépend pas de toi d\'être riche, mais il dépend de toi d\'être heureux.'.split(' ');
+const philoquote7 = 'La colère est nécessaire ; On ne triomphe de rien sans elle, si elle ne remplit l\'âme, si elle n\'échauffe le coeur ; Elle doit donc nous servir, non comme chef, mais comme soldat.'.split(' ');
+const philoquote8 = 'Dans tout les cas, mariez-vous. si vous tombez sur une bonne épouse, vous serez heureux ; etsi vous tombez sur une mauvaise, vous deviendrez philosophe, ce qui est excellent pour l\'homme.'.split(' ');
+const philoquote9 = 'Je ne suis ni Athénien, ni Grec, mais citoyen du monde.'.split(' ');
+const philoquote10 = 'Je crois qu\'on ne peut mieux vivre qu\'en cherchant à devenir meilleur, ni plus agréablement qu\'en ayant la pleine conscience de son amélioration.'.split(' ');
+const philoquote11 = 'Les gens qu\on interroge, pouvru qu\'on les interroge bien, trouvent d\'eux-mêmes les bonnes réponses.'.split(' ');
 
 function chooseList() {
     let wordArray = []
@@ -37,8 +48,8 @@ function chooseList() {
     return wordArray;
 }
 
-
-const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, ];
+const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11];
+const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11];
 const shortQuoteList = []; const mediumQuoteList = []; const longQuoteList = [];
 
 for(let i=0; i<quotelist.length; i++) {
@@ -51,43 +62,43 @@ for(let i=0; i<quotelist.length; i++) {
     else if (quotelist[i].length > 50) {longQuoteList.push(quotelist[i]);}
 }
 
-let lastquote;
+let lastquote; let lastshortquote; let lastmediumquote; let lastlongquote; let lastphiloquote;
 let lastquoteIndex;
 function chooseQuote(size) {
     if(size == 'short') {
         lastquoteIndex = Math.floor(Math.random() * shortQuoteList.length)
-        if (lastquote !== undefined) {
-            shortQuoteList.push(lastquote)
+        if (lastshortquote !== undefined) {
+            shortQuoteList.push(lastshortquote)
         }
-        lastquote = shortQuoteList[lastquoteIndex]
-        let index = shortQuoteList.indexOf(shortQuoteList[lastquoteIndex]);
-        if (index > -1) { // only splice array when item is found
-            shortQuoteList.splice(index, 1); // 2nd parameter means remove one item only
-        }
-        return lastquote}
+        lastshortquote = shortQuoteList[lastquoteIndex]
+        shortQuoteList.splice(lastquoteIndex, 1); 
+        return lastshortquote}
     if(size == 'medium') {
         lastquoteIndex = Math.floor(Math.random() * mediumQuoteList.length)
-        if (lastquote !== undefined) {
-            mediumQuoteList.push(lastquote)
+        if (lastmediumquote !== undefined) {
+            mediumQuoteList.push(lastmediumquote)
         }
-        lastquote = mediumQuoteList[lastquoteIndex]
-        let index = mediumQuoteList.indexOf(mediumQuoteList[lastquoteIndex]);
-        if (index > -1) { // only splice array when item is found
-            mediumQuoteList.splice(index, 1); // 2nd parameter means remove one item only
-        }
-        return lastquote
+        lastmediumquote = mediumQuoteList[lastquoteIndex]
+        mediumQuoteList.splice(lastquoteIndex, 1); 
+        return lastmediumquote
     }
     if(size == 'long') {
         lastquoteIndex = Math.floor(Math.random() * longQuoteList.length)
-        if (lastquote !== undefined) {
-            longQuoteList.push(lastquote)
+        if (lastlongquote !== undefined) {
+            longQuoteList.push(lastlongquote)
         }
-        lastquote = longQuoteList[lastquoteIndex]
-        let index = longQuoteList.indexOf(longQuoteList[lastquoteIndex]);
-        if (index > -1) { // only splice array when item is found
-            longQuoteList.splice(index, 1); // 2nd parameter means remove one item only
+        lastlongquote = longQuoteList[lastquoteIndex]
+        longQuoteList.splice(lastquoteIndex, 1); 
+        return lastlongquote
+    }
+    if(size == 'philo') {
+        lastquoteIndex = Math.floor(Math.random() * philoquotelist.length)
+        if(lastphiloquote !== undefined) {
+            philoquotelist.push(lastphiloquote)
         }
-        return lastquote
+        lastphiloquote = philoquotelist[lastquoteIndex]
+        philoquotelist.splice(lastquoteIndex, 1);
+        return lastphiloquote;
     }
     else{
         lastquoteIndex = Math.floor(Math.random() * quotelist.length)
@@ -95,9 +106,6 @@ function chooseQuote(size) {
             quotelist.push(lastquote)
         }
         lastquote = quotelist[lastquoteIndex]
-        let index = quotelist.indexOf(quotelist[lastquoteIndex]);
-        if (index > -1) { // only splice array when item is found
-            quotelist.splice(index, 1); // 2nd parameter means remove one item only
-        }
+        quotelist.splice(lastquoteIndex, 1); // 2nd parameter means remove one item only
         return lastquote}
 }

@@ -61,16 +61,6 @@ body {
 #gamemodeBar>p {
     margin-right: 10px;
     cursor: pointer;
-}
-
-#wordsGamemodeButton{
-    display: inline-block;
-}
-#quoteGamemodeButton{
-    display: inline-block;
-}
-
-#gamemodeDivider {
     display: inline-block;
 }
 
@@ -114,11 +104,6 @@ body {
 
 #container {
     margin: 0 auto;
-}
-
-#words15GamemodeButton, #words30GamemodeButton, #words60GamemodeButton, #shortQuoteGamemodeButton, #mediumQuoteGamemodeButton, #longQuoteGamemodeButton {
-    text-align: end;
-    display: inline;
 }
 
 #switchThemeButton {

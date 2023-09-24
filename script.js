@@ -40,6 +40,9 @@ function switchGamemode() {
         case 'longQuote':
             changeQuoteLength('long');
             break;
+        case 'philo':
+            changeQuoteLength('philo');
+            break;
         case 'words15':
             changeTestTime(15);
             break;
@@ -153,7 +156,7 @@ function changeQuoteLength(size) {
     testTime = 500;
     timeBox.textContent = '500';
     wordList = chooseQuote(size);
-    printWords(wordList)
+    printWords(wordList);
 }
 
 function changeClientTheme(theme) {
@@ -195,33 +198,35 @@ addEventListener('keyup', (nextWord)=> {
         
     }
     let wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
-    if(wordInput != wordList[i].slice(0, wordInput[0].length + '')) {document.getElementById(i).className = 'redhighlight'}
-    else{document.getElementById(i).className = 'highlight'}
     //if the spacebar is pressed,
-    if(nextWord.isComposing || spacebarIsInput()) {
-        wordInput = inputbox.value.replace(' ', ' ').split(' ');
-
-        //check if the word is correctly typed
-        if (wordInput[0] == wordList[i] && testRunning == true) {
-            correctWords++;
-            correctCharacters += wordList[i].length;
-            document.getElementById(i).style.color = localStorage.getItem('textColor');
+    if(testRunning) {
+        if(wordInput != wordList[i].slice(0, wordInput[0].length + '')) {document.getElementById(i).className = 'redhighlight'}
+        else{document.getElementById(i).className = 'highlight'}
+        if(nextWord.isComposing || spacebarIsInput()) {
+            wordInput = inputbox.value.replace(' ', ' ').split(' ');
+    
+            //check if the word is correctly typed
+            if (wordInput[0] == wordList[i] && testRunning == true) {
+                correctWords++;
+                correctCharacters += wordList[i].length;
+                document.getElementById(i).style.color = localStorage.getItem('textColor');
+            }
+            if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
+            
+            if(testRunning === true && wordInput[0] != '') {
+                if(document.getElementById(i).style.color != localStorage.getItem('textColor')) {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'; document.getElementById(i).style.backgroundColor = 'rgba(0, 0, 0, 0.0)'}
+                correctCharacters++;                                        //even if the word is incorrect, the space is typed and is count
+                i++;                                                        //go to the next word
+                totalspacePress++;
+                if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
+                    inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
+                document.getElementById(i-1).className = '';                //clear the highlight
+                document.getElementById(i).className = 'highlight';         //highlight the next word
+            }
+            else{inputbox.value = ''}
+            }
+            
         }
-        if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
-        
-        if(testRunning === true && wordInput[0] != '') {
-            if(document.getElementById(i).style.color != localStorage.getItem('textColor')) {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'; document.getElementById(i).style.backgroundColor = 'rgba(0, 0, 0, 0.0)'}
-            correctCharacters++;                                        //even if the word is incorrect, the space is typed and is count
-            i++;                                                        //go to the next word
-            totalspacePress++;
-            if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
-                inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
-            document.getElementById(i-1).className = '';                //clear the highlight
-            document.getElementById(i).className = 'highlight';         //highlight the next word
-        }
-        else{inputbox.value = ''}
-        }
-        
     }
 });
 
@@ -249,15 +254,19 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
 
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'shortQuote');
-    changeQuoteLength('short');
+    switchGamemode();
 })
 document.getElementById('mediumQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'mediumQuote');
-    changeQuoteLength('medium');
+    switchGamemode();
 })
 document.getElementById('longQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
-    sessionStorage.setItem('gm', 'longQuote')
-    changeQuoteLength('long');
+    sessionStorage.setItem('gm', 'longQuote');
+    switchGamemode();
+})
+document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (changeGamemodeToPhiloQuote)=> {
+    sessionStorage.setItem('gm', 'philo');
+    switchGamemode();
 })
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {

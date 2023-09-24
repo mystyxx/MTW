@@ -26,12 +26,11 @@ let TimerObject;
 
 
 function switchGamemode() {
-    //loads the previous gamemode
-    switch (gamemode) {
+    switch (sessionStorage.getItem('gm')) {
         case 'quote' :
             changeQuoteLength()
-        printWords(wordList);
-        inputbox.focus();
+            printWords(wordList);
+            inputbox.focus();
         case 'shortQuote':
             changeQuoteLength('short');
             break;
@@ -86,7 +85,11 @@ function timer() {
     if (timeBox.textContent > 0 && testRunning === true) {
         timeBox.textContent--;
     }
-    if ((timeBox.textContent == '0') || (i===wordList.length && testTime == 500)) {
+    if(i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) {
+        correctWords++;
+        correctCharacters += wordList[i].length;
+        document.getElementById(i).style.color = localStorage.getItem('textColor');}
+    if ((timeBox.textContent == '0') || (i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length)) {
         clearInterval(TimerObject);
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';

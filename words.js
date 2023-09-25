@@ -34,16 +34,52 @@ const philoquote4 = 'Celui qui progresse ne blâme personne, ne loue personne, n
 const philoquote5 = 'Lorsque donc quelqu\'un te met en colère, sache que c\'est ton jugement qui te met en colère.'.split(' ');
 const philoquote6 = 'Il ne dépend pas de toi d\'être riche, mais il dépend de toi d\'être heureux.'.split(' ');
 const philoquote7 = 'La colère est nécessaire ; On ne triomphe de rien sans elle, si elle ne remplit l\'âme, si elle n\'échauffe le coeur ; Elle doit donc nous servir, non comme chef, mais comme soldat.'.split(' ');
-const philoquote8 = 'Dans tout les cas, mariez-vous. si vous tombez sur une bonne épouse, vous serez heureux ; etsi vous tombez sur une mauvaise, vous deviendrez philosophe, ce qui est excellent pour l\'homme.'.split(' ');
+const philoquote8 = 'Dans tout les cas, mariez-vous. si vous tombez sur une bonne épouse, vous serez heureux ; et si vous tombez sur une mauvaise, vous deviendrez philosophe, ce qui est excellent pour l\'homme.'.split(' ');
 const philoquote9 = 'Je ne suis ni Athénien, ni Grec, mais citoyen du monde.'.split(' ');
 const philoquote10 = 'Je crois qu\'on ne peut mieux vivre qu\'en cherchant à devenir meilleur, ni plus agréablement qu\'en ayant la pleine conscience de son amélioration.'.split(' ');
 const philoquote11 = 'Les gens qu\on interroge, pouvru qu\'on les interroge bien, trouvent d\'eux-mêmes les bonnes réponses.'.split(' ');
 
-function chooseList() {
+function chooseList(hardmode) {
     let wordArray = []
     for(let i =0; i<40; i++) {
         let feur = Math.floor(Math.random() * frenchWords.length);
-        wordArray.push(frenchWords[feur]);
+        if(hardmode){let ponctuation = Math.floor(Math.random() * 40); let apagnan = '';
+            switch(ponctuation){
+                case 1:
+                case 2:
+                    apagnan = frenchWords[feur]+ ',';
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    apagnan = frenchWords[feur]+ '.';
+                    break;
+                case 5:
+                    apagnan = '!';
+                    break;
+                case 6:
+                case 7:
+                    apagnan = '?';
+                    break;
+                case 8:
+                    apagnan = ';';
+                    break;
+                case 9:
+                    apagnan = '\"' + frenchWords[feur] + '\"';
+                    break;
+                case 10:
+                    apagnan = ':';
+                    break;
+                case 11:
+                    apagnan = '('+frenchWords[feur]+')';
+                    break;
+                default:
+                    apagnan = frenchWords[feur];
+                    break
+            }
+            wordArray.push(apagnan);
+        }
+        else{wordArray.push(frenchWords[feur])}
     }
     return wordArray;
 }

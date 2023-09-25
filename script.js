@@ -43,13 +43,13 @@ function switchGamemode() {
         case 'philo':
             changeQuoteLength('philo');
             break;
-        case 'words15':
+        case '15':
             changeTestTime(15);
             break;
-        case 'words30':
+        case '30':
             changeTestTime(30);
             break;
-        case 'words60':
+        case '60':
             changeTestTime(60);
             break;
         default:
@@ -140,10 +140,10 @@ function changeGamemode() {
     totalspacePress = 0; correctCharacters = 0; correctWords = 0; wrongCharacters = 0;
     inputbox.focus();
 }
-function changeTestTime(time) {
+function changeTestTime(time, hardmode) {
     changeGamemode();
     wordList = '';
-    wordList = shuffle(chooseList()) 
+    wordList = shuffle(chooseList(hardmode)) 
     printWords(wordList)
     testTime = time;
     timeBox.textContent = time;
@@ -270,16 +270,19 @@ document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (c
 })
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
-    sessionStorage.setItem('gm', 'words15')
+    sessionStorage.setItem('gm', '15')
     changeTestTime(15);
 })
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
-    sessionStorage.setItem('gm', 'words30');
+    sessionStorage.setItem('gm', '30');
     changeTestTime(30);
 })
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
-    sessionStorage.setItem('gm', 'words60');
+    sessionStorage.setItem('gm', '60');
     changeTestTime(60);
+})
+document.getElementById('EnablePonctuation').addEventListener('click', (enablePonctuation)=> {
+    changeTestTime(sessionStorage.getItem('gm'), true)
 })
 
 document.getElementById('switchThemeButton').addEventListener('click', (changeTheme)=> {

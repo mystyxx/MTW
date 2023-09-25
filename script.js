@@ -22,7 +22,8 @@ printWords(wordList);
 let correctWords = 0;
 let correctCharacters = 0;
 let testRunning = false;
-let TimerObject; 
+let TimerObject;
+let hardmode = false;
 
 
 function switchGamemode() {
@@ -44,16 +45,16 @@ function switchGamemode() {
             changeQuoteLength('philo');
             break;
         case '15':
-            changeTestTime(15);
+            changeTestTime(15, hardmode);
             break;
         case '30':
-            changeTestTime(30);
+            changeTestTime(30, hardmode);
             break;
         case '60':
-            changeTestTime(60);
+            changeTestTime(60, hardmode);
             break;
         default:
-            changeTestTime(15);
+            changeTestTime(15, hardmode);
             break;
     }
 }
@@ -110,7 +111,7 @@ function timer() {
     if (testRunning == true && i===wordList.length && testTime !=500) {
         i = 0;
         wordBox.textContent = '';
-        wordList = shuffle(chooseList());
+        wordList = shuffle(chooseList(hardmode));
         printWords(wordList);
     }
     
@@ -272,17 +273,23 @@ document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (c
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     sessionStorage.setItem('gm', '15')
     changeTestTime(15);
+    document.getElementById('EnablePonctuation').textContent = 'enable ponctuaton'
 })
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     sessionStorage.setItem('gm', '30');
     changeTestTime(30);
+    document.getElementById('EnablePonctuation').textContent = 'enable ponctuaton'
 })
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     sessionStorage.setItem('gm', '60');
     changeTestTime(60);
+    document.getElementById('EnablePonctuation').textContent = 'enable ponctuaton'
 })
 document.getElementById('EnablePonctuation').addEventListener('click', (enablePonctuation)=> {
-    changeTestTime(sessionStorage.getItem('gm'), true)
+    hardmode = !hardmode;
+    if(hardmode) {document.getElementById('EnablePonctuation').textContent = 'disable ponctuation'}
+    else{document.getElementById('EnablePonctuation').textContent = 'enable ponctuaton'}
+    changeTestTime(sessionStorage.getItem('gm'), hardmode)
 })
 
 document.getElementById('switchThemeButton').addEventListener('click', (changeTheme)=> {

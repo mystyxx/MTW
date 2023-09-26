@@ -30,7 +30,7 @@ body {
 }
 
 #retryButton {
-    width: 65px;
+    width: wrap-content;
     height: 35px;
 }
 
@@ -51,17 +51,34 @@ body {
 }
 
 #gamemodeBar {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+
 }
 
-#gamemodeBar::selection, #gamemodeBar>p::selection {
+#wordsGamemodeBar, #quoteGamemodeBar {
+    display: flex;
+    justify-content: center;
+    text-align: end;
+    width: 40vw
+}
+
+#wordsGamemodeBar {
+  justify-content: right;
+}
+#quoteGamemodeBar {
+  justify-content: left;
+}
+
+#gamemodeBar::selection, #gamemodeBar>div>p::selection, #gamemodeBar>p::selection {
     background-color: none;
 }
 
-#gamemodeBar>p {
+#gamemodeBar>div>p{
     margin-right: 10px;
+    margin-left: 10px;
     cursor: pointer;
-    display: inline-block;
+    /* align-items: end; */
 }
 
 #resultCard {

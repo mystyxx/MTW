@@ -39,11 +39,15 @@ const philoquote9 = 'Je ne suis ni Athénien, ni Grec, mais citoyen du monde.'.s
 const philoquote10 = 'Je crois qu\'on ne peut mieux vivre qu\'en cherchant à devenir meilleur, ni plus agréablement qu\'en ayant la pleine conscience de son amélioration.'.split(' ');
 const philoquote11 = 'Les gens qu\on interroge, pouvru qu\'on les interroge bien, trouvent d\'eux-mêmes les bonnes réponses.'.split(' ');
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function chooseList(hardmode) {
     let wordArray = []
     for(let i =0; i<40; i++) {
         let feur = Math.floor(Math.random() * frenchWords.length);
-        if(hardmode && i%2 == 0){let ponctuation = Math.floor(Math.random() * 25); let apagnan = '';
+        if(hardmode && i%2 == 1){let ponctuation = Math.floor(Math.random() * 25); let apagnan = '';
             switch(ponctuation){
                 case 1:
                 case 2:
@@ -54,17 +58,21 @@ function chooseList(hardmode) {
                 case 4:
                 case 12:
                 case 13:
-                    apagnan = frenchWords[feur]+ '.';
+                    wordArray[wordArray.length] = frenchWords[feur] + '.';
+                    apagnan = capitalizeFirstLetter(frenchWords[Math.floor(Math.random() * frenchWords.length)])
                     break;
                 case 5:
-                    apagnan = '!';
+                    wordArray[wordArray.length] = '!';
+                    apagnan = capitalizeFirstLetter(frenchWords[Math.floor(Math.random() * frenchWords.length)])
                     break;
                 case 6:
                 case 7:
-                    apagnan = '?';
+                    wordArray[wordArray.length] = '?';
+                    apagnan = capitalizeFirstLetter(frenchWords[Math.floor(Math.random() * frenchWords.length)])
                     break;
                 case 8:
-                    apagnan = ';';
+                    wordArray[wordArray.length] = ';';
+                    apagnan = capitalizeFirstLetter(frenchWords[Math.floor(Math.random() * frenchWords.length)])
                     break;
                 case 9:
                     apagnan = '\"' + frenchWords[feur] + '\"';

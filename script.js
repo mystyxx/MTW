@@ -111,7 +111,7 @@ function timer() {
     if (testRunning == true && i===wordList.length && testTime !=500) {
         i = 0;
         wordBox.textContent = '';
-        wordList = shuffle(chooseList(hardmode));
+        wordList = chooseList(hardmode);
         printWords(wordList);
     }
     
@@ -144,7 +144,7 @@ function changeGamemode() {
 function changeTestTime(time, hardmode) {
     changeGamemode();
     wordList = '';
-    wordList = shuffle(chooseList(hardmode)) 
+    wordList = chooseList(hardmode)
     printWords(wordList)
     testTime = time;
     timeBox.textContent = time;

@@ -43,7 +43,7 @@ function chooseList(hardmode) {
     let wordArray = []
     for(let i =0; i<40; i++) {
         let feur = Math.floor(Math.random() * frenchWords.length);
-        if(hardmode){let ponctuation = Math.floor(Math.random() * 40); let apagnan = '';
+        if(hardmode && i%2 == 0){let ponctuation = Math.floor(Math.random() * 25); let apagnan = '';
             switch(ponctuation){
                 case 1:
                 case 2:
@@ -52,6 +52,8 @@ function chooseList(hardmode) {
                 case 2:
                 case 3:
                 case 4:
+                case 12:
+                case 13:
                     apagnan = frenchWords[feur]+ '.';
                     break;
                 case 5:

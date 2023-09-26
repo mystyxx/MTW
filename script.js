@@ -234,7 +234,8 @@ addEventListener('keyup', (nextWord)=> {
 
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
     changeGamemode();
-    sessionStorage.setItem('gm', 'quote')
+    sessionStorage.setItem('gm', 'quote');
+    document.getElementById('EnablePonctuation').style.visibility = 'hidden';
     inputbox.style.display = 'inline';
     wordList = chooseQuote(quotelist);
     timeBox.style.display = 'none';
@@ -244,51 +245,54 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
 });
 
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
-    changeGamemode()
-    sessionStorage.setItem('gm', 'words15')
+    sessionStorage.setItem('gm', '15')
     inputbox.style.display = 'reative';
-    wordList = shuffle(chooseList());
     timeBox.style.display = 'inline';
-    changeTestTime(15);
+    changeTestTime(15, hardmode)
 });
 
 
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'shortQuote');
     switchGamemode();
+    document.getElementById('EnablePonctuation').style.visibility = 'hidden'
 })
 document.getElementById('mediumQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'mediumQuote');
     switchGamemode();
+    document.getElementById('EnablePonctuation').style.visibility = 'hidden'
 })
 document.getElementById('longQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'longQuote');
     switchGamemode();
+    document.getElementById('EnablePonctuation').style.visibility = 'hidden'
 })
 document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (changeGamemodeToPhiloQuote)=> {
     sessionStorage.setItem('gm', 'philo');
     switchGamemode();
+    document.getElementById('EnablePonctuation').style.visibility = 'hidden'
 })
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     sessionStorage.setItem('gm', '15')
-    changeTestTime(15);
-    document.getElementById('EnablePonctuation').textContent = 'enable ponctuaton'
+    changeTestTime(15, hardmode);
+    document.getElementById('EnablePonctuation').style.visibility = 'visible'
 })
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     sessionStorage.setItem('gm', '30');
-    changeTestTime(30);
-    document.getElementById('EnablePonctuation').textContent = 'enable ponctuaton'
+    changeTestTime(30, hardmode);
+    document.getElementById('EnablePonctuation').style.visibility = 'visible'
 })
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     sessionStorage.setItem('gm', '60');
-    changeTestTime(60);
-    document.getElementById('EnablePonctuation').textContent = 'enable ponctuaton'
+    changeTestTime(60, hardmode);
+    document.getElementById('EnablePonctuation').style.visibility = 'visible'
 })
 document.getElementById('EnablePonctuation').addEventListener('click', (enablePonctuation)=> {
     hardmode = !hardmode;
-    if(hardmode) {document.getElementById('EnablePonctuation').textContent = 'disable ponctuation'}
-    else{document.getElementById('EnablePonctuation').textContent = 'enable ponctuaton'}
+    document.getElementById('EnablePonctuation').style.visibility = 'visible'
+    if(hardmode) {document.getElementById('EnablePonctuation').textContent = 'désactiver la  ponctuation'}
+    else{document.getElementById('EnablePonctuation').textContent = 'activer la ponctuaton'}
     changeTestTime(sessionStorage.getItem('gm'), hardmode)
 })
 

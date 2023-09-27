@@ -12,19 +12,19 @@ if (window.sessionStorage.getItem('sesionWpmArray') == undefined && sessionStora
     window.sessionStorage.setItem('sessionWpmArray', '');
 }
 
-var wordList = shuffle(chooseList());
+var wordList = chooseList();
+printWords(wordList);
 let wrongCharacters = 0;
 inputbox.value = '';
 let totalspacePress = 0;
 let testTime = 15;
 let i = 0;
-printWords(wordList);
 let correctWords = 0;
 let correctCharacters = 0;
 let testRunning = false;
 let TimerObject;
 let hardmode = false;
-
+var secondetenth = 0;
 
 function switchGamemode() {
     switch (sessionStorage.getItem('gm')) {
@@ -68,25 +68,11 @@ function avg(array) {
     return sum/(array.length-1);
 }
 
-function shuffle(array) {
-    //this function shuffles the array to make the words in a different order each test.
-    let currentIndex = array.length,  randomIndex;
-    
-    while (currentIndex != 0) {
-        
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        
-        [array[0], array[randomIndex]] = [array[randomIndex], array[0]];
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-    }
-    
-    return array;
-}
-
 function timer() {
     //this function runs when a test is in progress.
-    if (timeBox.textContent > 0 && testRunning === true) {
+    secondetenth++;
+    console.log(secondetenth)
+    if (timeBox.textContent > 0 && testRunning === true && secondetenth%10==0) {
         timeBox.textContent--;
     }
     if(i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) {
@@ -94,18 +80,18 @@ function timer() {
         correctCharacters += wordList[i].length;
         document.getElementById(i).style.color = localStorage.getItem('textColor');}
     if ((timeBox.textContent == '0') || (i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) || (i===wordList.length && testTime == 500) ) {
+        let zizi = sessionStorage.getItem('sessionWpmArray')
         clearInterval(TimerObject);
+        testRunning = false;
+        inputbox.style.visibility = 'hidden';
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
         document.getElementById('characters').textContent = correctCharacters + ' | ' + wrongCharacters + ' (' + Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) + '%)';
         scorebox.textContent = correctWords + '/' + totalspacePress;  //update the score
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
-        let zizi = sessionStorage.getItem('sessionWpmArray')
         sessionStorage.setItem('sessionWpmArray', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) +'~' + zizi);
         document.getElementById('sessionSpeedAverage').textContent = Math.floor(avg(sessionStorage.getItem('sessionWpmArray').split('~')));
-        testRunning = false;
-        inputbox.style.visibility = 'hidden';
         
     }
     if (testRunning == true && i===wordList.length && testTime !=500) {
@@ -195,7 +181,8 @@ addEventListener('keyup', (nextWord)=> {
     if (testRunning == false && timeBox.textContent != 0 && i==0) {
         i=0;
         testRunning = true;
-        TimerObject = setInterval(timer, 1000)
+        TimerObject = setInterval(timer, 100)
+        secondetenth = 0;
         
     }
     let wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space

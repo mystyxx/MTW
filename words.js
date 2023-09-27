@@ -26,7 +26,8 @@ const quote23 = 'Il est écrit "Seul Link peut vaincre Ganon" !'.split(' ');
 const quote24 = 'Dieu a-t-il fait l\'Homme à son image ou L\'Homme a-t-il fait Dieu à la sienne ? J\'ai mon avis. La religion traduit les aspirations profondes de la race humaine. Nulles qu\'elles n\'ont davantage façonné l\'histoire. Ce cycle nous tente à en tirer des leçons. Devenir de meilleurs croyants ou de meilleurs athées, ça signifie avant tout "regarder au plus profond de nous pour ne pas reproduire les erreurs du passé."'.split(' ');
 const quote25 = 'Si la jeunesse n\'a pas toujours raison, la société qui la méconnaît et qui la frappe a toujours tort.'.split(' ');
 const quote26 = 'Vous avez tout à fait raison, Monsieur le Premier Ministre...'.split(' ');
-const quote27 = ''
+const quote27 = 'Moi, je n\'étais rien et voilà qu\'aujourd\'hui, je suis le gardien du sommeil de ses nuits, je l\'aime à mourir... Vous pouvez détruire tout ce qu\'il vous plaira, elle n\'a qu\'à ouvrir l\'espace de ses bras, pour tout reconstruire... Pour tout reconstruire...'.split(' ');
+const quote28 = 'La première étape du Tour de France 1952 s\'est déroulée le 25 juin 1952 entre les villes de Brest, qui accueille pour la première fois le départ d\'un Tour, et de Rennes, qui est une ville-étape du Tour pour la sixième fois de son histoire. Le parcours franchit les reliefs bretons à travers les départements du Finistère, des Côtes-du-Nord et de l\'Ille-et-Vilaine, sur une route accidentée longue de 246 km. Il passe notamment les villes de Morlaix, Guingamp et Saint-Brieuc. Cette première étape des vingt-trois prévues lance la 39e édition du Tour de France, dont Fausto Coppi prend le départ dans le rôle de l\'immense favori en l\'absence d\'Hugo Koblet, vainqueur de l\'édition précédente, et de Louison Bobet, alors champion de France. La course est remportée par le Belge Rik Van Steenbergen devant son compatriote et coéquipier Maurice Blomme, tous les deux membres de l\'équipe de Belgique.'.split(' ');
 const philoquote1 = 'La simplicité véritable allie la bonté à la beauté.'.split(' ');
 const philoquote2 = 'La justice de l\'intelligence est la sagesse. le sage n\'est pas celui qui sait beaucoup de choses, mais celui qui voit leur juste mesure.'.split(' ');
 const philoquote3 = 'La victoire sur soi est la plus grande des victoire.'.split(' ');
@@ -37,7 +38,11 @@ const philoquote7 = 'La colère est nécessaire ; On ne triomphe de rien sans el
 const philoquote8 = 'Dans tout les cas, mariez-vous. si vous tombez sur une bonne épouse, vous serez heureux ; et si vous tombez sur une mauvaise, vous deviendrez philosophe, ce qui est excellent pour l\'homme.'.split(' ');
 const philoquote9 = 'Je ne suis ni Athénien, ni Grec, mais citoyen du monde.'.split(' ');
 const philoquote10 = 'Je crois qu\'on ne peut mieux vivre qu\'en cherchant à devenir meilleur, ni plus agréablement qu\'en ayant la pleine conscience de son amélioration.'.split(' ');
-const philoquote11 = 'Les gens qu\on interroge, pouvru qu\'on les interroge bien, trouvent d\'eux-mêmes les bonnes réponses.'.split(' ');
+const philoquote11 = 'Les gens qu\'on interroge, pourvu qu\'on les interroge bien, trouvent d\'eux-mêmes les bonnes réponses.'.split(' ');
+const philoquote12 = 'Tu dois devenir l\'homme que tu es. Fais ce que toi seul peut faire. Deviens sans cesse celui que tu es, sois le maître et le sculpteur de toi-même.'.split(' ');
+const philoquote13 = 'Je peux douter de tout, sauf d\'une chose, et c\'est le fait même que je doute. Autrement dit - Je pense, donc je suis.'.split(' ');
+const philoquote14 = 'Pour atteindre la vérité, il faut une fois dans la vie se défaire de toutes les opinions qu\'on a reçues, et reconstruire de nouveau tout le sytème de ses connaissances.'.split(' ');
+const philoquote15 = 'La lecture de tous les bons livres est comme une conversation avec les plus honnêtes gens des siècles passés.'.split(' ');
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -94,8 +99,8 @@ function chooseList(hardmode) {
     return wordArray;
 }
 
-const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11];
-const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11];
+const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
+const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
 const shortQuoteList = []; const mediumQuoteList = []; const longQuoteList = [];
 
 for(let i=0; i<quotelist.length; i++) {

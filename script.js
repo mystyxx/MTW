@@ -172,11 +172,13 @@ function changeTestTime(time, hardmode, numberwords) {
         document.getElementById('words15GamemodeButton').textContent = '15';
         document.getElementById('words30GamemodeButton').textContent = '30';
         document.getElementById('words60GamemodeButton').textContent = '60';
+        timeBox.style.display = 'inline'
     }
     if(words){
         document.getElementById('words15GamemodeButton').textContent = '10';
         document.getElementById('words30GamemodeButton').textContent = '25';
         document.getElementById('words60GamemodeButton').textContent = '50';
+        timeBox.style.display = 'none'
     }
 }
 
@@ -221,6 +223,9 @@ function spacebarIsInput() {
 
 
 addEventListener('keyup', (nextWord)=> {
+    //quick restart
+    if(nextWord.keyCode == 9) {switchGamemode();}
+
     //test started when input detected
     if (testRunning == false && timeBox.textContent != 0 && i==0) {
         i=0;
@@ -267,9 +272,7 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
     changeGamemode();
     sessionStorage.setItem('gm', 'quote');
     document.getElementById('EnablePonctuation').style.display = 'none';
-    inputbox.style.display = 'inline';
     wordList = chooseQuote(quotelist);
-    timeBox.style.display = 'none';
     testTime = 500;
     timeBox.textContent = '500';
     printWords(wordList);
@@ -278,19 +281,15 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
 
 document.getElementById('timeGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
     sessionStorage.setItem('gm', '15'); 
-    timeBox.style.display = 'inline';
     words = false;
     changeTestTime(15, hardmode);
-    hideButtons('quote');
-    document.getElementById('EnablePonctuation').style.display = 'inline-block';
 });
 
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
     sessionStorage.setItem('gm', 'words10'); 
-    timeBox.style.display = 'none';
     words = true;
     changeTestTime(500, hardmode, 10);
-    hideButtons('quote');
+    timeBox.style.display = 'none';
     document.getElementById('EnablePonctuation').style.display = 'none';
 });
 

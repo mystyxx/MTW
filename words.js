@@ -48,9 +48,9 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function chooseList(hardmode) {
+function chooseList(hardmode, words = 50) {
     let wordArray = []
-    for(let i =0; i<40; i++) {
+    for(let i =0; i<words; i++) {
         let feur = Math.floor(Math.random() * frenchWords.length);
         if(hardmode && i%2 == 1){let ponctuation = Math.floor(Math.random() * 25); let apagnan = '';
             switch(ponctuation){

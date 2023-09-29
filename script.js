@@ -168,17 +168,17 @@ function changeTestTime(time, hardmode, numberwords) {
     timeBox.textContent = time;
     timeBox.style.display = 'inline';
     hideButtons('quote');
-    if(!words) {
+    if(numberwords === undefined) {
         document.getElementById('words15GamemodeButton').textContent = '15';
         document.getElementById('words30GamemodeButton').textContent = '30';
         document.getElementById('words60GamemodeButton').textContent = '60';
         timeBox.style.display = 'inline'
     }
-    if(words){
+    if(numberwords !== undefined){
         document.getElementById('words15GamemodeButton').textContent = '10';
         document.getElementById('words30GamemodeButton').textContent = '25';
         document.getElementById('words60GamemodeButton').textContent = '50';
-        timeBox.style.display = 'none'
+        timeBox.style.display = 'none';
     }
 }
 
@@ -227,7 +227,7 @@ addEventListener('keyup', (nextWord)=> {
     if(nextWord.keyCode == 9) {switchGamemode();}
 
     //test started when input detected
-    if (testRunning == false && timeBox.textContent != 0 && i==0) {
+    if (testRunning == false && timeBox.textContent != 0 && i==0 && nextWord.keyCode != 9) {
         i=0;
         testRunning = true;
         TimerObject = setInterval(timer, 100)
@@ -290,7 +290,6 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
     words = true;
     changeTestTime(500, hardmode, 10);
     timeBox.style.display = 'none';
-    document.getElementById('EnablePonctuation').style.display = 'none';
 });
 
 

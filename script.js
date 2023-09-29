@@ -194,15 +194,6 @@ function changeQuoteLength(size) {
 
 function changeClientTheme(theme) {
     if(theme == 'dark') {
-        document.getElementById('switchThemeButton').textContent = 'switch to dark mode';
-        document.body.style.backgroundColor = 'rgb(183, 229, 255)';
-        document.body.style.color = 'black';
-        wordBox.style.backgroundColor = 'white';
-        document.getElementById('resultCard').style.backgroundColor = 'white';
-        document.getElementById('wpm').style.color = 'green';
-        localStorage.setItem('textColor', 'green');
-    }
-    else {
         document.getElementById('switchThemeButton').textContent = 'switch to light mode';
         document.body.style.backgroundColor = 'black';
         document.body.style.color = 'white';
@@ -210,6 +201,15 @@ function changeClientTheme(theme) {
         document.getElementById('resultCard').style.backgroundColor = 'black';
         document.getElementById('wpm').style.color = 'lightgreen';
         localStorage.setItem('textColor', 'lightgreen');
+    }
+    else {
+        document.getElementById('switchThemeButton').textContent = 'switch to dark mode';
+        document.body.style.backgroundColor = 'rgb(183, 229, 255)';
+        document.body.style.color = 'black';
+        wordBox.style.backgroundColor = 'white';
+        document.getElementById('resultCard').style.backgroundColor = 'white';
+        document.getElementById('wpm').style.color = 'green';
+        localStorage.setItem('textColor', 'green');
     }
 }
 

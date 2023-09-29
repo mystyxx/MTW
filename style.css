@@ -1,7 +1,7 @@
 body {
     background-color: rgb(183, 229, 255);
     color: rgb(0, 0, 0);
-    font-family:Verdana, Geneva, Tahoma, sans-serif
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #words {
@@ -27,6 +27,7 @@ body {
     margin-top: 5px;
     margin-left: 20em;
     margin-right: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #retryButton {
@@ -82,7 +83,7 @@ body {
     margin-right: 10px;
     margin-left: 10px;
     cursor: pointer;
-    color:gray
+    /* color:gray */
     /* align-items: end; */
 }
 
@@ -99,6 +100,8 @@ body {
     justify-content: center;
     margin: 0 auto;
     margin-top: 5%;
+    padding-left: 1%;
+    padding-right: 1%;
     width: 18%;
     outline: 1px solid;
     outline-color: white;

@@ -28,14 +28,21 @@ const quote25 = 'Si la jeunesse n\'a pas toujours raison, la société qui la m�
 const quote26 = 'Vous avez tout à fait raison, Monsieur le Premier Ministre...'.split(' ');
 const quote27 = 'Moi, je n\'étais rien et voilà qu\'aujourd\'hui, je suis le gardien du sommeil de ses nuits, je l\'aime à mourir... Vous pouvez détruire tout ce qu\'il vous plaira, elle n\'a qu\'à ouvrir l\'espace de ses bras, pour tout reconstruire... Pour tout reconstruire...'.split(' ');
 const quote28 = 'La première étape du Tour de France 1952 s\'est déroulée le 25 juin 1952 entre les villes de Brest, qui accueille pour la première fois le départ d\'un Tour, et de Rennes, qui est une ville-étape du Tour pour la sixième fois de son histoire. Le parcours franchit les reliefs bretons à travers les départements du Finistère, des Côtes-du-Nord et de l\'Ille-et-Vilaine, sur une route accidentée longue de 246 km. Il passe notamment les villes de Morlaix, Guingamp et Saint-Brieuc. Cette première étape des vingt-trois prévues lance la 39e édition du Tour de France, dont Fausto Coppi prend le départ dans le rôle de l\'immense favori en l\'absence d\'Hugo Koblet, vainqueur de l\'édition précédente, et de Louison Bobet, alors champion de France. La course est remportée par le Belge Rik Van Steenbergen devant son compatriote et coéquipier Maurice Blomme, tous les deux membres de l\'équipe de Belgique.'.split(' ');
+const quote29 = 'La bataille de Drépane (ou Drepanum) est une bataille navale qui a lieu en 249 avant Jésus-Christ, lors de la première guerre punique, au large de Drépane (aujourd\'hui Trapani) à l\'ouest de la Sicile, entre une flotte carthaginoise commandée par Adherbal et une flotte romaine dirigée par Publius Claudius Puicher. Le consul romain tente de bloquer la forteresse carthaginoise de Lilybée (aujourd\'hui Marsala), mais sans réel succès, celle-ci étant toujours ravitaillée par voie maritime grâce aux connaissances locales d\'Hannibal le Rhodien sur les hauts-fonds du secteur. Pour arrêter ce ravitaillement, Publius Claudius Pulcher décide d\'attaquer la flotte punique qui se trouve dans le port de la ville voisine de Drépane.'.split(' ');
+const quote30 = 'La pluie de tes sarcasmes glisse sur la toile de mon indifférence.'.split(' ');
+const quote31 = 'Malgré tout cela, je crois encore à la bonté innée de l\'Homme'.split(' ');
+const quote32 = 'Essayez de quitter la Terre un peu meilleure que vous l\'avez trouvée.'.split(' ');
+const quote33 = 'On ne voit bien qu\'avec le coeur. L\essentiel est invisible pour les yeux.'.split(' ');
+const quote34 = 'Toutes les grandes personnes ont d\'abord été des enfants. Mais peu d\'entre elles s\'en souviennent.'.split(' ');
+const quote35 = 'Mais si tu m\'apprivoise, nous aurons besoin l\'un de l\'autre. Tu seras pour moi unique au monde. Et je serai pour toi unique au monde.'.split(' ');
 const philoquote1 = 'La simplicité véritable allie la bonté à la beauté.'.split(' ');
-const philoquote2 = 'La justice de l\'intelligence est la sagesse. le sage n\'est pas celui qui sait beaucoup de choses, mais celui qui voit leur juste mesure.'.split(' ');
+const philoquote2 = 'La justice de l\'intelligence est la sagesse. Le sage n\'est pas celui qui sait beaucoup de choses, mais celui qui voit leur juste mesure.'.split(' ');
 const philoquote3 = 'La victoire sur soi est la plus grande des victoire.'.split(' ');
 const philoquote4 = 'Celui qui progresse ne blâme personne, ne loue personne, ne critique personne, n\'incrimine personne. Il ne dit rien, ni de son importance, ni de son savoir.'.split(' ');
 const philoquote5 = 'Lorsque donc quelqu\'un te met en colère, sache que c\'est ton jugement qui te met en colère.'.split(' ');
 const philoquote6 = 'Il ne dépend pas de toi d\'être riche, mais il dépend de toi d\'être heureux.'.split(' ');
 const philoquote7 = 'La colère est nécessaire ; On ne triomphe de rien sans elle, si elle ne remplit l\'âme, si elle n\'échauffe le coeur ; Elle doit donc nous servir, non comme chef, mais comme soldat.'.split(' ');
-const philoquote8 = 'Dans tout les cas, mariez-vous. si vous tombez sur une bonne épouse, vous serez heureux ; et si vous tombez sur une mauvaise, vous deviendrez philosophe, ce qui est excellent pour l\'homme.'.split(' ');
+const philoquote8 = 'J\'entends par raison non pas la faculté de raisonner, qui peut être bien et mal employée, mais l\'enchaînement de vérités qui ne peut produire que des vérités, et une vérité ne saurait être contraire à une autre.'.split(' ');
 const philoquote9 = 'Je ne suis ni Athénien, ni Grec, mais citoyen du monde.'.split(' ');
 const philoquote10 = 'Je crois qu\'on ne peut mieux vivre qu\'en cherchant à devenir meilleur, ni plus agréablement qu\'en ayant la pleine conscience de son amélioration.'.split(' ');
 const philoquote11 = 'Les gens qu\'on interroge, pourvu qu\'on les interroge bien, trouvent d\'eux-mêmes les bonnes réponses.'.split(' ');
@@ -100,7 +107,7 @@ function chooseList(hardmode, words = 50) {
 }
 
 const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
-const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
+const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, quote29, quote30, quote31, quote32, quote33, quote34, quote35, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
 const shortQuoteList = []; const mediumQuoteList = []; const longQuoteList = [];
 
 for(let i=0; i<quotelist.length; i++) {

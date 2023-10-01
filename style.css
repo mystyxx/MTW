@@ -1,6 +1,8 @@
 body {
-    background-color: rgb(183, 229, 255);
-    color: rgb(0, 0, 0);
+    --main-bg-color: rgb(183, 229, 255);
+    background-color: var(--main-bg-color);
+    --secondary-color: rgb(0, 0, 0);
+    color: var(--secondary-color);
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -9,7 +11,7 @@ body {
     margin-left: 5em;
     margin-right: 5em;
     padding:10px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--main-bg-color);
     outline: 1px solid;
     outline-color: white;
 }
@@ -76,7 +78,8 @@ body {
 }
 
 #gamemodeBar>div>p:hover, #gamemodeBar>p:hover {
-    color: white;
+    --tertiary-color: rgb(255, 255, 255);
+    color: var(--tertiary-color);
 }
 
 #gamemodeBar>div>p{
@@ -88,7 +91,7 @@ body {
 }
 
 #resultCard {
-    background-color: aliceblue;
+    background-color: var(--main-bg-color);
     display: grid;
     grid-template-areas:
     'speed speed speed'
@@ -104,7 +107,7 @@ body {
     padding-right: 1%;
     width: 18%;
     outline: 1px solid;
-    outline-color: white;
+    outline-color: var(--tertiary-color);
     inset-inline-start: 5px;
 }
 
@@ -118,7 +121,8 @@ body {
 }
 
 #wpm {
-    color: green;
+    --great-color: green;
+    color: var(--great-color);
     font-size: 40px;
     font-weight:bolder;
     grid-area: speed;

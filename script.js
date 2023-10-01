@@ -195,21 +195,16 @@ function changeQuoteLength(size) {
 function changeClientTheme(theme) {
     if(theme == 'dark') {
         document.getElementById('switchThemeButton').textContent = 'switch to light mode';
-        document.body.style.backgroundColor = 'black';
-        document.body.style.color = 'white';
-        wordBox.style.backgroundColor= 'black';
-        document.getElementById('resultCard').style.backgroundColor = 'black';
-        document.getElementById('wpm').style.color = 'lightgreen';
-        localStorage.setItem('textColor', 'lightgreen');
+        document.body.style.setProperty("--main-bg-color", 'black');
+        document.body.style.setProperty("--secondary-color", 'white');
+        document.body.style.setProperty("--great-color", 'lightgreen');
     }
     else {
         document.getElementById('switchThemeButton').textContent = 'switch to dark mode';
-        document.body.style.backgroundColor = 'rgb(183, 229, 255)';
-        document.body.style.color = 'black';
-        wordBox.style.backgroundColor = 'white';
-        document.getElementById('resultCard').style.backgroundColor = 'white';
-        document.getElementById('wpm').style.color = 'green';
-        localStorage.setItem('textColor', 'green');
+        document.body.style.setProperty("--main-bg-color", 'rgb(183, 229, 255');
+        document.body.style.setProperty("--secondary-color", 'black');
+        document.body.style.setProperty("--tertiary-color", 'white');
+        document.body.style.setProperty("--great-color", 'green');
     }
 }
 
@@ -246,12 +241,12 @@ addEventListener('keyup', (nextWord)=> {
             if (wordInput[0] == wordList[i] && testRunning == true) {
                 correctWords++;
                 correctCharacters += wordList[i].length;
-                document.getElementById(i).style.color = localStorage.getItem('textColor');
+                document.getElementById(i).style.color = document.body.style.getPropertyValue('--great-color');
             }
             if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
             
             if(testRunning === true && wordInput[0] != '') {
-                if(document.getElementById(i).style.color != localStorage.getItem('textColor')) {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'; document.getElementById(i).style.backgroundColor = 'rgba(0, 0, 0, 0.0)'}
+                if(document.getElementById(i).style.color != document.body.style.getPropertyValue('--great-color')) {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'; document.getElementById(i).style.backgroundColor = 'rgba(0, 0, 0, 0.0)'}
                 correctCharacters++;                                        //even if the word is incorrect, the space is typed and is count
                 i++;                                                        //go to the next word
                 totalspacePress++;

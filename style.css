@@ -1,7 +1,10 @@
 body {
     --main-bg-color: rgb(183, 229, 255);
+    --great-color: green;
     background-color: var(--main-bg-color);
     --secondary-color: rgb(0, 0, 0);
+    --outline-color: rgb(255, 255, 255);
+    --tertiary-color: rgb(255, 255, 255);
     color: var(--secondary-color);
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -13,7 +16,7 @@ body {
     padding:10px;
     background-color: var(--tertiary-color);
     outline: 1px solid;
-    outline-color: var(--tertiary-color);
+    outline-color: var(--outline-color);
 }
 
 #words>span {
@@ -78,8 +81,7 @@ body {
 }
 
 #gamemodeBar>div>p:hover, #gamemodeBar>p:hover {
-    --tertiary-color: rgb(255, 255, 255);
-    color: var(--tertiary-color);
+    color: gray;
 }
 
 #gamemodeBar>div>p{
@@ -107,7 +109,7 @@ body {
     padding-right: 1%;
     width: 18%;
     outline: 1px solid;
-    outline-color: var(--tertiary-color);
+    outline-color: var(--outline-color);
     inset-inline-start: 5px;
 }
 
@@ -127,7 +129,6 @@ body {
     grid-area: speed;
     margin-top: 20px;
     text-align: center;
-    
 }
 
 #container {
@@ -142,6 +143,5 @@ body {
 }
 
 .correct {
-    --great-color: green;
     color: var(--great-color);
 }

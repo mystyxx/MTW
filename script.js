@@ -104,7 +104,7 @@ function hideButtons(mode) {
 function timer() {
     //this function runs when a test is in progress.
     secondetenth++;
-    if (timeBox.textContent > 0 && testRunning === true && secondetenth%10==0) {
+    if (timeBox.textContent > 0 && testRunning === true && secondetenth%5==0) {
         timeBox.textContent--;
     }
     if(i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) {
@@ -194,17 +194,18 @@ function changeQuoteLength(size) {
 
 function changeClientTheme(theme) {
     if(theme == 'dark') {
-        document.getElementById('switchThemeButton').textContent = 'switch to light mode';
-        document.body.style.setProperty("--main-bg-color", 'black');
-        document.body.style.setProperty("--secondary-color", 'white');
-        document.body.style.setProperty("--great-color", 'lightgreen');
-    }
-    else {
         document.getElementById('switchThemeButton').textContent = 'switch to dark mode';
         document.body.style.setProperty("--main-bg-color", 'rgb(183, 229, 255');
         document.body.style.setProperty("--secondary-color", 'black');
         document.body.style.setProperty("--tertiary-color", 'white');
         document.body.style.setProperty("--great-color", 'green');
+    }
+    else {
+        document.getElementById('switchThemeButton').textContent = 'switch to light mode';
+        document.body.style.setProperty("--main-bg-color", 'black');
+        document.body.style.setProperty("--secondary-color", 'white');
+        document.body.style.setProperty("--tertiary-color", 'black');
+        document.body.style.setProperty("--great-color", 'lightgreen');
     }
 }
 
@@ -225,7 +226,7 @@ addEventListener('keyup', (nextWord)=> {
     if (testRunning == false && timeBox.textContent != 0 && i==0 && nextWord.keyCode != 9) {
         i=0;
         testRunning = true;
-        TimerObject = setInterval(timer, 100)
+        TimerObject = setInterval(timer, 200)
         secondetenth = 0;
         
     }

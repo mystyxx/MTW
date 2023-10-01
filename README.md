@@ -13,6 +13,7 @@ Thanks a lot to deysox for helping me so much !
 ## Incoming features
 - better css
 - more quotes
+- (english gamemode ?)
 
 ## Spot an issue ?
 - If you have an issue with the website, please check first if the issue hasn't been discovered yet (cf. known issues just below) you can either open an issue [here](https://github.com/mystyxx/MTW/issues) or message me on discord (mysty.xx).  
@@ -28,3 +29,7 @@ The website is (not yet (?)) available on the internet, so you have to download 
     git clone https://www.github.com/mystyxx/MTW.git
     ```
 - open the newly created folder and open index.html with your browser
+
+## Contributing 
+- If you want to contribute to the project, you are welcome ! You can clone the repository on your machine and make the changes you want, then create a pull request. 
+- I would really appreciate if you have quotes to suggest or words to add !

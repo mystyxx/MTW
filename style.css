@@ -11,9 +11,9 @@ body {
     margin-left: 5em;
     margin-right: 5em;
     padding:10px;
-    background-color: var(--main-bg-color);
+    background-color: var(--tertiary-color);
     outline: 1px solid;
-    outline-color: white;
+    outline-color: var(--tertiary-color);
 }
 
 #words>span {
@@ -91,7 +91,7 @@ body {
 }
 
 #resultCard {
-    background-color: var(--main-bg-color);
+    background-color: var(--tertiary-color);
     display: grid;
     grid-template-areas:
     'speed speed speed'
@@ -121,14 +121,13 @@ body {
 }
 
 #wpm {
-    --great-color: green;
     color: var(--great-color);
     font-size: 40px;
     font-weight:bolder;
     grid-area: speed;
     margin-top: 20px;
     text-align: center;
-
+    
 }
 
 #container {
@@ -140,4 +139,9 @@ body {
     position:fixed;
     right: 5px;
     text-decoration: underline;
+}
+
+.correct {
+    --great-color: green;
+    color: var(--great-color);
 }

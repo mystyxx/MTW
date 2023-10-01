@@ -241,18 +241,17 @@ addEventListener('keyup', (nextWord)=> {
             if (wordInput[0] == wordList[i] && testRunning == true) {
                 correctWords++;
                 correctCharacters += wordList[i].length;
-                document.getElementById(i).style.color = document.body.style.getPropertyValue('--great-color');
+                document.getElementById(i).className = 'correct';
             }
             if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
             
             if(testRunning === true && wordInput[0] != '') {
-                if(document.getElementById(i).style.color != document.body.style.getPropertyValue('--great-color')) {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'; document.getElementById(i).style.backgroundColor = 'rgba(0, 0, 0, 0.0)'}
+                if(document.getElementById(i).className != 'correct') {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'; document.getElementById(i).style.backgroundColor = 'rgba(0, 0, 0, 0.0)'}
                 correctCharacters++;                                        //even if the word is incorrect, the space is typed and is count
                 i++;                                                        //go to the next word
                 totalspacePress++;
                 if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                     inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
-                document.getElementById(i-1).className = '';                //clear the highlight
                 document.getElementById(i).className = 'highlight';         //highlight the next word
             }
             else{inputbox.value = ''}

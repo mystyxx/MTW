@@ -28,54 +28,67 @@ var secondetenth = 0;
 var words = false;
 
 function switchGamemode() {
+    document.getElementById('words15GamemodeButton').className = ''; document.getElementById('words30GamemodeButton').className = ''; document.getElementById('words60GamemodeButton').className = ''; document.getElementById('shortQuoteGamemodeButton').className = ''; document.getElementById('mediumQuoteGamemodeButton').className = ''; document.getElementById('longQuoteGamemodeButton').className = ''; document.getElementById('philoQuoteGamemodeButton').className = '';
     switch (sessionStorage.getItem('gm')) {
         case 'quote' :
             changeQuoteLength()
             printWords(wordList);
             inputbox.focus();
+            document.getElementById('shortQuoteGamemodeButton').className = 'titleHighlight'; document.getElementById('mediumQuoteGamemodeButton').className = 'titleHighlight'; document.getElementById('longQuoteGamemodeButton').className = 'titleHighlight';
         case 'shortQuote':
             changeQuoteLength('short');
             changeModeHighlight('quoteGamemodeButton');
+            document.getElementById('shortQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'mediumQuote':
             changeQuoteLength('medium');
             changeModeHighlight('quoteGamemodeButton');
+            document.getElementById('mediumQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'longQuote':
             changeQuoteLength('long');
             changeModeHighlight('quoteGamemodeButton');
+            document.getElementById('longQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'philo':
             changeQuoteLength('philo');
             changeModeHighlight('quoteGamemodeButton');
+            document.getElementById('philoQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case '15':
             changeTestTime(15, hardmode);
             changeModeHighlight('timeGamemodeButton');
+            document.getElementById('words15GamemodeButton').className = 'titleHighlight';
             break;
         case '30':
             changeTestTime(30, hardmode);
             changeModeHighlight('timeGamemodeButton');
+            document.getElementById('words30GamemodeButton').className = 'titleHighlight';
             break;
         case '60':
             changeTestTime(60, hardmode);
             changeModeHighlight('timeGamemodeButton');
+            document.getElementById('words60GamemodeButton').className = 'titleHighlight';
             break;
         case 'words10':
             changeTestTime(500, hardmode, 10);
             changeModeHighlight('wordsGamemodeButton');
+            document.getElementById('words15GamemodeButton').className = 'titleHighlight';
             break;
         case 'words25':
             changeTestTime(500, hardmode, 25);
             changeModeHighlight('wordsGamemodeButton');
+            document.getElementById('words30GamemodeButton').className = 'titleHighlight';
             break;
         case 'words50':
             changeTestTime(500, hardmode, 50);
             changeModeHighlight('wordsGamemodeButton');
+            document.getElementById('words60GamemodeButton').className = 'titleHighlight';
             break;
         default:
             changeTestTime(15, hardmode);
             changeModeHighlight('timeGamemodeButton');
+            document.getElementById('words15GamemodeButton').className = 'titleHighlight';
             break;
     }
 }
@@ -116,7 +129,7 @@ function changeModeHighlight(mode) {
     document.getElementById('wordsGamemodeButton').className = '';
     document.getElementById('timeGamemodeButton').className = '';
     document.getElementById('quoteGamemodeButton').className = '';
-    document.getElementById(mode).className = 'titleHighlight'
+    document.getElementById(mode).className = 'titleHighlight';
 }
 
 function timer() {

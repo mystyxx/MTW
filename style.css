@@ -80,7 +80,7 @@ body {
     background-color: none;
 }
 
-#gamemodeBar>div>p:hover, #gamemodeBar>p:hover {
+#gamemodeBar>div>p:hover, #gamemodeBar>p:hover, .titleHighlight {
     color: gray;
 }
 

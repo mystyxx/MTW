@@ -35,36 +35,47 @@ function switchGamemode() {
             inputbox.focus();
         case 'shortQuote':
             changeQuoteLength('short');
+            changeModeHighlight('quoteGamemodeButton');
             break;
         case 'mediumQuote':
             changeQuoteLength('medium');
+            changeModeHighlight('quoteGamemodeButton');
             break;
         case 'longQuote':
             changeQuoteLength('long');
+            changeModeHighlight('quoteGamemodeButton');
             break;
         case 'philo':
             changeQuoteLength('philo');
+            changeModeHighlight('quoteGamemodeButton');
             break;
         case '15':
             changeTestTime(15, hardmode);
+            changeModeHighlight('timeGamemodeButton');
             break;
         case '30':
             changeTestTime(30, hardmode);
+            changeModeHighlight('timeGamemodeButton');
             break;
         case '60':
             changeTestTime(60, hardmode);
+            changeModeHighlight('timeGamemodeButton');
             break;
         case 'words10':
             changeTestTime(500, hardmode, 10);
+            changeModeHighlight('wordsGamemodeButton');
             break;
         case 'words25':
             changeTestTime(500, hardmode, 25);
+            changeModeHighlight('wordsGamemodeButton');
             break;
         case 'words50':
             changeTestTime(500, hardmode, 50);
+            changeModeHighlight('wordsGamemodeButton');
             break;
         default:
             changeTestTime(15, hardmode);
+            changeModeHighlight('timeGamemodeButton');
             break;
     }
 }
@@ -99,6 +110,13 @@ function hideButtons(mode) {
         document.getElementById('words60GamemodeButton').style.display = 'none';
         document.getElementById('EnablePonctuation').style.display = 'none'
     }
+}
+
+function changeModeHighlight(mode) {
+    document.getElementById('wordsGamemodeButton').className = '';
+    document.getElementById('timeGamemodeButton').className = '';
+    document.getElementById('quoteGamemodeButton').className = '';
+    document.getElementById(mode).className = 'titleHighlight'
 }
 
 function timer() {
@@ -264,26 +282,22 @@ addEventListener('keyup', (nextWord)=> {
 
 
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
-    changeGamemode();
     sessionStorage.setItem('gm', 'quote');
+    switchGamemode();
     document.getElementById('EnablePonctuation').style.display = 'none';
-    wordList = chooseQuote(quotelist);
-    testTime = 500;
-    timeBox.textContent = '500';
-    printWords(wordList);
     hideButtons('words');
 });
 
 document.getElementById('timeGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
     sessionStorage.setItem('gm', '15'); 
     words = false;
-    changeTestTime(15, hardmode);
+    switchGamemode();
 });
 
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
     sessionStorage.setItem('gm', 'words10'); 
     words = true;
-    changeTestTime(500, hardmode, 10);
+    switchGamemode();
     timeBox.style.display = 'none';
 });
 
@@ -312,12 +326,12 @@ document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (c
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
         sessionStorage.setItem('gm', '15')
-        changeTestTime(15, hardmode);
+        switchGamemode();
         timeBox.style.display = 'inline';
     }
     else{
         sessionStorage.setItem('gm', 'words10')
-        changeTestTime(500, hardmode, 10)
+        switchGamemode();
         timeBox.style.display = 'none';
     }
     hideButtons('quote');
@@ -325,12 +339,12 @@ document.getElementById('words15GamemodeButton').addEventListener('click', (chan
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
         sessionStorage.setItem('gm', '30')
-        changeTestTime(30, hardmode);
+        switchGamemode();
         timeBox.style.display = 'inline';
     }
     else{
         sessionStorage.setItem('gm', 'words25')
-        changeTestTime(500, hardmode, 25)
+        switchGamemode();
         timeBox.style.display = 'none';
     }
     hideButtons('quote');
@@ -338,12 +352,12 @@ document.getElementById('words30GamemodeButton').addEventListener('click', (chan
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
         sessionStorage.setItem('gm', '60')
-        changeTestTime(60, hardmode);
+        switchGamemode();
         timeBox.style.display = 'inline';
     }
     else{
         sessionStorage.setItem('gm', 'words50')
-        changeTestTime(500, hardmode, 50)
+        switchGamemode();
         timeBox.style.display = 'none';
     }
     hideButtons('quote');

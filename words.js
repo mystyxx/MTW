@@ -1,4 +1,5 @@
 const frenchWords = ["bonjour", "merci", "plaisir", "amour", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "plage", "ville", "voiture", "train", "avion", "temps", "jour", "sécurité", "matin", "soir", "hôtel", "vin", "pain", "eau", "café", "fruits", "légumes", "viande", "poisson", "dessert", "il", "que", "voix", "ciel", "petit", "entre", "comme", "maison", "répondre", "ici", "terre", "ça", "moins", "tant", "chambre", "depuis", "mais", "ne", "âme", "dieu", "mot", "chez", "coup", "autre", "heure", "tout", "chez", "commentaire", "philosophie", "pourquoi", "élégant", "abandonner", "nuit", "question", "j'ai", "obtenu", "ça", "mais", "pourquoi", "sentir", "obtenu", "géré", "cube", "stylo", "comment", "réseau", "dans", "passant", "chanter", "angoisse", "relatif", "mépris", "encore", "clavier", "rat", "écran", "même", "si", "à", "où", "commentaire", "vrai", "novembre", "utile", "urgent", "retrouver", "plage", "chien", "chat", "livre", "musique", "soleil", "lune", "étoile", "fleur", "arbre", "montagne", "opposition", "odeur", "annoncer", "choisir", "pays", "vent", "puisque", "lutte", "propre", "durant", "ligne", "animal", "deux", "tout", "pourrait"];
+const englishWords = "apple beach black chair cloud dance drink earth faith flame fruit grass happy heart light music ocean paper peach river smile snake space stone sugar sweet table tiger water world write young olive lemon mango grape cherry peach plum apple kiwi banana orange lemon lime grapefruit pomegranate pineapple coconut strawberry raspberry blueberry blackberry cranberry watermelon lettuce carrot potato onion mushroom corn peas dash controller lamp low cube pen void skepticism computer desktop dress avoid remain stay run jump swim eat sleep dance ring talk walk play study cook drive think laugh smile climb fly cheat happy sad beautiful smart cowardly brave friendly tall dark bright quiet dirty dry delicious comfortable".split(' ');
 
 const quote1 = 'Dans la vie, on ne fait pas ce que l\'on veut, mais on est responsable de ce que l\'on est.'.split(' ');
 const quote2 = 'La vie est un mystère qu\'il faut vivre, et non un problème à résoudre.'.split(' ');
@@ -55,53 +56,53 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function chooseList(hardmode, words = 50) {
+function chooseList(language, hardmode, words = 50) {
     let wordArray = []
     for(let i =0; i<words; i++) {
-        let feur = Math.floor(Math.random() * frenchWords.length);
+        let feur = Math.floor(Math.random() * language.length);
         if(hardmode && i%2 == 1){let ponctuation = Math.floor(Math.random() * 25); let apagnan = '';
             switch(ponctuation){
                 case 1:
                 case 2:
-                    apagnan = frenchWords[feur]+ ',';
+                    apagnan = language[feur]+ ',';
                     break;
                 case 2:
                 case 3:
                 case 4:
                 case 12:
                 case 13:
-                    wordArray[wordArray.length] = frenchWords[feur] + '.';
-                    apagnan = capitalizeFirstLetter(frenchWords[Math.floor(Math.random() * frenchWords.length)])
+                    wordArray[wordArray.length] = language[feur] + '.';
+                    apagnan = capitalizeFirstLetter(language[Math.floor(Math.random() * language.length)])
                     break;
                 case 5:
                     wordArray[wordArray.length] = '!';
-                    apagnan = capitalizeFirstLetter(frenchWords[Math.floor(Math.random() * frenchWords.length)])
+                    apagnan = capitalizeFirstLetter(language[Math.floor(Math.random() * language.length)])
                     break;
                 case 6:
                 case 7:
                     wordArray[wordArray.length] = '?';
-                    apagnan = capitalizeFirstLetter(frenchWords[Math.floor(Math.random() * frenchWords.length)])
+                    apagnan = capitalizeFirstLetter(language[Math.floor(Math.random() * language.length)])
                     break;
                 case 8:
                     wordArray[wordArray.length] = ';';
-                    apagnan = capitalizeFirstLetter(frenchWords[Math.floor(Math.random() * frenchWords.length)])
+                    apagnan = capitalizeFirstLetter(language[Math.floor(Math.random() * language.length)])
                     break;
                 case 9:
-                    apagnan = '\"' + frenchWords[feur] + '\"';
+                    apagnan = '\"' + language[feur] + '\"';
                     break;
                 case 10:
                     apagnan = ':';
                     break;
                 case 11:
-                    apagnan = '('+frenchWords[feur]+')';
+                    apagnan = '('+language[feur]+')';
                     break;
                 default:
-                    apagnan = frenchWords[feur];
+                    apagnan = language[feur];
                     break
             }
             wordArray.push(apagnan);
         }
-        else{wordArray.push(frenchWords[feur])}
+        else{wordArray.push(language[feur])}
     }
     return wordArray;
 }

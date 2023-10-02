@@ -12,8 +12,8 @@ if (window.sessionStorage.getItem('sesionWpmArray') == undefined && sessionStora
     window.sessionStorage.setItem('sessionWpmArray', '');
 }
 
-var wordList = chooseList();
-printWords(wordList);
+var langue = frenchWords;
+var wordList;
 let wrongCharacters = 0;
 inputbox.value = '';
 let totalspacePress = 0;
@@ -111,7 +111,8 @@ function hideButtons(mode) {
         document.getElementById('words15GamemodeButton').style.display = 'inline-block';
         document.getElementById('words30GamemodeButton').style.display = 'inline-block';
         document.getElementById('words60GamemodeButton').style.display = 'inline-block';
-        document.getElementById('EnablePonctuation').style.display = 'inline-block'
+        document.getElementById('EnablePonctuation').style.display = 'inline-block';
+        document.getElementById('switchLanguageButton').style.display = 'inline-block';
     }
     else {
         document.getElementById('shortQuoteGamemodeButton').style.display = 'inline-block';
@@ -121,7 +122,8 @@ function hideButtons(mode) {
         document.getElementById('words15GamemodeButton').style.display = 'none'
         document.getElementById('words30GamemodeButton').style.display = 'none';
         document.getElementById('words60GamemodeButton').style.display = 'none';
-        document.getElementById('EnablePonctuation').style.display = 'none'
+        document.getElementById('EnablePonctuation').style.display = 'none';
+        document.getElementById('switchLanguageButton').style.display = 'none';
     }
 }
 
@@ -193,7 +195,7 @@ function changeGamemode() {
 function changeTestTime(time, hardmode, numberwords) {
     changeGamemode();
     wordList = '';
-    wordList = chooseList(hardmode, numberwords)
+    wordList = chooseList(langue, hardmode, numberwords)
     printWords(wordList)
     testTime = time;
     timeBox.textContent = time;
@@ -378,9 +380,19 @@ document.getElementById('words60GamemodeButton').addEventListener('click', (chan
 document.getElementById('EnablePonctuation').addEventListener('click', (enablePonctuation)=> {
     hardmode = !hardmode;
     document.getElementById('EnablePonctuation').style.display = 'inline-block'
-    if(hardmode) {document.getElementById('EnablePonctuation').textContent = 'désactiver la  ponctuation'}
-    else{document.getElementById('EnablePonctuation').textContent = 'activer la ponctuaton'}
+    if(hardmode) {document.getElementById('EnablePonctuation').className = 'titleHighlight'}
+    else{document.getElementById('EnablePonctuation').className = ''}
     changeTestTime(sessionStorage.getItem('gm'), hardmode)
+})
+
+document.getElementById('switchLanguageButton').addEventListener('click', (changeLanguage)=> {
+    if(langue == frenchWords) {
+        langue = englishWords;
+    }
+    else{
+        langue = frenchWords;
+    }
+    switchGamemode();
 })
 
 document.getElementById('switchThemeButton').addEventListener('click', (changeTheme)=> {

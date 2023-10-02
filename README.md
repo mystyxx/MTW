@@ -13,7 +13,7 @@ Thanks a lot to deysox for helping me so much !
 ## Incoming features
 - better css
 - more quotes
-- (english gamemode ?)
+- full english translation and quotes
 
 ## Spot an issue ?
 - If you have an issue with the website, please check first if the issue hasn't been discovered yet (cf. known issues just below) you can either open an issue [here](https://github.com/mystyxx/MTW/issues) or message me on discord (mysty.xx).  

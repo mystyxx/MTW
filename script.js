@@ -183,6 +183,7 @@ function printWords(wordList) {
 }
 
 function changeGamemode() {
+    //operations to do each time the gamemode is changed
     i=0;
     clearInterval(TimerObject);
     inputbox.style.visibility = 'visible';
@@ -299,7 +300,6 @@ addEventListener('keyup', (nextWord)=> {
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
     sessionStorage.setItem('gm', 'quote');
     switchGamemode();
-    document.getElementById('EnablePonctuation').style.display = 'none';
     hideButtons('words');
 });
 
@@ -313,29 +313,24 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
     sessionStorage.setItem('gm', 'words10'); 
     words = true;
     switchGamemode();
-    timeBox.style.display = 'none';
 });
 
 
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'shortQuote');
     switchGamemode();
-    hideButtons('words');
 })
 document.getElementById('mediumQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'mediumQuote');
     switchGamemode();
-    hideButtons('words');
 })
 document.getElementById('longQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'longQuote');
     switchGamemode();
-    hideButtons('words');
 })
 document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (changeGamemodeToPhiloQuote)=> {
     sessionStorage.setItem('gm', 'philo');
     switchGamemode();
-    hideButtons('words');
 })
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
@@ -349,7 +344,6 @@ document.getElementById('words15GamemodeButton').addEventListener('click', (chan
         switchGamemode();
         timeBox.style.display = 'none';
     }
-    hideButtons('quote');
 })
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
@@ -362,7 +356,6 @@ document.getElementById('words30GamemodeButton').addEventListener('click', (chan
         switchGamemode();
         timeBox.style.display = 'none';
     }
-    hideButtons('quote');
 })
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
@@ -375,14 +368,13 @@ document.getElementById('words60GamemodeButton').addEventListener('click', (chan
         switchGamemode();
         timeBox.style.display = 'none';
     }
-    hideButtons('quote');
 })
 document.getElementById('EnablePonctuation').addEventListener('click', (enablePonctuation)=> {
     hardmode = !hardmode;
     document.getElementById('EnablePonctuation').style.display = 'inline-block'
     if(hardmode) {document.getElementById('EnablePonctuation').className = 'titleHighlight'}
     else{document.getElementById('EnablePonctuation').className = ''}
-    changeTestTime(sessionStorage.getItem('gm'), hardmode)
+    switchGamemode();
 })
 
 document.getElementById('switchLanguageButton').addEventListener('click', (changeLanguage)=> {

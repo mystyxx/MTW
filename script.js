@@ -156,7 +156,7 @@ function timer() {
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
         sessionStorage.setItem('sessionWpmArray', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) +'~' + zizi);
-        document.getElementById('sessionSpeedAverage').textContent = Math.floor(avg(sessionStorage.getItem('sessionWpmArray').split('~'))) + 'wpm (' + sessionStorage.getItem('sessionWpmArray').split('~').length + ')';
+        document.getElementById('sessionSpeedAverage').textContent = Math.floor(avg(sessionStorage.getItem('sessionWpmArray').split('~'))) + 'wpm (' + (sessionStorage.getItem('sessionWpmArray').split('~').length-1) + ')';
         
     }
     if (testRunning == true && i===wordList.length && testTime !=500) {

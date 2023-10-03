@@ -80,11 +80,11 @@ body {
     background-color: none;
 }
 
-#gamemodeBar>div>p:hover, #gamemodeBar>p:hover, .titleHighlight {
+#gamemodeBar>div>p:hover, #gamemodeBar>p:hover, .titleHighlight, #switchThemeButton:hover {
     color: gray;
 }
 
-#gamemodeBar>div>p{
+#gamemodeBar>div>p, #switchThemeButton{
     margin-right: 10px;
     margin-left: 10px;
     cursor: pointer;

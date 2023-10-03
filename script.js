@@ -233,6 +233,7 @@ function changeClientTheme(theme) {
         document.body.style.setProperty("--secondary-color", 'black');
         document.body.style.setProperty("--tertiary-color", 'white');
         document.body.style.setProperty("--great-color", 'green');
+        if(langue==frenchWords) {document.getElementById('switchThemeButton').textContent = 'changer le thème'}
     }
     else {
         document.getElementById('switchThemeButton').textContent = 'switch to light mode';
@@ -240,6 +241,7 @@ function changeClientTheme(theme) {
         document.body.style.setProperty("--secondary-color", 'white');
         document.body.style.setProperty("--tertiary-color", 'black');
         document.body.style.setProperty("--great-color", 'lightgreen');
+        if(langue==frenchWords) {document.getElementById('switchThemeButton').textContent = 'changer le thème'}
     }
 }
 
@@ -380,9 +382,25 @@ document.getElementById('EnablePonctuation').addEventListener('click', (enablePo
 document.getElementById('switchLanguageButton').addEventListener('click', (changeLanguage)=> {
     if(langue == frenchWords) {
         langue = englishWords;
+        document.getElementById('wordsGamemodeButton').textContent = 'words';
+        document.getElementById('timeGamemodeButton').textContent = 'time';
+        document.getElementById('quoteGamemodeButton').textContent = 'quote';
+        document.getElementById('shortQuoteGamemodeButton').textContent = 'short';
+        document.getElementById('mediumQuoteGamemodeButton').textContent = 'medium';
+        document.getElementById('longQuoteGamemodeButton').textContent = 'long';
+        document.getElementById('switchThemeButton').textContent = 'switch to ' + localStorage.getItem('theme') + ' mode';
+        document.getElementById('switchLanguageButton').textContent = 'switch language';
     }
     else{
         langue = frenchWords;
+        document.getElementById('wordsGamemodeButton').textContent = 'mots';
+        document.getElementById('timeGamemodeButton').textContent = 'temps';
+        document.getElementById('quoteGamemodeButton').textContent = 'citation';
+        document.getElementById('shortQuoteGamemodeButton').textContent = 'court';
+        document.getElementById('mediumQuoteGamemodeButton').textContent = 'moyen';
+        document.getElementById('longQuoteGamemodeButton').textContent = 'long';
+        document.getElementById('switchThemeButton').textContent = 'changer le thème';
+        document.getElementById('switchLanguageButton').textContent = 'changer la langue';
     }
     switchGamemode();
 })

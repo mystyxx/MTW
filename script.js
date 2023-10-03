@@ -151,12 +151,12 @@ function timer() {
         inputbox.style.visibility = 'hidden';
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
-        document.getElementById('characters').textContent = correctCharacters + ' | ' + wrongCharacters + ' (' + Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) + '%)';
-        scorebox.textContent = correctWords + '/' + totalspacePress;  //update the score
+        document.getElementById('characters').innerHTML = '<span style="color:green; display:inline;">' + correctCharacters + '</span> | <span style="color:red; display:inline;">' + wrongCharacters + '</span> (' + Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) + '%)';
+        scorebox.innerHTML = '<p style="color:green; display:inline;">' + correctWords + '</span> /' + totalspacePress;  //update the score    
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
         sessionStorage.setItem('sessionWpmArray', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) +'~' + zizi);
-        document.getElementById('sessionSpeedAverage').textContent = Math.floor(avg(sessionStorage.getItem('sessionWpmArray').split('~')));
+        document.getElementById('sessionSpeedAverage').textContent = Math.floor(avg(sessionStorage.getItem('sessionWpmArray').split('~'))) + 'wpm (' + sessionStorage.getItem('sessionWpmArray').split('~').length + ')';
         
     }
     if (testRunning == true && i===wordList.length && testTime !=500) {

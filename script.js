@@ -12,7 +12,7 @@ if (window.sessionStorage.getItem('sesionWpmArray') == undefined && sessionStora
     window.sessionStorage.setItem('sessionWpmArray', '');
 }
 
-var langue = frenchWords;
+var langue = french;
 var wordList;
 let wrongCharacters = 0;
 inputbox.value = '';
@@ -31,32 +31,32 @@ function switchGamemode() {
     document.getElementById('words15GamemodeButton').className = ''; document.getElementById('words30GamemodeButton').className = ''; document.getElementById('words60GamemodeButton').className = ''; document.getElementById('shortQuoteGamemodeButton').className = ''; document.getElementById('mediumQuoteGamemodeButton').className = ''; document.getElementById('longQuoteGamemodeButton').className = ''; document.getElementById('philoQuoteGamemodeButton').className = ''; document.getElementById('wikipediaGamemodeButton').className = '';
     switch (sessionStorage.getItem('gm')) {
         case 'quote' :
-            changeQuoteLength()
+            changeQuoteLength('', langue)
             printWords(wordList);
             inputbox.focus();
             document.getElementById('shortQuoteGamemodeButton').className = 'titleHighlight'; document.getElementById('mediumQuoteGamemodeButton').className = 'titleHighlight'; document.getElementById('longQuoteGamemodeButton').className = 'titleHighlight';
         case 'shortQuote':
-            changeQuoteLength('short');
+            changeQuoteLength('short', langue);
             changeModeHighlight('quoteGamemodeButton');
             document.getElementById('shortQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'mediumQuote':
-            changeQuoteLength('medium');
+            changeQuoteLength('medium', langue);
             changeModeHighlight('quoteGamemodeButton');
             document.getElementById('mediumQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'longQuote':
-            changeQuoteLength('long');
+            changeQuoteLength('long', langue);
             changeModeHighlight('quoteGamemodeButton');
             document.getElementById('longQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'philo':
-            changeQuoteLength('philo');
+            changeQuoteLength('philo', langue);
             changeModeHighlight('quoteGamemodeButton');
             document.getElementById('philoQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'wiki':
-            changeQuoteLength();
+            changeQuoteLength('wiki', langue);
             fetchFeaturedArticle().then(() => {
                 changeGamemode();
                 wordBox.textContent = ''
@@ -122,7 +122,6 @@ function hideButtons(mode) {
         document.getElementById('words30GamemodeButton').style.display = 'inline-block';
         document.getElementById('words60GamemodeButton').style.display = 'inline-block';
         document.getElementById('EnablePonctuation').style.display = 'inline-block';
-        document.getElementById('switchLanguageButton').style.display = 'inline-block';
         document.getElementById('wikipediaGamemodeButton').style.display = 'none';
     }
     else {
@@ -134,7 +133,6 @@ function hideButtons(mode) {
         document.getElementById('words30GamemodeButton').style.display = 'none';
         document.getElementById('words60GamemodeButton').style.display = 'none';
         document.getElementById('EnablePonctuation').style.display = 'none';
-        document.getElementById('switchLanguageButton').style.display = 'none';
         document.getElementById('wikipediaGamemodeButton').style.display = 'inline-block';
     }
 }
@@ -228,12 +226,12 @@ function changeTestTime(time, hardmode, numberwords) {
     }
 }
 
-function changeQuoteLength(size) {
+function changeQuoteLength(size, langue) {
     changeGamemode();
     timeBox.style.display = 'none';
     testTime = 500;
     timeBox.textContent = '500';
-    wordList = chooseQuote(size);
+    wordList = chooseQuote(size, langue);
     printWords(wordList);
     hideButtons('words');
 }
@@ -245,7 +243,7 @@ function changeClientTheme(theme) {
         document.body.style.setProperty("--secondary-color", 'black');
         document.body.style.setProperty("--tertiary-color", 'white');
         document.body.style.setProperty("--great-color", 'green');
-        if(langue==frenchWords) {document.getElementById('switchThemeButton').textContent = 'changer le thème'}
+        if(langue==french) {document.getElementById('switchThemeButton').textContent = 'changer le thème'}
     }
     else {
         document.getElementById('switchThemeButton').textContent = 'switch to light mode';
@@ -253,7 +251,7 @@ function changeClientTheme(theme) {
         document.body.style.setProperty("--secondary-color", 'white');
         document.body.style.setProperty("--tertiary-color", 'black');
         document.body.style.setProperty("--great-color", 'lightgreen');
-        if(langue==frenchWords) {document.getElementById('switchThemeButton').textContent = 'changer le thème'}
+        if(langue==french) {document.getElementById('switchThemeButton').textContent = 'changer le thème'}
     }
 }
 
@@ -397,8 +395,8 @@ document.getElementById('EnablePonctuation').addEventListener('click', (enablePo
 })
 
 document.getElementById('switchLanguageButton').addEventListener('click', (changeLanguage)=> {
-    if(langue == frenchWords) {
-        langue = englishWords;
+    if(langue == french) {
+        langue = english;
         document.getElementById('wordsGamemodeButton').textContent = 'words';
         document.getElementById('timeGamemodeButton').textContent = 'time';
         document.getElementById('quoteGamemodeButton').textContent = 'quote';
@@ -409,7 +407,7 @@ document.getElementById('switchLanguageButton').addEventListener('click', (chang
         document.getElementById('switchLanguageButton').textContent = 'switch language';
     }
     else{
-        langue = frenchWords;
+        langue = french;
         document.getElementById('wordsGamemodeButton').textContent = 'mots';
         document.getElementById('timeGamemodeButton').textContent = 'temps';
         document.getElementById('quoteGamemodeButton').textContent = 'citation';

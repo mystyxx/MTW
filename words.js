@@ -52,6 +52,12 @@ const philoquote13 = 'Je peux douter de tout, sauf d\'une chose, et c\'est le fa
 const philoquote14 = 'Pour atteindre la vérité, il faut une fois dans la vie se défaire de toutes les opinions qu\'on a reçues, et reconstruire de nouveau tout le sytème de ses connaissances.'.split(' ');
 const philoquote15 = 'La lecture de tous les bons livres est comme une conversation avec les plus honnêtes gens des siècles passés.'.split(' ');
 
+const enquote1 = 'Be proud of you, because you can be do what we want to do.'.split(' ');
+const enquote2 = 'Two things are infinite : the universe and human stupidity ; And i\'m not sure about the universe.'.split(' ');
+const enquote3 = 'How wonderful it is that nobody need wait a single moment before starting to improve the world.'.split(' ');
+const enquote4 = 'Never doubt that a small group of thoughtful, committed, citizens can change the world. Indeed, it is the only thing that ever has.'.split(' ');
+const enquote5 = 'One, remember to look up at the stars and not down at your feet. Two, never give up work. Work gives you meaning and purpose and life is empty without it. Three, if you are lucky enough to find love, remember it is there and don\'t throw it away.'.split(' ');
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -59,112 +65,133 @@ function capitalizeFirstLetter(string) {
 function chooseList(language, hardmode, words = 50) {
     let wordArray = []
     for(let i =0; i<words; i++) {
-        let feur = Math.floor(Math.random() * language.length);
+        let feur = Math.floor(Math.random() * language.words.length);
         if(hardmode && i%2 == 1){let ponctuation = Math.floor(Math.random() * 25); let apagnan = '';
             switch(ponctuation){
                 case 1:
                 case 2:
-                    apagnan = language[feur]+ ',';
+                    apagnan = language.words[feur]+ ',';
                     break;
                 case 2:
                 case 3:
                 case 4:
                 case 12:
                 case 13:
-                    wordArray[wordArray.length] = language[feur] + '.';
-                    apagnan = capitalizeFirstLetter(language[Math.floor(Math.random() * language.length)])
+                    wordArray[wordArray.length] = language.words[feur] + '.';
+                    apagnan = capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)])
                     break;
                 case 5:
                     wordArray[wordArray.length] = '!';
-                    apagnan = capitalizeFirstLetter(language[Math.floor(Math.random() * language.length)])
+                    apagnan = capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)])
                     break;
                 case 6:
                 case 7:
                     wordArray[wordArray.length] = '?';
-                    apagnan = capitalizeFirstLetter(language[Math.floor(Math.random() * language.length)])
+                    apagnan = capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)])
                     break;
                 case 8:
                     wordArray[wordArray.length] = ';';
-                    apagnan = capitalizeFirstLetter(language[Math.floor(Math.random() * language.length)])
+                    apagnan = capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)])
                     break;
                 case 9:
-                    apagnan = '\"' + language[feur] + '\"';
+                    apagnan = '\"' + language.words[feur] + '\"';
                     break;
                 case 10:
                     apagnan = ':';
                     break;
                 case 11:
-                    apagnan = '('+language[feur]+')';
+                    apagnan = '('+language.words[feur]+')';
                     break;
                 default:
-                    apagnan = language[feur];
+                    apagnan = language.words[feur];
                     break
             }
             wordArray.push(apagnan);
         }
-        else{wordArray.push(language[feur])}
+        else{wordArray.push(language.words[feur])}
     }
     return wordArray;
 }
 
 const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
 const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, quote29, quote30, quote31, quote32, quote33, quote34, quote35, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
+const enphiloquotelist = []
+const enquotelist = [enquote1, enquote2, enquote3, enquote4, enquote5];
 const shortQuoteList = []; const mediumQuoteList = []; const longQuoteList = [];
 
-for(let i=0; i<quotelist.length; i++) {
-    if(quotelist[i].length < 20) {
-        shortQuoteList.push(quotelist[i]);
+class langage {
+    constructor(words, quotes, philoquotes) {
+        this.words = words;
+        this.quotes = quotes;
+        this.philoquotes = philoquotes;
+        this.shortQuoteList = []; this.mediumQuoteList = []; this.longQuoteList = [];
+        for(let i=0; i<this.quotes.length; i++) {
+            if(this.quotes[i].length < 20) {
+                this.shortQuoteList.push(this.quotes[i]);
+            }
+            else if(this.quotes[i].length < 50 && this.quotes[i].length > 20) {
+                this.mediumQuoteList.push(this.quotes[i]);
+            }
+            else if (this.quotes[i].length > 50) {this.longQuoteList.push(this.quotes[i]);}
+        }
     }
-    else if(quotelist[i].length < 50 && quotelist[i].length > 20) {
-        mediumQuoteList.push(quotelist[i]);
-    }
-    else if (quotelist[i].length > 50) {longQuoteList.push(quotelist[i]);}
 }
+
+const french = new langage(frenchWords, quotelist, philoquotelist);
+const english = new langage(englishWords, enquotelist, enphiloquotelist);
 
 let lastquote; let lastshortquote; let lastmediumquote; let lastlongquote; let lastphiloquote;
 let lastquoteIndex;
-function chooseQuote(size) {
+
+function valIsInLang(arr) {
+    for(let i = 0 ; i<arr.length ; i++) {
+        if(langue.quotes[i] == arr) {return(true)}
+    }
+}
+
+function chooseQuote(size, language) {
     if(size == 'short') {
-        lastquoteIndex = Math.floor(Math.random() * shortQuoteList.length)
-        if (lastshortquote !== undefined) {
-            shortQuoteList.push(lastshortquote)
+        lastquoteIndex = Math.floor(Math.random() * language.shortQuoteList.length)
+        if (lastshortquote !== undefined && valIsInLang(lastshortquote)) {
+            language.shortQuoteList.push(lastshortquote)
         }
-        lastshortquote = shortQuoteList[lastquoteIndex]
-        shortQuoteList.splice(lastquoteIndex, 1); 
+        lastshortquote = language.shortQuoteList[lastquoteIndex]
+        language.shortQuoteList.splice(lastquoteIndex, 1);
         return lastshortquote}
     if(size == 'medium') {
-        lastquoteIndex = Math.floor(Math.random() * mediumQuoteList.length)
-        if (lastmediumquote !== undefined) {
-            mediumQuoteList.push(lastmediumquote)
+        lastquoteIndex = Math.floor(Math.random() * language.mediumQuoteList.length)
+        if (lastmediumquote !== undefined && valIsInLang(lastmediumquote)) {
+            language.mediumQuoteList.push(lastmediumquote)
         }
-        lastmediumquote = mediumQuoteList[lastquoteIndex]
-        mediumQuoteList.splice(lastquoteIndex, 1); 
+        lastmediumquote = language.mediumQuoteList[lastquoteIndex]
+        language.mediumQuoteList.splice(lastquoteIndex, 1); 
         return lastmediumquote
     }
     if(size == 'long') {
-        lastquoteIndex = Math.floor(Math.random() * longQuoteList.length)
-        if (lastlongquote !== undefined) {
-            longQuoteList.push(lastlongquote)
+        lastquoteIndex = Math.floor(Math.random() * language.longQuoteList.length)
+        if (lastlongquote !== undefined && valIsInLang(lastlongquote)) {
+            language.longQuoteList.push(lastlongquote)
         }
-        lastlongquote = longQuoteList[lastquoteIndex]
-        longQuoteList.splice(lastquoteIndex, 1); 
+        lastlongquote = language.longQuoteList[lastquoteIndex]
+        language.longQuoteList.splice(lastquoteIndex, 1); 
         return lastlongquote
     }
     if(size == 'philo') {
-        lastquoteIndex = Math.floor(Math.random() * philoquotelist.length)
-        if(lastphiloquote !== undefined) {
-            philoquotelist.push(lastphiloquote)
+        lastquoteIndex = Math.floor(Math.random() * language.philoquotes.length)
+        if(lastphiloquote !== undefined && valIsInLang(lastphiloquote)) {
+            language.philoquotes.push(lastphiloquote)
         }
-        lastphiloquote = philoquotelist[lastquoteIndex]
-        philoquotelist.splice(lastquoteIndex, 1);
+        lastphiloquote = language.philoquotes[lastquoteIndex]
+        language.philoquotes.splice(lastquoteIndex, 1);
         return lastphiloquote;
     }
+    if(size == 'wiki') {return '';}
     else{
-        lastquoteIndex = Math.floor(Math.random() * quotelist.length)
+        lastquoteIndex = Math.floor(Math.random() * language.quotes.length)
         if (lastquote !== undefined) {
-            quotelist.push(lastquote)
+            language.quotes.push(lastquote)
         }
-        lastquote = quotelist[lastquoteIndex]
-        quotelist.splice(lastquoteIndex, 1); // 2nd parameter means remove one item only
+        lastquote = language.quotes[lastquoteIndex]
+        language.quotes.splice(lastquoteIndex, 1); // 2nd parameter means remove one item only
         return lastquote}
 }

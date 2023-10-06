@@ -57,6 +57,19 @@ const enquote2 = 'Two things are infinite : the universe and human stupidity ; A
 const enquote3 = 'How wonderful it is that nobody need wait a single moment before starting to improve the world.'.split(' ');
 const enquote4 = 'Never doubt that a small group of thoughtful, committed, citizens can change the world. Indeed, it is the only thing that ever has.'.split(' ');
 const enquote5 = 'One, remember to look up at the stars and not down at your feet. Two, never give up work. Work gives you meaning and purpose and life is empty without it. Three, if you are lucky enough to find love, remember it is there and don\'t throw it away.'.split(' ');
+const enquote6 = 'Mount Celeste is the unofficial name for a moutain located on Vancouver Island, British Columbia. It shares the name Celeste with two peaks in the Cariboo region of the BC Interior. Within the boundaries of Starhcona Provincial Park, this peak lies at the north end of Rees Ridge. Iceberg Peak lies at the south end of this ridge. The first ascent of this peak is cretited to Jack Horbury and Jock Sutherland on August 18, 1934. A ficitonal version of Mount Celeste is featured as the primary setting in the 2016 platforming game Celeste Classic and the 2018 platforming game Celeste. The game is about the personal struggles the main character Madeline faces as she attemps to climb to mountain. The moutain is also shown on the Instagram page of in-game character Theo.'.split(' ');
+const enquote7 = 'The 2003 London blackout was a serios power outage that affected parts of south London and north-west Kent in the evening of 28 August 2003. It was caused by a series of faults at National GRid transmission substations, which supplied the distribution network operateor in the area, EDF Energy (now UK Power Networks). It was the largest blackout in South East England since the Great Storm of 1986, affecting 476,000 customers. Power was lost at 18:20 BST and restored to EDF Energy 37 minutes later at 18:57, although it reportedly took longer for all customers to be reconnected.'.split(' ');
+const enquote8 = 'On 3 October 2023, a bus fell from an overpass in Mestre-Carpenedo, Venice, Veneto, Italy, and crashed, killing 21 people and injuring 18. The incident happened at 19:45 CEST as the bus was transporting tourists from Piazzale Roma in the historic centre of Venice to a campsite in the Maghera district.'.split(' ');
+const enquote9 = 'Despite everything, it\'s still you.'.split(' ');
+
+const enphiloquote1 = 'I think; therefore I am.'.split(' ');
+const enphiloquote2 = 'Conquer yourself rather than the world.'.split(' ');
+const enphiloquote3 = 'We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light.'.split(' ');
+const enphiloquote4 = 'I am the wisest man alive, for I know one thing, and that is that I know nothing.'.split(' ');
+const enphiloquote5 = 'Love is a serious mental disease.'.split(' ');
+const enphiloquote6 = 'If women are expected to do the same work as men, we must teach them the same things.'.split(' ');
+const enphiloquote7 = 'Excellence is never an accident. It is always the result of high intention, sincere effort, and intelligent execution; it represents the wise choice of many alternatives - choice, not chance, determines your destiny.'.split(' ');
+
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -115,9 +128,8 @@ function chooseList(language, hardmode, words = 50) {
 
 const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
 const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, quote29, quote30, quote31, quote32, quote33, quote34, quote35, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
-const enphiloquotelist = []
-const enquotelist = [enquote1, enquote2, enquote3, enquote4, enquote5];
-const shortQuoteList = []; const mediumQuoteList = []; const longQuoteList = [];
+const enphiloquotelist = [enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7]
+const enquotelist = [enquote1, enquote2, enquote3, enquote4, enquote5, enquote6, enquote7, enquote8, enquote9, enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7];
 
 class langage {
     constructor(words, quotes, philoquotes) {

@@ -4,16 +4,15 @@
 --- 
 I hope you enjoy it :D  
 
-MTW is a website to train your typing speed, with different gamemodes. For now, only words, time and quote modes are available, but maybe in the future i'll add more of them. I started this project because I wanted a project to spend time on. It is made with html, css and vanilla javascript.  
+MTW is a website to train your typing speed, with different gamemodes like time, words, quotes and wikipedia's daily featured article. I started this project because I wanted a project to spend time on. It is made with html, css and vanilla javascript.  
 
 
 If you have any issues or just want to contact me, you can do it on discord, my username is mysty.xx <br>
 Thanks a lot to deysox for helping me so much !  
 
 ## Incoming features
-- better css
 - more quotes
-- full english translation and quotes
+- today's featured article in french
 
 ## Spot an issue ?
 - If you have an issue with the website, please check first if the issue hasn't been discovered yet (cf. known issues just below) you can either open an issue [here](https://github.com/mystyxx/MTW/issues) or message me on discord (mysty.xx).  

@@ -36,6 +36,8 @@ const quote32 = 'Essayez de quitter la Terre un peu meilleure que vous l\'avez t
 const quote33 = 'On ne voit bien qu\'avec le coeur. L\essentiel est invisible pour les yeux.'.split(' ');
 const quote34 = 'Toutes les grandes personnes ont d\'abord été des enfants. Mais peu d\'entre elles s\'en souviennent.'.split(' ');
 const quote35 = 'Mais si tu m\'apprivoise, nous aurons besoin l\'un de l\'autre. Tu seras pour moi unique au monde. Et je serai pour toi unique au monde.'.split(' ');
+const quote36 = 'Que la lumière soit. Dixit euh... Dieu. Je citais Dieu.'.search(' ');
+const quote37 = 'Vous êtes vous déjà dit qu\'il y a toujours un moment où l\'on entend som nom pour la dernière fois ? Et bien, ce moment est arrivé : je vais vous tuer... Chell...'
 const philoquote1 = 'La simplicité véritable allie la bonté à la beauté.'.split(' ');
 const philoquote2 = 'La justice de l\'intelligence est la sagesse. Le sage n\'est pas celui qui sait beaucoup de choses, mais celui qui voit leur juste mesure.'.split(' ');
 const philoquote3 = 'La victoire sur soi est la plus grande des victoire.'.split(' ');
@@ -61,7 +63,16 @@ const enquote6 = 'Mount Celeste is the unofficial name for a moutain located on 
 const enquote7 = 'The 2003 London blackout was a serios power outage that affected parts of south London and north-west Kent in the evening of 28 August 2003. It was caused by a series of faults at National GRid transmission substations, which supplied the distribution network operateor in the area, EDF Energy (now UK Power Networks). It was the largest blackout in South East England since the Great Storm of 1986, affecting 476,000 customers. Power was lost at 18:20 BST and restored to EDF Energy 37 minutes later at 18:57, although it reportedly took longer for all customers to be reconnected.'.split(' ');
 const enquote8 = 'On 3 October 2023, a bus fell from an overpass in Mestre-Carpenedo, Venice, Veneto, Italy, and crashed, killing 21 people and injuring 18. The incident happened at 19:45 CEST as the bus was transporting tourists from Piazzale Roma in the historic centre of Venice to a campsite in the Maghera district.'.split(' ');
 const enquote9 = 'Despite everything, it\'s still you.'.split(' ');
-
+const enquote10 = 'I guess I should stop looking out for you, like I always do. When will you start lookin\' for me too, instead of leaving starin\' at my shoes ? Just the way, you\'re glancing at me, something about you just makes me feel guilty for liking you. When you\'re with him, when you\'re with him.'.split(' ');
+const enquote11 = 'Breaking Bad is an American crime drama television series created and produced by Vince Gilligan for AMC. Set and filed in Albuquerque, New Mexico, the series follows Walter White (Bryan Cranston), and underpaid, overqualified, and dispirited high-school chemistry teacher who is struggling with a recent disgnosis of stage-three lung cancer. White turns to a life of crime and partners with a former student, jesse Pinkman (Aaron Paul), to produce methamphetamine to secure his family\'s financial future before he dies, while navigating the dangers of the criminal underworld. Breaking Bad premiered on AMC on Janurary 20, 2008 and concuded on September 29, 2013, after five seasons consisting of 62 Episodes.'.split(' ');
+const enquote12 = 'And I guess, I\'ll just miss her, even if she isn\'t really gone, things are just different, ever since she cut her blue hair off.'.split(' ');
+const enquote13 = 'YOU! You\'re standing in the way of everybody\'s hopes and dreams!'.split(' ');
+const enquote14 = 'You never gained any LOVE, but you gained love.'.split(' ');
+const enquote15 = 'I gently open the door...'.split(' ');
+const enquote16 = 'It\'s dangerous to go alone ! Take this.'.split(' ');
+const enquote17 = 'The cake is a lie.'.split(' ');
+const enquote18 = 'For a moment, nothing happened. Then, after a second or so, nothing continued to happen.'.split(' ');
+const enquote19 = 'Space is big. You just won\'t believe how vastly, hugely, mind-bogglingly big it is. I mean, you may think it\'s a long way down the road to the chemist\'s, but that\'s just peanuts to space.'.split(' ');
 const enphiloquote1 = 'I think; therefore I am.'.split(' ');
 const enphiloquote2 = 'Conquer yourself rather than the world.'.split(' ');
 const enphiloquote3 = 'We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light.'.split(' ');
@@ -127,9 +138,9 @@ function chooseList(language, hardmode, words = 50) {
 }
 
 const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
-const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, quote29, quote30, quote31, quote32, quote33, quote34, quote35, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
-const enphiloquotelist = [enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7]
-const enquotelist = [enquote1, enquote2, enquote3, enquote4, enquote5, enquote6, enquote7, enquote8, enquote9, enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7];
+const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, quote29, quote30, quote31, quote32, quote33, quote34, quote35, quote36, quote37, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
+const enphiloquotelist = [enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7, enquote8, enquote9, enquote10, enquote11, enquote12, enquote13, enquote14, enquote15, enquote16, enquote17, enquote18, enquote19]
+const enquotelist = [enquote1, enquote2, enquote3, enquote4, enquote5, enquote6, enquote7, enquote8, enquote9, enquote10, enquote11, enquote12, enquote13, enquote14, enquote15, enquote16, enquote17, enquote18, enquote19, enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7];
 
 class langage {
     constructor(words, quotes, philoquotes) {

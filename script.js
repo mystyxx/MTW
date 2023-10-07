@@ -11,6 +11,8 @@ changeClientTheme(theme);
 if (window.sessionStorage.getItem('sesionWpmArray') == undefined && sessionStorage.getItem('sessionWpmArray') == null) {
     window.sessionStorage.setItem('sessionWpmArray', '');
 }
+let personalBest = localStorage.getItem('pb');
+if(window.localStorage.getItem('pb') == null) {window.localStorage.setItem('pb', 0)}
 
 var langue = french;
 var wordList;
@@ -153,20 +155,24 @@ function timer() {
     if(i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) {
         correctWords++;
         correctCharacters += wordList[i].length;
-        document.getElementById(i).style.color = localStorage.getItem('textColor');}
+        document.getElementById(i).className = "correct";
+    }
     if ((timeBox.textContent == '0') || (i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) || (i===wordList.length && testTime == 500) ) {
         let zizi = sessionStorage.getItem('sessionWpmArray')
         clearInterval(TimerObject);
         testRunning = false;
+        if(inputbox.value == wordList[i].slice(0, inputbox.value.length + '')) {correctCharacters = correctCharacters + inputbox.value.length}
         inputbox.style.visibility = 'hidden';
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
-        document.getElementById('characters').innerHTML = '<span style="color:green; display:inline;">' + correctCharacters + '</span> | <span style="color:red; display:inline;">' + wrongCharacters + '</span> (' + Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) + '%)';
-        scorebox.innerHTML = '<p style="color:green; display:inline;">' + correctWords + '</span> /' + totalspacePress;  //update the score    
+        document.getElementById('characters').innerHTML = '<span style="color:var(--great-color); display:inline;">' + correctCharacters + '</span> | <span style="color:red; display:inline;">' + wrongCharacters + '</span> (' + Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) + '%)';
+        scorebox.innerHTML = '<p style="color:var(--great-color); display:inline;">' + correctWords + '</p> / ' + totalspacePress+1;  //update the score    
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
         sessionStorage.setItem('sessionWpmArray', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) +'~' + zizi);
         document.getElementById('sessionSpeedAverage').textContent = Math.floor(avg(sessionStorage.getItem('sessionWpmArray').split('~'))) + 'wpm (' + (sessionStorage.getItem('sessionWpmArray').split('~').length-1) + ')';
+        document.getElementById('wpm').style.textDecoration = '';
+        if(Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) > localStorage.getItem('pb')) {localStorage.setItem('pb', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent)))); document.getElementById('wpm').style.textDecoration = 'underline';}
         
     }
     if (testRunning == true && i===wordList.length && testTime !=500) {

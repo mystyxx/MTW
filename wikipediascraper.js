@@ -1,5 +1,5 @@
 var tfa;
-async function fetchFeaturedArticle(langue) {
+async function fetchFeaturedArticle(langue, mode) {
     let today = new Date();
     let year = today.getFullYear();
     let month = String(today.getMonth() + 1).padStart(2, '0');
@@ -17,8 +17,17 @@ async function fetchFeaturedArticle(langue) {
         });
 
         let data = await response.json();
-        if(langue == french) {tfa = data.mostread.articles[Math.floor(Math.random() * data.mostread.articles.length)].extract}
-        else{tfa = data.tfa.extract;}
+        if(langue == french) {
+            if(mode == 'mostread') {tfa = data.mostread.articles[Math.floor(Math.random() * data.mostread.articles.length)].extract}
+            if(mode == 'onthisday') { for(let i=0; i<data.onthisday.length; i++) {
+                tfa = data.onthisday[Math.floor(Math.random() * data.onthisday.length)].year + ' : ' + data.onthisday[Math.floor(Math.random() * data.onthisday.length)].text;}}
+            }
+        else{
+            if(mode == 'mostread') {tfa = data.mostread.articles[Math.floor(Math.random() * data.mostread.articles.length)].extract}
+            if(mode == 'onthisday') { for(let i=0; i<data.onthisday.length; i++) {
+                tfa = data.onthisday[Math.floor(Math.random() * data.onthisday.length)].year + ' : ' + data.onthisday[Math.floor(Math.random() * data.onthisday.length)].text;}}
+            if(mode == 'tfa'){tfa = data.tfa.extract}
+        }
         return (tfa);
     } catch (error) {
         console.error(error);

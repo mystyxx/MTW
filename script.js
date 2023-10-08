@@ -30,7 +30,7 @@ var secondetenth = 0;
 var words = false;
 
 function switchGamemode() {
-    document.getElementById('words15GamemodeButton').className = ''; document.getElementById('words30GamemodeButton').className = ''; document.getElementById('words60GamemodeButton').className = ''; document.getElementById('shortQuoteGamemodeButton').className = ''; document.getElementById('mediumQuoteGamemodeButton').className = ''; document.getElementById('longQuoteGamemodeButton').className = ''; document.getElementById('philoQuoteGamemodeButton').className = ''; document.getElementById('wikipediaGamemodeButton').className = '';
+    document.getElementById('words15GamemodeButton').className = ''; document.getElementById('words30GamemodeButton').className = ''; document.getElementById('words60GamemodeButton').className = ''; document.getElementById('shortQuoteGamemodeButton').className = ''; document.getElementById('mediumQuoteGamemodeButton').className = ''; document.getElementById('longQuoteGamemodeButton').className = ''; document.getElementById('philoQuoteGamemodeButton').className = ''; document.getElementById('wikipediaGamemodeButton').className = ''; document.getElementById('mostreadGamemodeButton').className = ''; document.getElementById('onthisdayGamemodeButton').className = ''; document.getElementById('tfaGamemodeButton').className = '';
     switch (sessionStorage.getItem('gm')) {
         case 'quote' :
             changeQuoteLength('', langue)
@@ -57,15 +57,17 @@ function switchGamemode() {
             changeModeHighlight('quoteGamemodeButton');
             document.getElementById('philoQuoteGamemodeButton').className = 'titleHighlight';
             break;
-        case 'wiki':
-            changeQuoteLength('wiki', langue);
-            fetchFeaturedArticle(langue).then(() => {
-                changeGamemode();
-                wordBox.textContent = ''
-                wordList = tfa.split(' ')
-                printWords(wordList);
-            });
-            document.getElementById('wikipediaGamemodeButton').className = 'titleHighlight';
+        case 'tfa':
+            changeWikipediaType('tfa', langue);
+            document.getElementById('tfaGamemodeButton').className = 'titleHighlight';
+            break;
+        case 'mostread':
+            changeWikipediaType('mostread', langue);
+            document.getElementById('mostreadGamemodeButton').className = 'titleHighlight';
+            break;
+        case 'onthisday':
+            changeWikipediaType('onthisday', langue);
+            document.getElementById('onthisdayGamemodeButton').className = 'titleHighlight';
             break;
         case '15':
             changeTestTime(15, hardmode);
@@ -124,7 +126,22 @@ function hideButtons(mode) {
         document.getElementById('words30GamemodeButton').style.display = 'inline-block';
         document.getElementById('words60GamemodeButton').style.display = 'inline-block';
         document.getElementById('EnablePonctuation').style.display = 'inline-block';
-        document.getElementById('wikipediaGamemodeButton').style.display = 'none';
+        document.getElementById('tfaGamemodeButton').style.display = 'none';
+        document.getElementById('mostreadGamemodeButton').style.display = 'none';
+        document.getElementById('onthisdayGamemodeButton').style.display = 'none';
+    }
+    if(mode == 'wiki') {
+        document.getElementById('shortQuoteGamemodeButton').style.display = 'none';
+        document.getElementById('mediumQuoteGamemodeButton').style.display = 'none';
+        document.getElementById('longQuoteGamemodeButton').style.display = 'none';
+        document.getElementById('philoQuoteGamemodeButton').style.display = 'none';
+        document.getElementById('words15GamemodeButton').style.display = 'none'
+        document.getElementById('words30GamemodeButton').style.display = 'none';
+        document.getElementById('words60GamemodeButton').style.display = 'none';
+        document.getElementById('EnablePonctuation').style.display = 'none';
+        if(langue == english) {document.getElementById('tfaGamemodeButton').style.display = 'inline-block';}
+        document.getElementById('mostreadGamemodeButton').style.display = 'inline-block';
+        document.getElementById('onthisdayGamemodeButton').style.display = 'inline-block';
     }
     else {
         document.getElementById('shortQuoteGamemodeButton').style.display = 'inline-block';
@@ -135,7 +152,9 @@ function hideButtons(mode) {
         document.getElementById('words30GamemodeButton').style.display = 'none';
         document.getElementById('words60GamemodeButton').style.display = 'none';
         document.getElementById('EnablePonctuation').style.display = 'none';
-        document.getElementById('wikipediaGamemodeButton').style.display = 'inline-block';
+        document.getElementById('tfaGamemodeButton').style.display = 'none';
+        document.getElementById('mostreadGamemodeButton').style.display = 'none';
+        document.getElementById('onthisdayGamemodeButton').style.display = 'none';
     }
 }
 
@@ -143,6 +162,7 @@ function changeModeHighlight(mode) {
     document.getElementById('wordsGamemodeButton').className = '';
     document.getElementById('timeGamemodeButton').className = '';
     document.getElementById('quoteGamemodeButton').className = '';
+    document.getElementById('wikipediaGamemodeButton').className = '';
     document.getElementById(mode).className = 'titleHighlight';
 }
 
@@ -240,6 +260,20 @@ function changeQuoteLength(size, langue) {
     wordList = chooseQuote(size, langue);
     printWords(wordList);
     hideButtons('words');
+}
+
+function changeWikipediaType(mode, langue) {
+            changeModeHighlight('wikipediaGamemodeButton')
+            hideButtons('wiki');
+            timeBox.style.display = 'none';
+            testTime = 500;
+            timeBox.textContent = '500';
+            fetchFeaturedArticle(langue, mode).then(() => {
+                changeGamemode();
+                wordBox.textContent = ''
+                wordList = tfa.split(' ')
+                printWords(wordList);
+            });
 }
 
 function changeClientTheme(theme) {
@@ -352,7 +386,22 @@ document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (c
 })
 
 document.getElementById('wikipediaGamemodeButton').addEventListener('click', (changeGamemodeToWikipedia) => {
-    sessionStorage.setItem('gm', 'wiki');
+    sessionStorage.setItem('gm', 'mostread');
+    switchGamemode();
+})
+
+document.getElementById('mostreadGamemodeButton').addEventListener('click', (changeGamemodeToMostRead) => {
+    sessionStorage.setItem('gm', 'mostread');
+    switchGamemode();
+})
+
+document.getElementById('onthisdayGamemodeButton').addEventListener('click', (changeGamemodeToMostRead) => {
+    sessionStorage.setItem('gm', 'onthisday');
+    switchGamemode();
+})
+
+document.getElementById('tfaGamemodeButton').addEventListener('click', (changeGamemodeToTfa) => {
+    sessionStorage.setItem('gm', 'tfa');
     switchGamemode();
 })
 
@@ -368,6 +417,7 @@ document.getElementById('words15GamemodeButton').addEventListener('click', (chan
         timeBox.style.display = 'none';
     }
 })
+
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
         sessionStorage.setItem('gm', '30')
@@ -411,7 +461,10 @@ document.getElementById('switchLanguageButton').addEventListener('click', (chang
         document.getElementById('longQuoteGamemodeButton').textContent = 'long';
         document.getElementById('switchThemeButton').textContent = 'switch to ' + localStorage.getItem('theme') + ' mode';
         document.getElementById('switchLanguageButton').textContent = 'switch language';
-        document.getElementById('wikipediaGamemodeButton').textContent = 'wikipedia\'s tfa'
+        document.getElementById('wikipediaGamemodeButton').textContent = 'wikipedia article';
+        document.getElementById('tfaGamemodeButton').style.display = 'inline-block';
+        document.getElementById('mostreadGamemodeButton').textContent = 'most read';
+        document.getElementById('onthisdayGamemodeButton').textContent = 'on this day';
     }
     else{
         langue = french;
@@ -423,7 +476,10 @@ document.getElementById('switchLanguageButton').addEventListener('click', (chang
         document.getElementById('longQuoteGamemodeButton').textContent = 'long';
         document.getElementById('switchThemeButton').textContent = 'changer le thème';
         document.getElementById('switchLanguageButton').textContent = 'changer la langue';
-        document.getElementById('wikipediaGamemodeButton').textContent = 'article wikipedia populaire'
+        document.getElementById('wikipediaGamemodeButton').textContent = 'article wikipedia'
+        document.getElementById('tfaGamemodeButton').style.display = 'none';
+        document.getElementById('mostreadGamemodeButton').textContent = 'populaire';
+        document.getElementById('onthisdayGamemodeButton').textContent = 'à cette date';
     }
     switchGamemode();
 })

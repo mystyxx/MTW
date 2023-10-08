@@ -37,7 +37,7 @@ const quote33 = 'On ne voit bien qu\'avec le coeur. L\essentiel est invisible po
 const quote34 = 'Toutes les grandes personnes ont d\'abord été des enfants. Mais peu d\'entre elles s\'en souviennent.'.split(' ');
 const quote35 = 'Mais si tu m\'apprivoise, nous aurons besoin l\'un de l\'autre. Tu seras pour moi unique au monde. Et je serai pour toi unique au monde.'.split(' ');
 const quote36 = 'Que la lumière soit. Dixit euh... Dieu. Je citais Dieu.'.search(' ');
-const quote37 = 'Vous êtes vous déjà dit qu\'il y a toujours un moment où l\'on entend som nom pour la dernière fois ? Et bien, ce moment est arrivé : je vais vous tuer... Chell...'
+const quote37 = 'Vous êtes vous déjà dit qu\'il y a toujours un moment où l\'on entend son nom pour la dernière fois ? Et bien, ce moment est arrivé : je vais vous tuer, Chell.'.split(' ');
 const philoquote1 = 'La simplicité véritable allie la bonté à la beauté.'.split(' ');
 const philoquote2 = 'La justice de l\'intelligence est la sagesse. Le sage n\'est pas celui qui sait beaucoup de choses, mais celui qui voit leur juste mesure.'.split(' ');
 const philoquote3 = 'La victoire sur soi est la plus grande des victoire.'.split(' ');
@@ -208,7 +208,7 @@ function chooseQuote(size, language) {
         language.philoquotes.splice(lastquoteIndex, 1);
         return lastphiloquote;
     }
-    if(size == 'wiki') {return '';}
+    if(size == 'wiki') {return 'please wait...';}
     else{
         lastquoteIndex = Math.floor(Math.random() * language.quotes.length)
         if (lastquote !== undefined) {

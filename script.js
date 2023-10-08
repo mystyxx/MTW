@@ -59,7 +59,7 @@ function switchGamemode() {
             break;
         case 'wiki':
             changeQuoteLength('wiki', langue);
-            fetchFeaturedArticle().then(() => {
+            fetchFeaturedArticle(langue).then(() => {
                 changeGamemode();
                 wordBox.textContent = ''
                 wordList = tfa.split(' ')
@@ -166,7 +166,7 @@ function timer() {
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
         document.getElementById('characters').innerHTML = '<span style="color:var(--great-color); display:inline;">' + correctCharacters + '</span> | <span style="color:red; display:inline;">' + wrongCharacters + '</span> (' + Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) + '%)';
-        scorebox.innerHTML = '<p style="color:var(--great-color); display:inline;">' + correctWords + '</p> / ' + totalspacePress+1;  //update the score    
+        scorebox.innerHTML = '<p style="color:var(--great-color); display:inline;">' + correctWords + '</p> / ' + ++totalspacePress;  //update the score    
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
         sessionStorage.setItem('sessionWpmArray', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) +'~' + zizi);
@@ -411,6 +411,7 @@ document.getElementById('switchLanguageButton').addEventListener('click', (chang
         document.getElementById('longQuoteGamemodeButton').textContent = 'long';
         document.getElementById('switchThemeButton').textContent = 'switch to ' + localStorage.getItem('theme') + ' mode';
         document.getElementById('switchLanguageButton').textContent = 'switch language';
+        document.getElementById('wikipediaGamemodeButton').textContent = 'wikipedia\'s tfa'
     }
     else{
         langue = french;
@@ -422,6 +423,7 @@ document.getElementById('switchLanguageButton').addEventListener('click', (chang
         document.getElementById('longQuoteGamemodeButton').textContent = 'long';
         document.getElementById('switchThemeButton').textContent = 'changer le thème';
         document.getElementById('switchLanguageButton').textContent = 'changer la langue';
+        document.getElementById('wikipediaGamemodeButton').textContent = 'article wikipedia populaire'
     }
     switchGamemode();
 })

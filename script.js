@@ -34,27 +34,22 @@ function switchGamemode() {
     switch (sessionStorage.getItem('gm')) {
         case 'quote' :
             changeQuoteLength('', langue)
-            printWords(wordList);
-            inputbox.focus();
-            document.getElementById('shortQuoteGamemodeButton').className = 'titleHighlight'; document.getElementById('mediumQuoteGamemodeButton').className = 'titleHighlight'; document.getElementById('longQuoteGamemodeButton').className = 'titleHighlight';
+            document.getElementById('shortQuoteGamemodeButton').className = 'titleHighlight'; document.getElementById('mediumQuoteGamemodeButton').className = 'titleHighlight'; document.getElementById('longQuoteGamemodeButton').className = 'titleHighlight'; changeModeHighlight('quoteGamemodeButton');
+            break;
         case 'shortQuote':
             changeQuoteLength('short', langue);
-            changeModeHighlight('quoteGamemodeButton');
             document.getElementById('shortQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'mediumQuote':
             changeQuoteLength('medium', langue);
-            changeModeHighlight('quoteGamemodeButton');
             document.getElementById('mediumQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'longQuote':
             changeQuoteLength('long', langue);
-            changeModeHighlight('quoteGamemodeButton');
             document.getElementById('longQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'philo':
             changeQuoteLength('philo', langue);
-            changeModeHighlight('quoteGamemodeButton');
             document.getElementById('philoQuoteGamemodeButton').className = 'titleHighlight';
             break;
         case 'tfa':
@@ -63,6 +58,7 @@ function switchGamemode() {
             break;
         case 'mostread':
             changeWikipediaType('mostread', langue);
+            changeModeHighlight('wikipediaGamemodeButton');
             document.getElementById('mostreadGamemodeButton').className = 'titleHighlight';
             break;
         case 'onthisday':
@@ -76,12 +72,10 @@ function switchGamemode() {
             break;
         case '30':
             changeTestTime(30, hardmode);
-            changeModeHighlight('timeGamemodeButton');
             document.getElementById('words30GamemodeButton').className = 'titleHighlight';
             break;
         case '60':
             changeTestTime(60, hardmode);
-            changeModeHighlight('timeGamemodeButton');
             document.getElementById('words60GamemodeButton').className = 'titleHighlight';
             break;
         case 'words10':
@@ -91,17 +85,14 @@ function switchGamemode() {
             break;
         case 'words25':
             changeTestTime(500, hardmode, 25);
-            changeModeHighlight('wordsGamemodeButton');
             document.getElementById('words30GamemodeButton').className = 'titleHighlight';
             break;
         case 'words50':
             changeTestTime(500, hardmode, 50);
-            changeModeHighlight('wordsGamemodeButton');
             document.getElementById('words60GamemodeButton').className = 'titleHighlight';
             break;
         default:
             changeTestTime(15, hardmode);
-            changeModeHighlight('timeGamemodeButton');
             document.getElementById('words15GamemodeButton').className = 'titleHighlight';
             break;
     }
@@ -143,7 +134,7 @@ function hideButtons(mode) {
         document.getElementById('mostreadGamemodeButton').style.display = 'inline-block';
         document.getElementById('onthisdayGamemodeButton').style.display = 'inline-block';
     }
-    else {
+    if(mode == 'words') {
         document.getElementById('shortQuoteGamemodeButton').style.display = 'inline-block';
         document.getElementById('mediumQuoteGamemodeButton').style.display = 'inline-block';
         document.getElementById('longQuoteGamemodeButton').style.display = 'inline-block';
@@ -352,7 +343,6 @@ addEventListener('keyup', (nextWord)=> {
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
     sessionStorage.setItem('gm', 'quote');
     switchGamemode();
-    hideButtons('words');
 });
 
 document.getElementById('timeGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
@@ -409,12 +399,10 @@ document.getElementById('words15GamemodeButton').addEventListener('click', (chan
     if(!words) {
         sessionStorage.setItem('gm', '15')
         switchGamemode();
-        timeBox.style.display = 'inline';
     }
     else{
         sessionStorage.setItem('gm', 'words10')
         switchGamemode();
-        timeBox.style.display = 'none';
     }
 })
 
@@ -422,24 +410,20 @@ document.getElementById('words30GamemodeButton').addEventListener('click', (chan
     if(!words) {
         sessionStorage.setItem('gm', '30')
         switchGamemode();
-        timeBox.style.display = 'inline';
     }
     else{
         sessionStorage.setItem('gm', 'words25')
         switchGamemode();
-        timeBox.style.display = 'none';
     }
 })
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
         sessionStorage.setItem('gm', '60')
         switchGamemode();
-        timeBox.style.display = 'inline';
     }
     else{
         sessionStorage.setItem('gm', 'words50')
         switchGamemode();
-        timeBox.style.display = 'none';
     }
 })
 document.getElementById('EnablePonctuation').addEventListener('click', (enablePonctuation)=> {

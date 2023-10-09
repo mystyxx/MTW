@@ -208,13 +208,13 @@ function chooseQuote(size, language) {
         language.philoquotes.splice(lastquoteIndex, 1);
         return lastphiloquote;
     }
-    if(size == 'wiki') {return 'please wait...';}
+    if(size == 'wiki') {return 'tip : press tab to restart quickly !'.split(' ');}
     else{
         lastquoteIndex = Math.floor(Math.random() * language.quotes.length)
         if (lastquote !== undefined) {
             language.quotes.push(lastquote)
         }
         lastquote = language.quotes[lastquoteIndex]
-        language.quotes.splice(lastquoteIndex, 1); // 2nd parameter means remove one item only
+        language.quotes.splice(lastquoteIndex, 1); 
         return lastquote}
 }

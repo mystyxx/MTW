@@ -19,13 +19,13 @@ async function fetchFeaturedArticle(langue, mode) {
         let data = await response.json();
         if(langue == french) {
             if(mode == 'mostread') {tfa = data.mostread.articles[Math.floor(Math.random() * data.mostread.articles.length)].extract}
-            if(mode == 'onthisday') { for(let i=0; i<data.onthisday.length; i++) {
-                tfa = data.onthisday[Math.floor(Math.random() * data.onthisday.length)].year + ' : ' + data.onthisday[Math.floor(Math.random() * data.onthisday.length)].text;}}
+            if(mode == 'onthisday') { let rn = Math.floor(Math.random() * data.onthisday.length) 
+                tfa = data.onthisday[rn].year + ' : ' + data.onthisday[rn].text;}
             }
         else{
             if(mode == 'mostread') {tfa = data.mostread.articles[Math.floor(Math.random() * data.mostread.articles.length)].extract}
-            if(mode == 'onthisday') { for(let i=0; i<data.onthisday.length; i++) {
-                tfa = data.onthisday[Math.floor(Math.random() * data.onthisday.length)].year + ' : ' + data.onthisday[Math.floor(Math.random() * data.onthisday.length)].text;}}
+            if(mode == 'onthisday') { let rn = Math.floor(Math.random() * data.onthisday.length)
+                tfa = data.onthisday[rn].year + ' : ' + data.onthisday[rn].text;}
             if(mode == 'tfa'){tfa = data.tfa.extract}
         }
         return (tfa);

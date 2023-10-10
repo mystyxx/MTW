@@ -270,20 +270,26 @@ function changeWikipediaType(mode, langue) {
 function changeClientTheme(theme) {
     if(theme == 'dark') {
         document.getElementById('switchThemeButton').textContent = 'switch to dark mode';
-        document.body.style.setProperty("--main-bg-color", 'rgb(183, 229, 255');
-        document.body.style.setProperty("--secondary-color", 'black');
-        document.body.style.setProperty("--tertiary-color", 'white');
-        document.body.style.setProperty("--great-color", 'green');
-        if(langue==french) {document.getElementById('switchThemeButton').textContent = 'changer le thème'}
+        document.body.style.setProperty("--main-bg-color", '#fffffe');
+        document.body.style.setProperty("--main-text-color", '#094067');
+        document.body.style.setProperty("--secondary-bg-color", '#d1e0e0');
+        document.body.style.setProperty("--secondary-text-color", '#094067');
+        document.body.style.setProperty("--outline-color", 'white')
+        document.body.style.setProperty("--hover-color", '#5f6c7b');
+        document.body.style.setProperty("--great-color", '#5f6c7b');
     }
     else {
         document.getElementById('switchThemeButton').textContent = 'switch to light mode';
-        document.body.style.setProperty("--main-bg-color", 'black');
-        document.body.style.setProperty("--secondary-color", 'white');
-        document.body.style.setProperty("--tertiary-color", 'black');
-        document.body.style.setProperty("--great-color", 'lightgreen');
-        if(langue==french) {document.getElementById('switchThemeButton').textContent = 'changer le thème'}
+        document.getElementById('switchThemeButton').textContent = 'switch to dark mode';
+        document.body.style.setProperty("--main-bg-color", '#12192C');
+        document.body.style.setProperty("--main-text-color", 'white');
+        document.body.style.setProperty("--secondary-bg-color", '#232F4F');
+        document.body.style.setProperty("--outline-color", '#727D82');
+        document.body.style.setProperty("--secondary-text-color", 'white');
+        document.body.style.setProperty("--hover-color", '#7E7F91');
+        document.body.style.setProperty("--great-color", '#7E7F91');
     }
+    document.getElementById('switchThemeButton').textContent = 'switch to ' + theme + ' theme';
 }
 
 function spacebarIsInput() {
@@ -449,6 +455,7 @@ document.getElementById('switchLanguageButton').addEventListener('click', (chang
         document.getElementById('tfaGamemodeButton').style.display = 'inline-block';
         document.getElementById('mostreadGamemodeButton').textContent = 'most read';
         document.getElementById('onthisdayGamemodeButton').textContent = 'on this day';
+        document.getElementById('retryButton').textContent = 'Retry';
     }
     else{
         langue = french;
@@ -464,6 +471,7 @@ document.getElementById('switchLanguageButton').addEventListener('click', (chang
         document.getElementById('tfaGamemodeButton').style.display = 'none';
         document.getElementById('mostreadGamemodeButton').textContent = 'populaire';
         document.getElementById('onthisdayGamemodeButton').textContent = 'à cette date';
+        document.getElementById('retryButton').textContent = 'Recommencer';
     }
     switchGamemode();
 })

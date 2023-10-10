@@ -12,7 +12,8 @@ body {
 }
 
 #words {
-    font-size: 35px;
+    font-size: 40px;
+    margin-top: 1em;
     margin-left: 5em;
     margin-right: 5em;
     padding:10px;
@@ -20,11 +21,29 @@ body {
     outline: 1px solid;
     outline-color: var(--outline-color);
     color: var(--main-text-color);
+    max-height: 160px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
-#words>span {
+#wpmjsp {
+    font-size: 40px;
+    margin-left: 5em;
+    margin-right: 5em;
+    padding:10px;
+    background-color: var(--secondary-bg-color);
+    outline: 1px solid;
+    outline-color: var(--outline-color);
+    color: var(--main-text-color);
+    overflow-x: hidden;
+    overflow-y: auto;
+    visibility: hidden;
+}
+
+#words>span, #wpmjsp>span {
     padding-left: 6px;
     padding-right: 6px;
+    padding-top: 7px;
     word-wrap: normal;
     text-wrap: balance;
     display: inline-block;

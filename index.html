@@ -26,12 +26,14 @@
             </div>
         </div>
         <div id="words"></div>
-        <input type="text" id="typeInput" autofocus>
-        <button onClick="switchGamemode();" id="retryButton">Recommencer</button>
-        <p id="time">15</p>
+        <div id="gameplayBar">
+            <input type="text" id="typeInput" autofocus>
+            <button onClick="switchGamemode();" id="retryButton">Recommencer</button>
+            <p id="time">15</p>
+        </div>
         
         <div id="container">
-
+            
             <div id="resultCard" style="visibility: hidden;">
                 <p id="wpm"></p>
                 <p class="margin-left">touches : </p> <p class="margin-right" id="characters"></p>
@@ -41,6 +43,7 @@
                 <p class="margin-left">moyenne de la session : </p><p class="margin-right" id="sessionSpeedAverage"></p>
             </div>
         </div>
+        <p id="wpmjsp">bonjour</p>
         <div id="swichThemeButtonHolder"><p id="switchThemeButton">changer le thème</p></div>
         
         <script src="wikipediascraper.js"></script>

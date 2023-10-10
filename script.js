@@ -28,6 +28,7 @@ let TimerObject;
 let hardmode = false;
 var secondetenth = 0;
 var words = false;
+var line = 0;
 
 function switchGamemode() {
     document.getElementById('words15GamemodeButton').className = ''; document.getElementById('words30GamemodeButton').className = ''; document.getElementById('words60GamemodeButton').className = ''; document.getElementById('shortQuoteGamemodeButton').className = ''; document.getElementById('mediumQuoteGamemodeButton').className = ''; document.getElementById('longQuoteGamemodeButton').className = ''; document.getElementById('philoQuoteGamemodeButton').className = ''; document.getElementById('wikipediaGamemodeButton').className = ''; document.getElementById('mostreadGamemodeButton').className = ''; document.getElementById('onthisdayGamemodeButton').className = ''; document.getElementById('tfaGamemodeButton').className = '';
@@ -189,8 +190,10 @@ function timer() {
     if (testRunning == true && i===wordList.length && testTime !=500) {
         i = 0;
         wordBox.textContent = '';
-        wordList = chooseList(hardmode);
+        wordList = chooseList(langue, hardmode);
         printWords(wordList);
+        line = 0;
+        wordBox.scroll(0, 0);
     }
     
 }
@@ -217,7 +220,9 @@ function changeGamemode() {
     testRunning = false;
     wordBox.textContent = '';
     inputbox.value = ''
-    totalspacePress = 0; correctCharacters = 0; correctWords = 0; wrongCharacters = 0;
+    totalspacePress = 0; correctCharacters = 0; correctWords = 0; wrongCharacters = 0; line=0;
+    document.getElementById('wpmjsp').innerHTML = 'Bonjour';
+    wordBox.scroll(0, line*170);
     inputbox.focus();
 }
 function changeTestTime(time, hardmode, numberwords) {
@@ -300,6 +305,19 @@ function spacebarIsInput() {
     }
 }
 
+function textwrap(index){
+    var height = wordBox.offsetHeight;
+
+    // for(let i = 1; i < wordList.length; i++){
+        document.getElementById('wpmjsp').innerHTML = document.getElementById('wpmjsp').innerHTML + '<span>' + wordList[i-1] + '</span>';
+
+        console.log(document.getElementById('wpmjsp').offsetHeight)
+        if(document.getElementById('wpmjsp').offsetHeight > 186){
+            document.getElementById('wpmjsp').innerHTML = 'bonjour';
+            return(i-1==index)
+        }
+    // }
+};
 
 addEventListener('keyup', (nextWord)=> {
     //quick restart
@@ -307,11 +325,12 @@ addEventListener('keyup', (nextWord)=> {
 
     //test started when input detected
     if (testRunning == false && timeBox.textContent != 0 && i==0 && nextWord.keyCode != 9) {
+        line = 0;
+        wordBox.scroll(0, line*170);
         i=0;
         testRunning = true;
         TimerObject = setInterval(timer, 200)
         secondetenth = 0;
-        
     }
     let wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
     //if the spacebar is pressed,
@@ -336,11 +355,14 @@ addEventListener('keyup', (nextWord)=> {
                 totalspacePress++;
                 if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                     inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
-                document.getElementById(i).className = 'highlight';         //highlight the next word
+                    document.getElementById(i).className = 'highlight';         //highlight the next word
+                    if(textwrap(i-1)) {
+                        line++;
+                        wordBox.scroll(0, line*170);
+                    }
+                }   
             }
             else{inputbox.value = ''}
-            }
-            
         }
     }
 });

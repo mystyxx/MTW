@@ -97,6 +97,7 @@ function switchGamemode() {
             document.getElementById('words15GamemodeButton').className = 'titleHighlight';
             break;
     }
+    wordBox.scroll(0, line*55 + 6);
 }
 switchGamemode();
 
@@ -222,17 +223,14 @@ function changeGamemode() {
     inputbox.value = ''
     totalspacePress = 0; correctCharacters = 0; correctWords = 0; wrongCharacters = 0; line=0;
     document.getElementById('wpmjsp').innerHTML = 'Bonjour';
-    wordBox.scroll(0, line*170);
     inputbox.focus();
 }
 function changeTestTime(time, hardmode, numberwords) {
     changeGamemode();
-    wordList = '';
     wordList = chooseList(langue, hardmode, numberwords)
     printWords(wordList)
     testTime = time;
     timeBox.textContent = time;
-    timeBox.style.display = 'inline';
     hideButtons('quote');
     if(numberwords === undefined) {
         document.getElementById('words15GamemodeButton').textContent = '15';
@@ -266,8 +264,8 @@ function changeWikipediaType(mode, langue) {
             timeBox.textContent = '500';
             fetchFeaturedArticle(langue, mode).then(() => {
                 changeGamemode();
-                wordBox.textContent = ''
-                wordList = tfa.split(' ')
+                wordBox.textContent = '';
+                wordList = tfa.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
                 printWords(wordList);
             });
 }
@@ -307,16 +305,12 @@ function spacebarIsInput() {
 
 function textwrap(index){
     var height = wordBox.offsetHeight;
+    document.getElementById('wpmjsp').innerHTML = document.getElementById('wpmjsp').innerHTML + '<span>' + wordList[i] + '</span>';
 
-    // for(let i = 1; i < wordList.length; i++){
-        document.getElementById('wpmjsp').innerHTML = document.getElementById('wpmjsp').innerHTML + '<span>' + wordList[i] + '</span>';
-
-        console.log(document.getElementById('wpmjsp').offsetHeight)
-        if(document.getElementById('wpmjsp').offsetHeight > 75){
-            document.getElementById('wpmjsp').innerHTML = wordList[i];
-            return(i-1==index)
-        }
-    // }
+    if(document.getElementById('wpmjsp').offsetHeight > 75){
+        document.getElementById('wpmjsp').innerHTML = wordList[i];
+        return(i-1==index)
+    }
 };
 
 addEventListener('keyup', (nextWord)=> {
@@ -327,7 +321,7 @@ addEventListener('keyup', (nextWord)=> {
     if (testRunning == false && timeBox.textContent != 0 && i==0 && nextWord.keyCode != 9) {
         document.getElementById('wpmjsp').innerHTML = wordList[i];
         line = 0;
-        wordBox.scroll(0, line*170);
+        wordBox.scroll(0, line*170 + 6);
         i=0;
         testRunning = true;
         TimerObject = setInterval(timer, 200)
@@ -336,6 +330,8 @@ addEventListener('keyup', (nextWord)=> {
     let wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
     //if the spacebar is pressed,
     if(testRunning) {
+        if(Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) < 60 && i>4) {timeBox.textContent = 0} //end the test if accuracy is too bad 
+
         if(wordInput != wordList[i].slice(0, wordInput[0].length + '')) {document.getElementById(i).className = 'redhighlight'}
         else{document.getElementById(i).className = 'highlight'}
         if(nextWord.isComposing || spacebarIsInput()) {
@@ -457,7 +453,6 @@ document.getElementById('words60GamemodeButton').addEventListener('click', (chan
 })
 document.getElementById('EnablePonctuation').addEventListener('click', (enablePonctuation)=> {
     hardmode = !hardmode;
-    document.getElementById('EnablePonctuation').style.display = 'inline-block'
     if(hardmode) {document.getElementById('EnablePonctuation').className = 'titleHighlight'}
     else{document.getElementById('EnablePonctuation').className = ''}
     switchGamemode();

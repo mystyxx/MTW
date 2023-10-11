@@ -173,7 +173,7 @@ function timer() {
         let zizi = sessionStorage.getItem('sessionWpmArray')
         clearInterval(TimerObject);
         testRunning = false;
-        if(inputbox.value == wordList[i].slice(0, inputbox.value.length + '')) {correctCharacters = correctCharacters + inputbox.value.length}
+        if(inputbox.value == wordList[i-1].slice(0, inputbox.value.length + '')) {correctCharacters = correctCharacters + inputbox.value.length}
         inputbox.style.visibility = 'hidden';
         document.getElementById('resultCard').style.visibility = 'visible';
         document.getElementById('wpm').textContent = Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) + ' WPM';
@@ -309,11 +309,11 @@ function textwrap(index){
     var height = wordBox.offsetHeight;
 
     // for(let i = 1; i < wordList.length; i++){
-        document.getElementById('wpmjsp').innerHTML = document.getElementById('wpmjsp').innerHTML + '<span>' + wordList[i-1] + '</span>';
+        document.getElementById('wpmjsp').innerHTML = document.getElementById('wpmjsp').innerHTML + '<span>' + wordList[i] + '</span>';
 
         console.log(document.getElementById('wpmjsp').offsetHeight)
-        if(document.getElementById('wpmjsp').offsetHeight > 186){
-            document.getElementById('wpmjsp').innerHTML = 'bonjour';
+        if(document.getElementById('wpmjsp').offsetHeight > 75){
+            document.getElementById('wpmjsp').innerHTML = wordList[i];
             return(i-1==index)
         }
     // }
@@ -325,6 +325,7 @@ addEventListener('keyup', (nextWord)=> {
 
     //test started when input detected
     if (testRunning == false && timeBox.textContent != 0 && i==0 && nextWord.keyCode != 9) {
+        document.getElementById('wpmjsp').innerHTML = wordList[i];
         line = 0;
         wordBox.scroll(0, line*170);
         i=0;
@@ -357,8 +358,8 @@ addEventListener('keyup', (nextWord)=> {
                     inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
                     document.getElementById(i).className = 'highlight';         //highlight the next word
                     if(textwrap(i-1)) {
+                        wordBox.scroll(0, line*55 + 6);
                         line++;
-                        wordBox.scroll(0, line*170);
                     }
                 }   
             }

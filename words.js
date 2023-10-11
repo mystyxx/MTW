@@ -86,7 +86,7 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function chooseList(language, hardmode, words = 50) {
+function chooseList(language, hardmode, words = 150) {
     let wordArray = []
     for(let i =0; i<words; i++) {
         let feur = Math.floor(Math.random() * language.words.length);

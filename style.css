@@ -24,6 +24,7 @@ body {
     max-height: 160px;
     overflow-x: hidden;
     overflow-y: auto;
+    scroll-behavior: smooth;
 }
 
 #wpmjsp {
@@ -38,6 +39,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     visibility: hidden;
+    position: fixed;
 }
 
 #words>span, #wpmjsp>span {
@@ -90,7 +92,7 @@ body {
 }
 
 .highlight {
-    background-color: rgba(77, 77, 77, 0.3);
+    background-color: rgba(77, 77, 77, 0.5);
     border-radius: 10px;
 }
 

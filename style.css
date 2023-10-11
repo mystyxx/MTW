@@ -14,8 +14,8 @@ body {
 #words {
     font-size: 40px;
     margin-top: 1em;
-    margin-left: 5em;
-    margin-right: 5em;
+    margin-left: 10%;
+    margin-right: 10%;
     padding:10px;
     background-color: var(--secondary-bg-color);
     outline: 1px solid;
@@ -29,8 +29,8 @@ body {
 
 #wpmjsp {
     font-size: 40px;
-    margin-left: 5em;
-    margin-right: 5em;
+    margin-left: 10%;
+    margin-right: 10%;
     padding:10px;
     background-color: var(--secondary-bg-color);
     outline: 1px solid;
@@ -55,7 +55,6 @@ body {
     color: var(--main-text-color);
     font-size: 25px;
     margin-top: 10px;
-    margin-left: 20em;
     margin-right: 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 5px;
@@ -74,6 +73,7 @@ body {
 #retryButton {
     min-width: 100px;
     border-radius: 7px;
+    margin-top: 10px;
     border: none;
     background-color: #3da9fc;
     color: #fffffe;
@@ -108,7 +108,7 @@ body {
     margin:5px;
 }
 
-#gamemodeBar {
+#gamemodeBar, #gameplayBar {
     display: flex;
     justify-content: center;
 
@@ -164,6 +164,7 @@ body {
     padding-left: 1%;
     padding-right: 1%;
     width: 18%;
+    min-width: 300px;
     outline: 1px solid;
     outline-color: var(--outline-color);
     inset-inline-start: 5px;

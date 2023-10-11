@@ -1,3 +1,12 @@
+/*
+|=========================|
+| __  __  _____ __      __|
+||  \/  ||_   _|\ \    / /|
+|| |\/| |  | |   \ \/\/ / |
+||_|  |_|  |_|    \_/\_/  |
+|   by mystyxx            |
+|=========================|
+*/
 let inputbox = document.getElementById('typeInput');
 let input = inputbox.textContent;
 let scorebox = document.getElementById('score');
@@ -9,26 +18,19 @@ let theme = localStorage.getItem('theme');
 let textColor = localStorage.getItem('textColor');
 changeClientTheme(theme);
 if (window.sessionStorage.getItem('sesionWpmArray') == undefined && sessionStorage.getItem('sessionWpmArray') == null) {
-    window.sessionStorage.setItem('sessionWpmArray', '');
+    window.sessionStorage.setItem('sessionWpmArray', '');   //initialise pb if it exists not yet
 }
 let personalBest = localStorage.getItem('pb');
 if(window.localStorage.getItem('pb') == null) {window.localStorage.setItem('pb', 0)}
 
 var langue = french;
 var wordList;
-let wrongCharacters = 0;
-inputbox.value = '';
-let totalspacePress = 0;
-let testTime = 15;
-let i = 0;
-let correctWords = 0;
-let correctCharacters = 0;
-let testRunning = false;
 let TimerObject;
-let hardmode = false;
-var secondetenth = 0;
-var words = false;
-var line = 0;
+let wrongCharacters = 0; let totalspacePress = 0; var line = 0; let i = 0; let correctWords = 0; let correctCharacters = 0; var secondetenth = 0;
+let hardmode = false; let testRunning = false; var words = false;
+inputbox.value = '';
+let testTime = 15;
+
 
 function switchGamemode() {
     document.getElementById('words15GamemodeButton').className = ''; document.getElementById('words30GamemodeButton').className = ''; document.getElementById('words60GamemodeButton').className = ''; document.getElementById('shortQuoteGamemodeButton').className = ''; document.getElementById('mediumQuoteGamemodeButton').className = ''; document.getElementById('longQuoteGamemodeButton').className = ''; document.getElementById('philoQuoteGamemodeButton').className = ''; document.getElementById('wikipediaGamemodeButton').className = ''; document.getElementById('mostreadGamemodeButton').className = ''; document.getElementById('onthisdayGamemodeButton').className = ''; document.getElementById('tfaGamemodeButton').className = '';
@@ -236,19 +238,19 @@ function changeTestTime(time, hardmode, numberwords) {
         document.getElementById('words15GamemodeButton').textContent = '15';
         document.getElementById('words30GamemodeButton').textContent = '30';
         document.getElementById('words60GamemodeButton').textContent = '60';
-        timeBox.style.display = 'inline'
+        timeBox.style.visibility = 'visible'
     }
     if(numberwords !== undefined){
         document.getElementById('words15GamemodeButton').textContent = '10';
         document.getElementById('words30GamemodeButton').textContent = '25';
         document.getElementById('words60GamemodeButton').textContent = '50';
-        timeBox.style.display = 'none';
+        timeBox.style.visibility= 'hidden';
     }
 }
 
 function changeQuoteLength(size, langue) {
     changeGamemode();
-    timeBox.style.display = 'none';
+    timeBox.style.visibility = 'hidden';
     testTime = 500;
     timeBox.textContent = '500';
     wordList = chooseQuote(size, langue);
@@ -259,7 +261,7 @@ function changeQuoteLength(size, langue) {
 function changeWikipediaType(mode, langue) {
             changeModeHighlight('wikipediaGamemodeButton')
             hideButtons('wiki');
-            timeBox.style.display = 'none';
+            timeBox.style.visibility = 'hidden';
             testTime = 500;
             timeBox.textContent = '500';
             fetchFeaturedArticle(langue, mode).then(() => {
@@ -343,7 +345,7 @@ addEventListener('keyup', (nextWord)=> {
                 correctCharacters += wordList[i].length;
                 document.getElementById(i).className = 'correct';
             }
-            if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length}
+            if (wordInput[0] != wordList[i] && testRunning == true) {wrongCharacters += wordInput[0].length;}
             
             if(testRunning === true && wordInput[0] != '') {
                 if(document.getElementById(i).className != 'correct') {document.getElementById(i).style.color = 'rgba(255, 69, 69, 1)'; document.getElementById(i).style.backgroundColor = 'rgba(0, 0, 0, 0.0)'}

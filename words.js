@@ -31,16 +31,17 @@ const quote27 = 'Moi, je n\'étais rien et voilà qu\'aujourd\'hui, je suis le g
 const quote28 = 'La première étape du Tour de France 1952 s\'est déroulée le 25 juin 1952 entre les villes de Brest, qui accueille pour la première fois le départ d\'un Tour, et de Rennes, qui est une ville-étape du Tour pour la sixième fois de son histoire. Le parcours franchit les reliefs bretons à travers les départements du Finistère, des Côtes-du-Nord et de l\'Ille-et-Vilaine, sur une route accidentée longue de 246 km. Il passe notamment les villes de Morlaix, Guingamp et Saint-Brieuc. Cette première étape des vingt-trois prévues lance la 39e édition du Tour de France, dont Fausto Coppi prend le départ dans le rôle de l\'immense favori en l\'absence d\'Hugo Koblet, vainqueur de l\'édition précédente, et de Louison Bobet, alors champion de France. La course est remportée par le Belge Rik Van Steenbergen devant son compatriote et coéquipier Maurice Blomme, tous les deux membres de l\'équipe de Belgique.'.split(' ');
 const quote29 = 'La bataille de Drépane (ou Drepanum) est une bataille navale qui a lieu en 249 avant Jésus-Christ, lors de la première guerre punique, au large de Drépane (aujourd\'hui Trapani) à l\'ouest de la Sicile, entre une flotte carthaginoise commandée par Adherbal et une flotte romaine dirigée par Publius Claudius Puicher. Le consul romain tente de bloquer la forteresse carthaginoise de Lilybée (aujourd\'hui Marsala), mais sans réel succès, celle-ci étant toujours ravitaillée par voie maritime grâce aux connaissances locales d\'Hannibal le Rhodien sur les hauts-fonds du secteur. Pour arrêter ce ravitaillement, Publius Claudius Pulcher décide d\'attaquer la flotte punique qui se trouve dans le port de la ville voisine de Drépane.'.split(' ');
 const quote30 = 'La pluie de tes sarcasmes glisse sur la toile de mon indifférence.'.split(' ');
-const quote31 = 'Malgré tout cela, je crois encore à la bonté innée de l\'Homme'.split(' ');
+const quote31 = 'Malgré tout cela, je crois encore à la bonté innée de l\'Homme.'.split(' ');
 const quote32 = 'Essayez de quitter la Terre un peu meilleure que vous l\'avez trouvée.'.split(' ');
-const quote33 = 'On ne voit bien qu\'avec le coeur. L\essentiel est invisible pour les yeux.'.split(' ');
+const quote33 = 'On ne voit bien qu\'avec le coeur. L\'essentiel est invisible pour les yeux.'.split(' ');
 const quote34 = 'Toutes les grandes personnes ont d\'abord été des enfants. Mais peu d\'entre elles s\'en souviennent.'.split(' ');
 const quote35 = 'Mais si tu m\'apprivoise, nous aurons besoin l\'un de l\'autre. Tu seras pour moi unique au monde. Et je serai pour toi unique au monde.'.split(' ');
 const quote36 = 'Que la lumière soit. Dixit euh... Dieu. Je citais Dieu.'.search(' ');
 const quote37 = 'Vous êtes vous déjà dit qu\'il y a toujours un moment où l\'on entend son nom pour la dernière fois ? Et bien, ce moment est arrivé : je vais vous tuer, Chell.'.split(' ');
+const quote38 = 'Je n\'ai jamais imaginé qu\'on pût être à ce point hanté par une voix, par un cou, par des épaules, par des mains. Ce que je veux dire, c\'est qu\'elle avait des yeux où il faisait si bon vivre que je n\'ai jamais su où aller depuis.'.split(' ');
 const philoquote1 = 'La simplicité véritable allie la bonté à la beauté.'.split(' ');
 const philoquote2 = 'La justice de l\'intelligence est la sagesse. Le sage n\'est pas celui qui sait beaucoup de choses, mais celui qui voit leur juste mesure.'.split(' ');
-const philoquote3 = 'La victoire sur soi est la plus grande des victoire.'.split(' ');
+const philoquote3 = 'La victoire sur soi est la plus grande des victoires.'.split(' ');
 const philoquote4 = 'Celui qui progresse ne blâme personne, ne loue personne, ne critique personne, n\'incrimine personne. Il ne dit rien, ni de son importance, ni de son savoir.'.split(' ');
 const philoquote5 = 'Lorsque donc quelqu\'un te met en colère, sache que c\'est ton jugement qui te met en colère.'.split(' ');
 const philoquote6 = 'Il ne dépend pas de toi d\'être riche, mais il dépend de toi d\'être heureux.'.split(' ');
@@ -138,7 +139,7 @@ function chooseList(language, hardmode, words = 150) {
 }
 
 const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
-const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, quote29, quote30, quote31, quote32, quote33, quote34, quote35, quote36, quote37, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
+const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, quote29, quote30, quote31, quote32, quote33, quote34, quote35, quote36, quote37, quote38, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
 const enphiloquotelist = [enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7, enquote8, enquote9, enquote10, enquote11, enquote12, enquote13, enquote14, enquote15, enquote16, enquote17, enquote18, enquote19]
 const enquotelist = [enquote1, enquote2, enquote3, enquote4, enquote5, enquote6, enquote7, enquote8, enquote9, enquote10, enquote11, enquote12, enquote13, enquote14, enquote15, enquote16, enquote17, enquote18, enquote19, enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7];
 
@@ -208,7 +209,6 @@ function chooseQuote(size, language) {
         language.philoquotes.splice(lastquoteIndex, 1);
         return lastphiloquote;
     }
-    if(size == 'wiki') {return 'tip : press tab to restart quickly !'.split(' ');}
     else{
         lastquoteIndex = Math.floor(Math.random() * language.quotes.length)
         if (lastquote !== undefined) {

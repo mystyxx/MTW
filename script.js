@@ -264,6 +264,8 @@ function changeWikipediaType(mode, langue) {
             timeBox.style.visibility = 'hidden';
             testTime = 500;
             timeBox.textContent = '500';
+            wordBox.textContent = ' ';
+            printWords('tip : press tab to restart quickly !'.split(' '))
             fetchFeaturedArticle(langue, mode).then(() => {
                 changeGamemode();
                 wordBox.textContent = '';
@@ -354,7 +356,7 @@ addEventListener('keyup', (nextWord)=> {
                 totalspacePress++;
                 if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                     inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
-                    document.getElementById(i).className = 'highlight';         //highlight the next word
+                    document.getElementById(i).className = 'highlight';     //highlight the next word
                     if(textwrap(i-1)) {
                         wordBox.scroll(0, line*55 + 6);
                         line++;

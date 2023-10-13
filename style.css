@@ -25,6 +25,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
+    border-radius: 15px;
 }
 
 #wpmjsp {
@@ -32,12 +33,6 @@ body {
     margin-left: 10%;
     margin-right: 10%;
     padding:10px;
-    background-color: var(--secondary-bg-color);
-    outline: 1px solid;
-    outline-color: var(--outline-color);
-    color: var(--main-text-color);
-    overflow-x: hidden;
-    overflow-y: auto;
     visibility: hidden;
     position: fixed;
 }
@@ -75,20 +70,21 @@ body {
     border-radius: 7px;
     margin-top: 10px;
     border: none;
-    background-color: #3da9fc;
-    color: #fffffe;
+    background-color: var(--secondary-bg-color);
+    color: var(--main-text-color);
     height: 35px;
     font-weight: bold;
-    box-shadow: 0 3px #666;
+    /* box-shadow: 0 1px #666; */
 }
 
 #retryButton:hover {
-    background-color: #4FCFF0;
+    background-color: var(--hover-color);
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 #retryButton:active {
     box-shadow: 0 1px #666;
-    transform: translateY(1px);
 }
 
 .highlight {
@@ -180,6 +176,7 @@ body {
     outline: 1px solid;
     outline-color: var(--outline-color);
     inset-inline-start: 5px;
+    border-radius: 15px;
 }
 
 #resultCard > .margin-right {

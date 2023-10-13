@@ -5,6 +5,7 @@
 || |\/| |  | |   \ \/\/ / |
 ||_|  |_|  |_|    \_/\_/  |
 |   by mystyxx            |
+|check README.md for infos|
 |=========================|
 */
 let inputbox = document.getElementById('typeInput');
@@ -265,11 +266,13 @@ function changeWikipediaType(mode, langue) {
             testTime = 500;
             timeBox.textContent = '500';
             wordBox.textContent = ' ';
-            printWords('tip : press tab to restart quickly !'.split(' '))
+            printWords('tip : press tab to restart quickly !'.split(' '));
+            document.body.style.cursor = 'wait';
             fetchFeaturedArticle(langue, mode).then(() => {
                 changeGamemode();
                 wordBox.textContent = '';
                 wordList = tfa.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
+                document.body.style.cursor = 'auto';
                 printWords(wordList);
             });
 }

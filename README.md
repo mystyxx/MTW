@@ -12,22 +12,22 @@ Thanks a lot to deysox for helping me so much !
 
 ## Incoming features
 - more quotes
-- today's featured article in french
+- today's featured article in french (not sure lmao it's not available on wikipedia's api)  
 
 ## Spot an issue ?
-- If you have an issue with the website, please check first if the issue hasn't been discovered yet (cf. known issues just below) you can either open an issue [here](https://github.com/mystyxx/MTW/issues) or message me on discord (mysty.xx).  
+- If you have an issue with the website, please check first if the issue hasn't been discovered yet (cf. known issues just below). You can either open an issue [here](https://github.com/mystyxx/MTW/issues) or message me on discord (mysty.xx).  
 
 ## Known issues
-- there are currently no known issues :)  
+- the website dosen't work on mobile devices (next word/scroll at each letter typed, etc)   
 
 ## How can I use the website ?
-The website is (not yet (?)) available on the internet, so you have to download it on your device. You can do this by clicking on the green button 'code' then 'download zip' or by following these steps : 
+The website is available at [this adress](https://mtw.paulroux3.repl.co), or you can download the website by clicking on the green button 'code' then 'download zip' or by following these steps :  
 - open a terminal/command line
 - run this command :  
     ```bash
     git clone https://www.github.com/mystyxx/MTW.git
     ```
-- open the newly created folder and open index.html with your browser
+- open the newly created folder and open the index.html file with your browser
 
 ## Contributing 
 - If you want to contribute to the project, you are welcome ! You can clone the repository on your machine and make the changes you want, then create a pull request. 

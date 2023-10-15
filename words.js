@@ -140,14 +140,17 @@ function chooseList(language, hardmode, words = 150) {
 
 const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
 const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, quote29, quote30, quote31, quote32, quote33, quote34, quote35, quote36, quote37, quote38, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
+const tiplist = ['tip : appuyez sur TAB pour recommencer !', 'tip : utilisez tout vos doigts pour taper plus rapidement !', 'tip : Celeste est mon jeu préféré !'];
 const enphiloquotelist = [enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7, enquote8, enquote9, enquote10, enquote11, enquote12, enquote13, enquote14, enquote15, enquote16, enquote17, enquote18, enquote19]
 const enquotelist = [enquote1, enquote2, enquote3, enquote4, enquote5, enquote6, enquote7, enquote8, enquote9, enquote10, enquote11, enquote12, enquote13, enquote14, enquote15, enquote16, enquote17, enquote18, enquote19, enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7];
+const entiplist = ['tip : press tab to restart quickly !'.split(' '), 'tip : use all your fingers to type !'.split(' '), 'tip : celeste is an awesome game !'.split(' '), ''];
 
 class langage {
-    constructor(words, quotes, philoquotes) {
+    constructor(words, quotes, philoquotes, tiplist) {
         this.words = words;
         this.quotes = quotes;
         this.philoquotes = philoquotes;
+        this.tiplist = tiplist;
         this.shortQuoteList = []; this.mediumQuoteList = []; this.longQuoteList = [];
         for(let i=0; i<this.quotes.length; i++) {
             if(this.quotes[i].length < 20) {
@@ -161,8 +164,8 @@ class langage {
     }
 }
 
-const french = new langage(frenchWords, quotelist, philoquotelist);
-const english = new langage(englishWords, enquotelist, enphiloquotelist);
+const french = new langage(frenchWords, quotelist, philoquotelist, tiplist);
+const english = new langage(englishWords, enquotelist, enphiloquotelist, entiplist);
 
 let lastquote; let lastshortquote; let lastmediumquote; let lastlongquote; let lastphiloquote;
 let lastquoteIndex;
@@ -171,6 +174,10 @@ function valIsInLang(arr) {
     for(let i = 0 ; i<arr.length ; i++) {
         if(langue.quotes[i] == arr) {return(true)}
     }
+}
+
+function selectLoadingTip(language) {
+    return(language.tiplist[Math.floor(Math.random() * language.tiplist.length)]);
 }
 
 function chooseQuote(size, language) {

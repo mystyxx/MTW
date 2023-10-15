@@ -263,13 +263,11 @@ function changeQuoteLength(size, langue) {
 }
 
 function changeWikipediaType(mode, langue) {
-    changeModeHighlight('wikipediaGamemodeButton')
     hideButtons('wiki');
     timeBox.style.visibility = 'hidden';
     testTime = 500;
     timeBox.textContent = '500';
-    wordBox.textContent = ' ';
-    printWords('tip : press tab to restart quickly !'.split(' '));
+    printWords(selectLoadingTip(langue).split(' '));
     document.body.style.cursor = 'wait';
     fetchFeaturedArticle(langue, mode).then(() => {
         changeGamemode();

@@ -97,6 +97,7 @@ function switchGamemode() {
             break;
         default:
             changeTestTime(15, hardmode);
+            changeModeHighlight('timeGamemodeButton');
             document.getElementById('words15GamemodeButton').className = 'titleHighlight';
             break;
     }
@@ -164,7 +165,7 @@ function changeModeHighlight(mode) {
 
 function timer() {
     //this function runs when a test is in progress.
-    secondetenth++;
+    secondetenth++; //actually 1/5 of a second lmao
     if (timeBox.textContent > 0 && testRunning === true && secondetenth%5==0) {
         timeBox.textContent--;
     }
@@ -174,6 +175,7 @@ function timer() {
         document.getElementById(i).className = "correct";
     }
     if ((timeBox.textContent == '0') || (i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) || (i===wordList.length && testTime == 500) ) {
+        //end of the test
         let zizi = sessionStorage.getItem('sessionWpmArray')
         clearInterval(TimerObject);
         testRunning = false;
@@ -192,6 +194,7 @@ function timer() {
         
     }
     if (testRunning == true && i===wordList.length && testTime !=500) {
+        //generate new words in case there's not enough
         i = 0;
         wordBox.textContent = '';
         wordList = chooseList(langue, hardmode);
@@ -260,21 +263,21 @@ function changeQuoteLength(size, langue) {
 }
 
 function changeWikipediaType(mode, langue) {
-            changeModeHighlight('wikipediaGamemodeButton')
-            hideButtons('wiki');
-            timeBox.style.visibility = 'hidden';
-            testTime = 500;
-            timeBox.textContent = '500';
-            wordBox.textContent = ' ';
-            printWords('tip : press tab to restart quickly !'.split(' '));
-            document.body.style.cursor = 'wait';
-            fetchFeaturedArticle(langue, mode).then(() => {
-                changeGamemode();
-                wordBox.textContent = '';
-                wordList = tfa.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
-                document.body.style.cursor = 'auto';
-                printWords(wordList);
-            });
+    changeModeHighlight('wikipediaGamemodeButton')
+    hideButtons('wiki');
+    timeBox.style.visibility = 'hidden';
+    testTime = 500;
+    timeBox.textContent = '500';
+    wordBox.textContent = ' ';
+    printWords('tip : press tab to restart quickly !'.split(' '));
+    document.body.style.cursor = 'wait';
+    fetchFeaturedArticle(langue, mode).then(() => {
+        changeGamemode();
+        wordBox.textContent = '';
+        wordList = tfa.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
+        document.body.style.cursor = 'auto';
+        printWords(wordList);
+    });
 }
 
 function changeClientTheme(theme) {
@@ -334,12 +337,11 @@ addEventListener('keyup', (nextWord)=> {
         secondetenth = 0;
     }
     let wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
-    //if the spacebar is pressed,
     if(testRunning) {
         if(Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) < 60 && i>4) {timeBox.textContent = 0} //end the test if accuracy is too bad 
-
         if(wordInput != wordList[i].slice(0, wordInput[0].length + '')) {document.getElementById(i).className = 'redhighlight'}
         else{document.getElementById(i).className = 'highlight'}
+        //if the spacebar is pressed,
         if(nextWord.isComposing || spacebarIsInput()) {
             wordInput = inputbox.value.replace(' ', ' ').split(' ');
     

@@ -208,6 +208,12 @@ body {
     text-decoration: underline;
 }
 
+#githublogo {
+    bottom: 5px;
+    position:fixed;
+    left: 10px;
+}
+
 .correct {
     color: var(--great-color);
 }

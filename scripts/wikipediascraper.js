@@ -30,6 +30,7 @@ async function fetchFeaturedArticle(langue, mode) {
         }
         return (tfa);
     } catch (error) {
+        printWords('internet error. please check your internet connection or contact mysty.xx on discord.')
         console.error(error);
     }
 }

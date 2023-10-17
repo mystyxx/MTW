@@ -143,7 +143,7 @@ const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote
 const tiplist = ['tip : appuyez sur TAB pour recommencer !', 'tip : utilisez tout vos doigts pour taper plus rapidement !', 'tip : Celeste est mon jeu préféré !'];
 const enphiloquotelist = [enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7, enquote8, enquote9, enquote10, enquote11, enquote12, enquote13, enquote14, enquote15, enquote16, enquote17, enquote18, enquote19]
 const enquotelist = [enquote1, enquote2, enquote3, enquote4, enquote5, enquote6, enquote7, enquote8, enquote9, enquote10, enquote11, enquote12, enquote13, enquote14, enquote15, enquote16, enquote17, enquote18, enquote19, enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7];
-const entiplist = ['tip : press tab to restart quickly !'.split(' '), 'tip : use all your fingers to type !'.split(' '), 'tip : celeste is an awesome game !'.split(' '), ''];
+const entiplist = ['tip : press tab to restart quickly !', 'tip : use all your fingers to type !', 'tip : celeste is an awesome game !'];
 
 class langage {
     constructor(words, quotes, philoquotes, tiplist) {

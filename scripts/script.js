@@ -96,6 +96,7 @@ function switchGamemode() {
             document.getElementById('words60GamemodeButton').className = 'titleHighlight';
             break;
         default:
+            sessionStorage.setItem('gm', 'time15')
             changeTestTime(15, hardmode);
             changeModeHighlight('timeGamemodeButton');
             document.getElementById('words15GamemodeButton').className = 'titleHighlight';
@@ -263,6 +264,7 @@ function changeQuoteLength(size, langue) {
 }
 
 function changeWikipediaType(mode, langue) {
+    changeGamemode();
     hideButtons('wiki');
     timeBox.style.visibility = 'hidden';
     testTime = 500;
@@ -270,12 +272,12 @@ function changeWikipediaType(mode, langue) {
     printWords(selectLoadingTip(langue).split(' '));
     document.body.style.cursor = 'wait';
     fetchFeaturedArticle(langue, mode).then(() => {
-        changeGamemode();
         wordBox.textContent = '';
-        wordList = tfa.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
         document.body.style.cursor = 'auto';
+        wordList = tfa.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
         printWords(wordList);
     });
+    changeModeHighlight('wikipediaGamemodeButton');
 }
 
 function changeClientTheme(theme) {
@@ -509,4 +511,8 @@ document.getElementById('switchThemeButton').addEventListener('click', (changeTh
         changeClientTheme('light');
         localStorage.setItem('theme', 'light');
     }
-})
+});
+
+// document.getElementById('showPopupButton').addEventListener('click', (showPopup)=> {
+//     document.getElementById('readmePopup').style.visibility = 'visible';
+// });

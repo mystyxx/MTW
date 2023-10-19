@@ -176,52 +176,52 @@ function valIsInLang(arr) {
     }
 }
 
-function selectLoadingTip(language) {
-    return(language.tiplist[Math.floor(Math.random() * language.tiplist.length)]);
+function selectLoadingTip(langue) {
+    return(langue.tiplist[Math.floor(Math.random() * langue.tiplist.length)]);
 }
 
-function chooseQuote(size, language) {
+function chooseQuote(size, langue) {
     if(size == 'short') {
         lastquoteIndex = Math.floor(Math.random() * language.shortQuoteList.length)
         if (lastshortquote !== undefined && valIsInLang(lastshortquote)) {
-            language.shortQuoteList.push(lastshortquote)
+            langue.shortQuoteList.push(lastshortquote)
         }
-        lastshortquote = language.shortQuoteList[lastquoteIndex]
-        language.shortQuoteList.splice(lastquoteIndex, 1);
+        lastshortquote = langue.shortQuoteList[lastquoteIndex]
+        langue.shortQuoteList.splice(lastquoteIndex, 1);
         return lastshortquote}
     if(size == 'medium') {
-        lastquoteIndex = Math.floor(Math.random() * language.mediumQuoteList.length)
+        lastquoteIndex = Math.floor(Math.random() * langue.mediumQuoteList.length)
         if (lastmediumquote !== undefined && valIsInLang(lastmediumquote)) {
-            language.mediumQuoteList.push(lastmediumquote)
+            langue.mediumQuoteList.push(lastmediumquote)
         }
-        lastmediumquote = language.mediumQuoteList[lastquoteIndex]
-        language.mediumQuoteList.splice(lastquoteIndex, 1); 
+        lastmediumquote = langue.mediumQuoteList[lastquoteIndex]
+        langue.mediumQuoteList.splice(lastquoteIndex, 1); 
         return lastmediumquote
     }
     if(size == 'long') {
-        lastquoteIndex = Math.floor(Math.random() * language.longQuoteList.length)
+        lastquoteIndex = Math.floor(Math.random() * langue.longQuoteList.length)
         if (lastlongquote !== undefined && valIsInLang(lastlongquote)) {
-            language.longQuoteList.push(lastlongquote)
+            langue.longQuoteList.push(lastlongquote)
         }
-        lastlongquote = language.longQuoteList[lastquoteIndex]
-        language.longQuoteList.splice(lastquoteIndex, 1); 
+        lastlongquote = langue.longQuoteList[lastquoteIndex]
+        langue.longQuoteList.splice(lastquoteIndex, 1); 
         return lastlongquote
     }
     if(size == 'philo') {
-        lastquoteIndex = Math.floor(Math.random() * language.philoquotes.length)
+        lastquoteIndex = Math.floor(Math.random() * langue.philoquotes.length)
         if(lastphiloquote !== undefined && valIsInLang(lastphiloquote)) {
-            language.philoquotes.push(lastphiloquote)
+            langue.philoquotes.push(lastphiloquote)
         }
-        lastphiloquote = language.philoquotes[lastquoteIndex]
-        language.philoquotes.splice(lastquoteIndex, 1);
+        lastphiloquote = langue.philoquotes[lastquoteIndex]
+        langue.philoquotes.splice(lastquoteIndex, 1);
         return lastphiloquote;
     }
     else{
-        lastquoteIndex = Math.floor(Math.random() * language.quotes.length)
+        lastquoteIndex = Math.floor(Math.random() * langue.quotes.length)
         if (lastquote !== undefined) {
-            language.quotes.push(lastquote)
+            langue.quotes.push(lastquote)
         }
-        lastquote = language.quotes[lastquoteIndex]
-        language.quotes.splice(lastquoteIndex, 1); 
+        lastquote = langue.quotes[lastquoteIndex]
+        langue.quotes.splice(lastquoteIndex, 1); 
         return lastquote}
 }

@@ -4,7 +4,8 @@
 ||  \/  ||_   _|\ \    / /|
 || |\/| |  | |   \ \/\/ / |
 ||_|  |_|  |_|    \_/\_/  |
-|   by mystyxx            |
+|         v. 1.0          |
+|       by mystyxx        |
 |check README.md for infos|
 |=========================|
 */
@@ -109,7 +110,7 @@ switchGamemode();
 function avg(array) {
     let sum = 0;
     for (let i=0; i<array.length-1; i++) {
-        sum = sum + Number(array[i])
+        sum = sum + Number(array[i]);
     }
     return sum/(array.length-1);
 }
@@ -201,9 +202,8 @@ function timer() {
         wordList = chooseList(langue, hardmode);
         printWords(wordList);
         line = 0;
-        wordBox.scroll(0, 0);
+        wordBox.scroll(0, line*55 + 6);
     }
-    
 }
 
 function printWords(wordList) {
@@ -217,7 +217,6 @@ function printWords(wordList) {
         wordBox.appendChild(newtask);
         document.getElementById('0').className = 'highlight';
     }
-    
 }
 
 function changeGamemode() {
@@ -227,7 +226,7 @@ function changeGamemode() {
     inputbox.style.visibility = 'visible';
     testRunning = false;
     wordBox.textContent = '';
-    inputbox.value = ''
+    inputbox.value = '';
     totalspacePress = 0; correctCharacters = 0; correctWords = 0; wrongCharacters = 0; line=0;
     document.getElementById('wpmjsp').innerHTML = 'Bonjour';
     inputbox.focus();
@@ -276,6 +275,7 @@ function changeWikipediaType(mode, langue) {
         document.body.style.cursor = 'auto';
         wordList = tfa.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
         printWords(wordList);
+        wordBox.scroll(0, line*55 + 6);
     });
     changeModeHighlight('wikipediaGamemodeButton');
 }
@@ -336,15 +336,14 @@ addEventListener('keyup', (nextWord)=> {
         TimerObject = setInterval(timer, 200)
         secondetenth = 0;
     }
+
     let wordInput = inputbox.value.replace(' ', ' ').split(' ');            //split the input to select only the first part of the input if a letter is pressed after the space
     if(testRunning) {
         if(Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) < 60 && i>4) {timeBox.textContent = 0} //end the test if accuracy is too bad 
-        if(wordInput != wordList[i].slice(0, wordInput[0].length + '')) {document.getElementById(i).className = 'redhighlight'}
-        else{document.getElementById(i).className = 'highlight'}
+        if(wordInput != wordList[i].slice(0, wordInput[0].length + '')) {document.getElementById(i).className = 'redhighlight';}
+        else{document.getElementById(i).className = 'highlight';}
         //if the spacebar is pressed,
         if(nextWord.isComposing || spacebarIsInput()) {
-            wordInput = inputbox.value.replace(' ', ' ').split(' ');
-    
             //check if the word is correctly typed
             if (wordInput[0] == wordList[i] && testRunning == true) {
                 correctWords++;
@@ -367,12 +366,12 @@ addEventListener('keyup', (nextWord)=> {
                     }
                 }   
             }
-            else{inputbox.value = ''}
+            else{inputbox.value = '';}
         }
     }
 });
 
-
+//check if the user change the gamemode
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
     sessionStorage.setItem('gm', 'quote');
     switchGamemode();
@@ -390,43 +389,42 @@ document.getElementById('wordsGamemodeButton').addEventListener('click', (change
     switchGamemode();
 });
 
-
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'shortQuote');
     switchGamemode();
-})
+});
 document.getElementById('mediumQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'mediumQuote');
     switchGamemode();
-})
+});
 document.getElementById('longQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'longQuote');
     switchGamemode();
-})
+});
 document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (changeGamemodeToPhiloQuote)=> {
     sessionStorage.setItem('gm', 'philo');
     switchGamemode();
-})
+});
 
 document.getElementById('wikipediaGamemodeButton').addEventListener('click', (changeGamemodeToWikipedia) => {
     sessionStorage.setItem('gm', 'mostread');
     switchGamemode();
-})
+});
 
 document.getElementById('mostreadGamemodeButton').addEventListener('click', (changeGamemodeToMostRead) => {
     sessionStorage.setItem('gm', 'mostread');
     switchGamemode();
-})
+});
 
 document.getElementById('onthisdayGamemodeButton').addEventListener('click', (changeGamemodeToMostRead) => {
     sessionStorage.setItem('gm', 'onthisday');
     switchGamemode();
-})
+});
 
 document.getElementById('tfaGamemodeButton').addEventListener('click', (changeGamemodeToTfa) => {
     sessionStorage.setItem('gm', 'tfa');
     switchGamemode();
-})
+});
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
@@ -434,37 +432,37 @@ document.getElementById('words15GamemodeButton').addEventListener('click', (chan
         switchGamemode();
     }
     else{
-        sessionStorage.setItem('gm', 'words10')
+        sessionStorage.setItem('gm', 'words10');
         switchGamemode();
     }
-})
+});
 
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
-        sessionStorage.setItem('gm', '30')
+        sessionStorage.setItem('gm', '30');
         switchGamemode();
     }
     else{
-        sessionStorage.setItem('gm', 'words25')
+        sessionStorage.setItem('gm', 'words25');
         switchGamemode();
     }
-})
+});
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
-        sessionStorage.setItem('gm', '60')
+        sessionStorage.setItem('gm', '60');
         switchGamemode();
     }
     else{
-        sessionStorage.setItem('gm', 'words50')
+        sessionStorage.setItem('gm', 'words50');
         switchGamemode();
     }
-})
+});
 document.getElementById('EnablePonctuation').addEventListener('click', (enablePonctuation)=> {
     hardmode = !hardmode;
-    if(hardmode) {document.getElementById('EnablePonctuation').className = 'titleHighlight'}
-    else{document.getElementById('EnablePonctuation').className = ''}
+    if(hardmode) {document.getElementById('EnablePonctuation').className = 'titleHighlight';}
+    else{document.getElementById('EnablePonctuation').className = '';}
     switchGamemode();
-})
+});
 
 document.getElementById('switchLanguageButton').addEventListener('click', (changeLanguage)=> {
     if(langue == french) {
@@ -512,7 +510,3 @@ document.getElementById('switchThemeButton').addEventListener('click', (changeTh
         localStorage.setItem('theme', 'light');
     }
 });
-
-// document.getElementById('showPopupButton').addEventListener('click', (showPopup)=> {
-//     document.getElementById('readmePopup').style.visibility = 'visible';
-// });

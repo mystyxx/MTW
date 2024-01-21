@@ -17,13 +17,14 @@ Thanks a lot to deysox for helping me so much !
 - the website dosen't work on mobile devices (next word/scroll at each letter typed, etc)   
 
 ## How can I use the website ?
-The website is available at [this adress](https://mtw.paulroux3.repl.co), or you can download the website by clicking on the green button 'code' then 'download zip' or by following these steps :  
+You can download the website by clicking on the green button 'code' then 'download zip' or by following these steps :  
 - open a terminal/command line
 - run this command :  
     ```bash
     git clone https://www.github.com/mystyxx/MTW.git
     ```
-- open the newly created folder and open the index.html file with your browser
+
+-> Then open the newly created folder and open the index.html file with your browser
 
 ## Contributing 
 - If you want to contribute to the project, you are welcome ! You can clone the repository on your machine and make the changes you want, then create a pull request. 

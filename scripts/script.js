@@ -19,7 +19,7 @@ let gamemode = sessionStorage.getItem('gm');
 let theme = localStorage.getItem('theme');
 let textColor = localStorage.getItem('textColor');
 changeClientTheme(theme);
-if (window.sessionStorage.getItem('sesionWpmArray') == undefined && sessionStorage.getItem('sessionWpmArray') == null) {
+if (window.sessionStorage.getItem('sessionWpmArray') == undefined && sessionStorage.getItem('sessionWpmArray') == null) {
     window.sessionStorage.setItem('sessionWpmArray', '');   //initialise pb if it exists not yet
 }
 let personalBest = localStorage.getItem('pb');
@@ -32,7 +32,7 @@ let wrongCharacters = 0; let totalspacePress = 0; var line = 0; let i = 0; let c
 let hardmode = false; let testRunning = false; var words = false;
 inputbox.value = '';
 let testTime = 15;
-
+var tfaDict = {}
 
 function switchGamemode() {
     document.getElementById('words15GamemodeButton').className = ''; document.getElementById('words30GamemodeButton').className = ''; document.getElementById('words60GamemodeButton').className = ''; document.getElementById('shortQuoteGamemodeButton').className = ''; document.getElementById('mediumQuoteGamemodeButton').className = ''; document.getElementById('longQuoteGamemodeButton').className = ''; document.getElementById('philoQuoteGamemodeButton').className = ''; document.getElementById('wikipediaGamemodeButton').className = ''; document.getElementById('mostreadGamemodeButton').className = ''; document.getElementById('onthisdayGamemodeButton').className = ''; document.getElementById('tfaGamemodeButton').className = '';
@@ -262,21 +262,34 @@ function changeQuoteLength(size, langue) {
     hideButtons('words');
 }
 
+tfaDict = fetchFeaturedArticle(langue, gamemode).then(() => {
+    printWords(selectLoadingTip(langue).split(' '));
+    document.body.style.cursor = 'auto';
+    return tfaDict;
+});
+document.body.style.cursor = 'wait';
+
 function changeWikipediaType(mode, langue) {
     changeGamemode();
     hideButtons('wiki');
     timeBox.style.visibility = 'hidden';
     testTime = 500;
     timeBox.textContent = '500';
-    printWords(selectLoadingTip(langue).split(' '));
-    document.body.style.cursor = 'wait';
-    fetchFeaturedArticle(langue, mode).then(() => {
-        wordBox.textContent = '';
-        document.body.style.cursor = 'auto';
-        wordList = tfa.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
-        printWords(wordList);
-        wordBox.scroll(0, line*55 + 6);
-    });
+    wordBox.textContent = '';
+    if(langue == french) {
+        if(mode == 'onthisday') {let rn = Math.floor(Math.random() * tfaDict.onthisday.length)
+            wordList = tfaDict.onthisday[rn].year + ' : ' + tfaDict.onthisday[rn].text;}
+        else{wordList = tfaDict.mostread.articles[Math.floor(Math.random() * tfaDict.mostread.articles.length)].extract; changeModeHighlight('mostreadGamemodeButton'); changeModeHighlight('wikipediaGamemodeButton'); sessionStorage.setItem('gm', 'mostread');}
+    }
+    else{
+        if(mode == 'mostread') {wordList = tfaDict.mostread.articles[Math.floor(Math.random() * tfaDict.mostread.articles.length)].extract}
+        if(mode == 'onthisday') {let rn = Math.floor(Math.random() * tfaDict.onthisday.length)
+            wordList = tfaDict.onthisday[rn].year + ' : ' + tfaDict.onthisday[rn].text;}
+        if(mode == 'tfa'){wordList = tfaDict.tfa.extract}
+    }
+    wordList = wordList.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
+    printWords(wordList);
+    wordBox.scroll(0, line*55 + 6);
     changeModeHighlight('wikipediaGamemodeButton');
 }
 

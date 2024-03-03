@@ -1,4 +1,3 @@
-var tfa;
 async function fetchFeaturedArticle(langue, mode) {
     let today = new Date();
     let year = today.getFullYear();
@@ -16,22 +15,13 @@ async function fetchFeaturedArticle(langue, mode) {
             }
         });
 
-        let data = await response.json();
-        if(langue == french) {
-            if(mode == 'onthisday') { let rn = Math.floor(Math.random() * data.onthisday.length) 
-                tfa = data.onthisday[rn].year + ' : ' + data.onthisday[rn].text;}
-            else{tfa = data.mostread.articles[Math.floor(Math.random() * data.mostread.articles.length)].extract; changeModeHighlight('mostreadGamemodeButton'); changeModeHighlight('wikipediaGamemodeButton'); sessionStorage.setItem('gm', 'mostread'); }
-            }
-        else{
-            if(mode == 'mostread') {tfa = data.mostread.articles[Math.floor(Math.random() * data.mostread.articles.length)].extract}
-            if(mode == 'onthisday') { let rn = Math.floor(Math.random() * data.onthisday.length)
-                tfa = data.onthisday[rn].year + ' : ' + data.onthisday[rn].text;}
-            if(mode == 'tfa'){tfa = data.tfa.extract}
-        }
-        return (tfa);
-    } catch (error) {
-        printWords('internet error. please check your internet connection or contact mysty.xx on discord.')
-        console.error(error);
+        tfaDict = await response.json();
+        return (tfaDict);
+
+    } catch (NetworkError) {
+        printWords('internet error. please check your internet connection or contact mysty.xx on discord.'.split(' '));
+        inputbox.value = '';
+        console.error(NetworkError);
     }
 }
 

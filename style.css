@@ -28,11 +28,14 @@ body {
     border-radius: 15px;
 }
 
-#wpmjsp {
-    font-size: 40px;
+#wpmjspbox { 
     margin-left: 10%;
     margin-right: 10%;
     padding:10px;
+}
+
+#wpmjsp {
+    font-size: 40px;
     visibility: hidden;
     position: fixed;
 }

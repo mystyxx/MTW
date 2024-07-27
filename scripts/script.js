@@ -213,7 +213,9 @@ function printWords(wordList) {
         newtask.innerHTML = wordList[i];
         newtask.id = i;
         newtask.className = '';
+        //pourquoi on append au body ptdr
         document.body.appendChild(newtask);
+        //append à la wordbox
         wordBox.appendChild(newtask);
         document.getElementById('0').className = 'highlight';
     }
@@ -228,7 +230,7 @@ function changeGamemode() {
     wordBox.textContent = '';
     inputbox.value = '';
     totalspacePress = 0; correctCharacters = 0; correctWords = 0; wrongCharacters = 0; line=0;
-    document.getElementById('wpmjsp').innerHTML = 'Bonjour';
+    document.getElementById('wpmjsp').innerHTML = '';
     inputbox.focus();
 }
 function changeTestTime(time, hardmode, numberwords) {
@@ -325,13 +327,12 @@ function spacebarIsInput() {
     }
 }
 
-function textwrap(index){
-    var height = wordBox.offsetHeight;
+function textwrap(){
     document.getElementById('wpmjsp').innerHTML = document.getElementById('wpmjsp').innerHTML + '<span>' + wordList[i] + '</span>';
 
-    if(document.getElementById('wpmjsp').offsetHeight > 75){
-        document.getElementById('wpmjsp').innerHTML = wordList[i];
-        return(i-1==index)
+    if(document.getElementById('wpmjsp').offsetHeight > document.getElementById('0').offsetHeight+1){
+        document.getElementById('wpmjsp').innerHTML = '<span>' + wordList[i] + '<span>';
+        return(true)
     }
 };
 
@@ -341,7 +342,7 @@ addEventListener('keyup', (nextWord)=> {
 
     //test started when input detected
     if (testRunning == false && timeBox.textContent != 0 && i==0 && nextWord.keyCode != 9) {
-        document.getElementById('wpmjsp').innerHTML = wordList[i];
+        document.getElementById('wpmjsp').innerHTML = '<span>' + wordList[i] + '<span>';
         line = 0;
         wordBox.scroll(0, line*170 + 6);
         i=0;
@@ -373,13 +374,14 @@ addEventListener('keyup', (nextWord)=> {
                 if (wordInput[1] !== undefined && wordInput[1] !== null) {  //check if the second part of the input exist (there may be no letter after the space)
                     inputbox.value = wordInput[1];                          //set the characters after the space in the inputbox (and erase the correctly typed word)
                     document.getElementById(i).className = 'highlight';     //highlight the next word
-                    if(textwrap(i-1)) {
-                        wordBox.scroll(0, line*55 + 6);
-                        line++;
-                    }
                 }   
             }
             else{inputbox.value = '';}
+
+            if(textwrap()) {
+                line++;
+                wordBox.scroll(0, line*55 + 6);
+            }
         }
     }
 });

@@ -1,5 +1,9 @@
 image: ruby:3.2
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
 pages:
   script:
     - gem install bundler
@@ -9,5 +13,4 @@ pages:
     paths:
       - public
   rules:
-    - if: $CI_COMMIT_BRANCH == "gitlab-pages"
-
+    - if: $CI_COMMIT_BRANCH == "main"

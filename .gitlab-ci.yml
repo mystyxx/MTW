@@ -6,7 +6,7 @@ pages:
   tags:
     - pages
   script:
-    - mv res/ scripts/ sytle.css index.html public/
+    - mv res/ scripts/ style.css index.html public/
   artifacts:
     paths:
       - public

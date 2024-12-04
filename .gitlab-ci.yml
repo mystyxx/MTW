@@ -5,6 +5,8 @@ workflow:
     - if: $CI_COMMIT_BRANCH
 
 pages:
+  tags:
+    - pages
   script:
     - gem install bundler
     - bundle install

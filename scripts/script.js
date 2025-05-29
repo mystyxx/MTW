@@ -105,7 +105,6 @@ function switchGamemode() {
     }
     wordBox.scroll(0, line*55 + 6);
 }
-switchGamemode();
 
 function avg(array) {
     let sum = 0;
@@ -178,7 +177,7 @@ function timer() {
     }
     if ((timeBox.textContent == '0') || (i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) || (i===wordList.length && testTime == 500) ) {
         //end of the test
-        let zizi = sessionStorage.getItem('sessionWpmArray')
+        let tmp = sessionStorage.getItem('sessionWpmArray')
         clearInterval(TimerObject);
         testRunning = false;
         if(inputbox.value == wordList[i-1].slice(0, inputbox.value.length + '')) {correctCharacters = correctCharacters + inputbox.value.length}
@@ -189,7 +188,7 @@ function timer() {
         scorebox.innerHTML = '<p style="color:var(--great-color); display:inline;">' + correctWords + '</p> / ' + ++totalspacePress;  //update the score    
         document.getElementById('raw').textContent = Math.floor((correctWords)*(60/(testTime-timeBox.textContent))) + 'wpm'
         document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
-        sessionStorage.setItem('sessionWpmArray', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) +'~' + zizi);
+        sessionStorage.setItem('sessionWpmArray', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) +'~' + tmp);
         document.getElementById('sessionSpeedAverage').textContent = Math.floor(avg(sessionStorage.getItem('sessionWpmArray').split('~'))) + 'wpm (' + (sessionStorage.getItem('sessionWpmArray').split('~').length-1) + ')';
         document.getElementById('wpm').style.textDecoration = '';
         if(Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) > localStorage.getItem('pb')) {localStorage.setItem('pb', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent)))); document.getElementById('wpm').style.textDecoration = 'underline';}
@@ -264,12 +263,17 @@ function changeQuoteLength(size, langue) {
     hideButtons('words');
 }
 
-tfaDict = fetchFeaturedArticle(langue, gamemode).then(() => {
+var frTfaDict;
+var enTfaDict;
+
+document.body.style.cursor = 'wait';
+fetchFeaturedArticle().then((data) => {
+    frTfaDict = data.fr;
+    enTfaDict = data.en;
     printWords(selectLoadingTip(langue).split(' '));
     document.body.style.cursor = 'auto';
-    return tfaDict;
+    switchGamemode();
 });
-document.body.style.cursor = 'wait';
 
 function changeWikipediaType(mode, langue) {
     changeGamemode();
@@ -279,15 +283,15 @@ function changeWikipediaType(mode, langue) {
     timeBox.textContent = '500';
     wordBox.textContent = '';
     if(langue == french) {
-        if(mode == 'onthisday') {let rn = Math.floor(Math.random() * tfaDict.onthisday.length)
-            wordList = tfaDict.onthisday[rn].year + ' : ' + tfaDict.onthisday[rn].text;}
-        else{wordList = tfaDict.mostread.articles[Math.floor(Math.random() * tfaDict.mostread.articles.length)].extract; changeModeHighlight('mostreadGamemodeButton'); changeModeHighlight('wikipediaGamemodeButton'); sessionStorage.setItem('gm', 'mostread');}
+        if(mode == 'onthisday') {let rn = Math.floor(Math.random() * frTfaDict.onthisday.length)
+            wordList = frTfaDict.onthisday[rn].year + ' : ' + frTfaDict.onthisday[rn].text;}
+        else{wordList = frTfaDict.mostread.articles[Math.floor(Math.random() * frTfaDict.mostread.articles.length)].extract; changeModeHighlight('mostreadGamemodeButton'); changeModeHighlight('wikipediaGamemodeButton'); sessionStorage.setItem('gm', 'mostread');}
     }
     else{
-        if(mode == 'mostread') {wordList = tfaDict.mostread.articles[Math.floor(Math.random() * tfaDict.mostread.articles.length)].extract}
-        if(mode == 'onthisday') {let rn = Math.floor(Math.random() * tfaDict.onthisday.length)
-            wordList = tfaDict.onthisday[rn].year + ' : ' + tfaDict.onthisday[rn].text;}
-        if(mode == 'tfa'){wordList = tfaDict.tfa.extract}
+        if(mode == 'mostread') {wordList = enTfaDict.mostread.articles[Math.floor(Math.random() * enTfaDict.mostread.articles.length)].extract}
+        if(mode == 'onthisday') {let rn = Math.floor(Math.random() * enTfaDict.onthisday.length)
+            wordList = enTfaDict.onthisday[rn].year + ' : ' + enTfaDict.onthisday[rn].text;}
+        if(mode == 'tfa'){wordList = enTfaDict.tfa.extract}
     }
     wordList = wordList.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').split(' ');
     printWords(wordList);

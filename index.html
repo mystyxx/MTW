@@ -4,6 +4,7 @@
         <title>Mystyxx' typing website</title>
         <link rel="stylesheet" href="style.css">
         <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
     </head>
 
     <body>
@@ -25,11 +26,17 @@
                 <p id="switchLanguageButton">changer la langue</p>
             </div>
         </div>
-        <div id="words"></div>
-        <div id="gameplayBar">
-            <input type="text" id="typeInput" autofocus>
-            <button onClick="switchGamemode();" id="retryButton">Recommencer</button>
-            <p id="time">15</p>
+
+        <div id="mainContent">
+            <div id="barUI">
+                <p id="time">15</p>
+                <button onClick="switchGamemode();" id="retryButton">Recommencer</button>
+                <input type="text" id="typeInput" autofocus>
+            </div>
+            <div id="typingContainer">
+                <div id="words"></div>
+                <div id="typedText"></div>
+            </div>
         </div>
         
         <div id="container">

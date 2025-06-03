@@ -7,25 +7,49 @@ body {
     --outline-color: white;
     --great-color: #5f6c7b;
     background-color: var(--main-bg-color);
-    color: var(--secondary-text-color);
+    color: var(--main-text-color);
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #words {
-    font-size: 40px;
-    margin-top: 7vh;
-    margin-left: 10%;
-    margin-right: 10%;
-    padding:10px;
+    position: relative;
+    z-index: 1;
     background-color: var(--secondary-bg-color);
     outline: 1px solid;
     outline-color: var(--outline-color);
     color: var(--main-text-color);
+}
+
+#typedText {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 2;
+    pointer-events: none;
+    max-height: 54px !important;
+    scroll-behavior: auto !important;
+    background: transparent;
+    visibility: hidden;
+}
+
+#words,
+#typedText {
+    font-size: 40px;
+    padding: 10px;
     max-height: 160px;
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
+    scrollbar-width: none;;
     border-radius: 15px;
+    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'monospace', Verdana, Geneva, Tahoma, sans-serif;
+    white-space: pre-wrap;
+    width: 100%;
+    line-height: 1.5;
+}
+
+words::-webkit-scrollbar,
+#typedText::-webkit-scrollbar {
+    display: none;
 }
 
 #wpmjspbox { 
@@ -40,13 +64,17 @@ body {
     position: fixed;
 }
 
-#words>span, #wpmjsp>span {
-    padding-left: 6px;
-    padding-right: 6px;
+#words>span, #wpmjsp>span, #typedText>span {
+    /* padding-left: 6px;
+    padding-right: 6px; */
     padding-top: 7px;
     word-wrap: normal;
     text-wrap: balance;
-    display: inline-block;
+    display: inline;
+}
+#typedText>span {
+    background-color: transparent;
+    color: var(--secondary-text-color);
 }
 
 #typeInput {
@@ -59,6 +87,12 @@ body {
     border: 1px solid var(--main-text-color);
     background-color: var(--main-bg-color);
     border-radius: 5px;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    width: 0;
+    z-index: -1;
 }
 
 #typeInput:focus {
@@ -71,7 +105,6 @@ body {
 #retryButton {
     min-width: 100px;
     border-radius: 7px;
-    margin-top: 10px;
     border: none;
     background-color: var(--secondary-bg-color);
     color: var(--main-text-color);
@@ -107,7 +140,19 @@ body {
     margin:5px;
 }
 
-#gamemodeBar, #gameplayBar {
+#mainContent {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#barUI {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1em;
+}
+
+#gamemodeBar {
     display: grid;
     grid-template-areas: 'wordsGamemodeBar quoteGamemodeBar f';
     margin: 20px auto;
@@ -117,7 +162,7 @@ body {
 #wordsGamemodeBar, #quoteGamemodeBar {
     display: flex;
     border: 1px solid var(--outline-color);
-    color: var(--secondary-text-color);
+    color: var(--main-text-color);
 }
 
 #wordsGamemodeBar {
@@ -229,6 +274,55 @@ body {
 .correct {
     color: var(--great-color);
 }
+.incorrect {
+    color: red;
+}
+.incorrect-underline {
+    text-decoration: underline;
+    text-decoration-color: red;
+}
+.extra {
+    opacity: 0.5;
+}
+
+letter.extra.last-extra {
+    padding-right: 0.5ch; /* Ajuste la largeur selon l'espacement souhaité */
+}
+
+#typingContainer {
+    /* position: relative;
+    width: 70%;
+    margin: 0 auto;
+    min-height: 180px;
+    margin-bottom: 2em; */
+
+    width: 100%; /* prend toute la largeur de #mainContent */
+    min-height: 180px;
+    margin-bottom: 2em;
+    position: relative;
+}
+
+.cursor {
+    display: inline-block;
+    width: 0px;
+    height: 1em;
+    background: var(--main-text-color) !important;
+    vertical-align: text-bottom;
+    animation: blink 1s steps(1) infinite;
+    z-index: 3;
+    margin-left: -5px !important;
+    padding-left: 0px !important;
+    padding-right: 4px !important;
+    padding-bottom: 2px;
+}
+.redcursor {
+    background: red !important;
+}
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
 #leaderboard h3 {
     text-align: center;
     margin-bottom: 10px;

@@ -70,16 +70,16 @@ function switchGamemode() {
             changeWikipediaType('onthisday', langue);
             document.getElementById('onthisdayGamemodeButton').className = 'titleHighlight';
             break;
-        case '15':
+        case 'time15':
             changeTestTime(15, hardmode);
             changeModeHighlight('timeGamemodeButton');
             document.getElementById('words15GamemodeButton').className = 'titleHighlight';
             break;
-        case '30':
+        case 'time30':
             changeTestTime(30, hardmode);
             document.getElementById('words30GamemodeButton').className = 'titleHighlight';
             break;
-        case '60':
+        case 'time60':
             changeTestTime(60, hardmode);
             document.getElementById('words60GamemodeButton').className = 'titleHighlight';
             break;
@@ -103,7 +103,9 @@ function switchGamemode() {
             document.getElementById('words15GamemodeButton').className = 'titleHighlight';
             break;
     }
-    wordBox.scroll(0, line*55 + 6);
+
+    displayLeaderboard();
+    updateTypedColors();
 }
 
 function avg(array) {
@@ -192,6 +194,9 @@ function timer() {
         document.getElementById('sessionSpeedAverage').textContent = Math.floor(avg(sessionStorage.getItem('sessionWpmArray').split('~'))) + 'wpm (' + (sessionStorage.getItem('sessionWpmArray').split('~').length-1) + ')';
         document.getElementById('wpm').style.textDecoration = '';
         if(Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent))) > localStorage.getItem('pb')) {localStorage.setItem('pb', Math.floor((correctCharacters/5)*(60/(testTime-timeBox.textContent)))); document.getElementById('wpm').style.textDecoration = 'underline';}
+
+        addTimeToLeaderboard(result);
+        displayLeaderboard();
         
     }
     if (testRunning == true && i===wordList.length && testTime !=500) {
@@ -217,9 +222,139 @@ function printWords(wordList) {
         //append à la wordbox
         wordBox.appendChild(newtask);
         document.getElementById('0').className = 'highlight';
-    }
+
+function createNewUser(userRef, username) {
+    // crée un nouvel utilisateur dans la base de données Firestore
+    // cet utilisateur possède une array de map pour chaque catégorie de jeu
+    const { setDoc } = window.firebase.firestore;
+    setDoc(userRef, {
+        username: username,
+        creationDate: new Date(),
+        email: '',
+        personalBest: 0,
+        scores: {
+            tfa: [],
+            shortQuote: [],
+            mediumQuote: [],
+            longQuote: [],
+            philo: [],
+            mostread: [],
+            onthisday: [],
+            time15: [],
+            time30: [],
+            time60: [],
+            words10: [],
+            words25: [],
+            words50: []
+        }
+    });
 }
 
+function isSameDay(date1, date2) {
+    return date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate();
+}
+
+async function displayLeaderboard() {
+    let gm = sessionStorage.getItem('gm');
+    const { getFirestore, collection, query, where, orderBy, limit, getDocs } = window.firebase.firestore;
+    const db = getFirestore();
+    let scoresList = []
+
+    if (gm == "shortQuote" || gm == "mediumQuote" || gm == "longQuote" || gm == "quote") {
+        /* pas de leaderboard pour les quotes
+        const leaderboardRef = collection(db, "leaderboard", gm, "scores");
+        const querySnapshot = await getDocs(query(leaderboardRef, where("quoteIndex", "==", lastquoteIndex), orderBy("score", "desc"), limit(10)));
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            scoresList.push({
+                name: getDoc(data.user).data().username,
+                score: data.score,
+                date: data.date
+            });
+        });
+        */
+    }
+    else {
+        const usersRef = collection(db, "users");
+        const querySnapshot = await getDocs(usersRef);
+
+        if (gm == "tfa") {
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                // Récupère le tableau de scores pour le mode courant
+                const userScores = data.scores && data.scores[gm] ? data.scores[gm] : [];
+                let todayScores = userScores.filter(score => isSameDay(new Date(score.date.seconds * 1000), new Date()));
+                if (Array.isArray(todayScores) && todayScores.length > 0) {
+                    // Cherche le meilleur score de l'utilisateur pour ce mode
+                    let best = todayScores.reduce((max, curr) => curr.score > max.score ? curr : max, todayScores[0]);
+                    scoresList.push({
+                        name: data.username,
+                        score: best.score,
+                        date: best.date
+                    });
+                }
+            });
+        }
+        else {
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                // Récupère le tableau de scores pour le mode courant
+                const userScores = data.scores && data.scores[gm] ? data.scores[gm] : [];
+                if (Array.isArray(userScores) && userScores.length > 0) {
+                    // Cherche le meilleur score de l'utilisateur pour ce mode
+                    let best = userScores.reduce((max, curr) => curr.score > max.score ? curr : max, userScores[0]);
+                    scoresList.push({
+                        name: data.username,
+                        score: best.score,
+                        date: best.date
+                    });
+                }
+            });
+        }
+    }
+    // affichage des scores
+    scoresList.sort((a, b) => b.score - a.score);
+    let text = `<h3>Leaderboard ${gm}</h3><ol>`
+    for (let i = 0; i < Math.min(10, scoresList.length); i++) {
+        text += `<li><span class="leaderboardUsername">${scoresList[i].name}</span>  <span class="leaderboardScore">${scoresList[i].score}</span>  <span class="leaderboardTimestamp">${new Date(scoresList[i].date.seconds * 1000).toLocaleDateString()}</span></li>`;
+    }
+    text += "</ol>"
+    document.getElementById('leaderboard').innerHTML = text;
+
+}
+
+async function addTimeToLeaderboard(score) {
+    let gm = sessionStorage.getItem('gm');
+    const { getFirestore, doc, updateDoc, getDoc } = window.firebase.firestore;
+    const db = getFirestore();
+    
+
+    if (gm == "shortQuote" || gm == "mediumQuote" || gm == "longQuote" || gm == "quote") {}
+    else {
+        if (localStorage.getItem('username') == null || localStorage.getItem('username') == '' || localStorage.getItem('username') == undefined) {
+            localStorage.setItem('username', prompt('Entrez votre nom d\'utilisateur pour enregistrer votre score :'));
+        }
+        const userRef = doc(db, "users", localStorage.getItem('username'));
+        let userDoc = await getDoc(userRef);
+        
+        if (!userDoc.exists() || userDoc.data === undefined || userDoc.data === null ) {
+            createNewUser(userRef, localStorage.getItem('username'));
+            userDoc = await getDoc(userRef);
+        }
+        const userData = userDoc.data();
+
+        if (userData.username == null || userData.username == 'null' || userData.username == undefined || userData.username == '') {
+            return;
+        }
+
+        let newScore = {score: score, date: new Date()};
+        userData.scores[gm].push(newScore);
+        
+        await updateDoc(userRef, {scores : userData.scores });
+    }
+}
 function changeGamemode() {
     //operations to do each time the gamemode is changed
     i=0;
@@ -397,7 +532,7 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
 });
 
 document.getElementById('timeGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
-    sessionStorage.setItem('gm', '15'); 
+    sessionStorage.setItem('gm', 'time15'); 
     words = false;
     switchGamemode();
 });
@@ -447,7 +582,7 @@ document.getElementById('tfaGamemodeButton').addEventListener('click', (changeGa
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
-        sessionStorage.setItem('gm', '15')
+        sessionStorage.setItem('gm', 'time15')
         switchGamemode();
     }
     else{
@@ -458,7 +593,7 @@ document.getElementById('words15GamemodeButton').addEventListener('click', (chan
 
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
-        sessionStorage.setItem('gm', '30');
+        sessionStorage.setItem('gm', 'time30');
         switchGamemode();
     }
     else{
@@ -468,7 +603,7 @@ document.getElementById('words30GamemodeButton').addEventListener('click', (chan
 });
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
-        sessionStorage.setItem('gm', '60');
+        sessionStorage.setItem('gm', 'time60');
         switchGamemode();
     }
     else{

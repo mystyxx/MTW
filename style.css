@@ -156,8 +156,23 @@ body {
     cursor: pointer;
 }
 
-#resultCard {
+#resultCard, 
+#leaderboard {
     background-color: var(--secondary-bg-color);
+    /* margin: 0 auto; */
+    /* margin-top: 5%; */
+    padding-left: 1%;
+    padding-right: 1%;
+    width: 18%;
+    min-width: 300px;
+    height: 360px; 
+    outline: 1px solid;
+    outline-color: var(--outline-color);
+    inset-inline-start: 5px;
+    border-radius: 15px;
+}
+
+#resultCard {
     display: grid;
     grid-template-areas:
     'speed speed speed'
@@ -167,17 +182,8 @@ body {
     'name name info'
     'name name info';
     justify-content: center;
-    margin: 0 auto;
-    margin-top: 5%;
-    padding-left: 1%;
-    padding-right: 1%;
-    width: 18%;
-    min-width: 300px;
-    outline: 1px solid;
-    outline-color: var(--outline-color);
-    inset-inline-start: 5px;
-    border-radius: 15px;
 }
+
 
 #resultCard > .margin-right {
     text-align: end;
@@ -199,6 +205,12 @@ body {
 
 #container {
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px; /* espace entre les cartes */
+    flex-wrap: wrap; /* utile pour petit écran */
 }
 
 #switchThemeButton {
@@ -216,4 +228,41 @@ body {
 
 .correct {
     color: var(--great-color);
+}
+#leaderboard h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#leaderboard ol {
+    list-style: decimal inside;
+    padding-left: 0;
+    margin: 0;
+}
+
+#leaderboard li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 6px 0;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--outline-color);
+}
+
+.leaderboardUsername {
+    font-weight: bold;
+    flex: 2;
+    text-align: left;
+}
+
+.leaderboardScore {
+    flex: 1;
+    text-align: center;
+}
+
+.leaderboardTimestamp {
+    flex: 1.5;
+    text-align: right;
+    font-size: 0.9em;
+    opacity: 0.75;
 }

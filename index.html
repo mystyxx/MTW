@@ -34,7 +34,7 @@
         
         <div id="container">
             
-            <div id="resultCard" style="visibility: hidden;">
+            <div id="resultCard" style="display: none;">
                 <p id="wpm"></p>
                 <p class="margin-left">touches : </p> <p class="margin-right" id="characters"></p>
                 <p class="margin-left">Mots corrects : </p><p class="margin-right" id="score"></p>
@@ -42,6 +42,9 @@
                 <p class = "margin-left">temps : </p> <p id="timeResult" class="margin-right"></p>
                 <p class="margin-left">moyenne de la session : </p><p class="margin-right" id="sessionSpeedAverage"></p>
             </div>
+
+            <div id="leaderboard"><h3>Chargement du leaderboard...</h3></div>
+
         </div>
         <a id="githublogo" href="https://github.com/mystyxx/mtw" target="_blank">
             <img src="res/245991_github_icon.png" alt="go to the project's github page">
@@ -50,6 +53,29 @@
         <div id="wpmjspbox"><p id="wpmjsp"></p></div>
         <div id="swichThemeButtonHolder"><p id="switchThemeButton">changer le thème</p></div>
         
+
+        <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getFirestore, collection, query, orderBy, limit, getDocs, where, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBEY-ilJw7tedj9URctwZg_-8k7kAgY2Ao",
+            authDomain: "mystyxx-typing-website.firebaseapp.com",
+            databaseURL: "https://mystyxx-typing-website-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "mystyxx-typing-website",
+            storageBucket: "mystyxx-typing-website.firebasestorage.app",
+            messagingSenderId: "94249593771",
+            appId: "1:94249593771:web:006512fe302d4899d800ee"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        window.firebase = { firestore: { getFirestore, collection, query, orderBy, limit, getDocs, where, doc, getDoc, setDoc, updateDoc } };
+        </script>
         <script src="scripts/wikipediascraper.js"></script>
         <script src="scripts/words.js"></script>
         <script src="scripts/script.js"></script>

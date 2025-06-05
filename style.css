@@ -33,6 +33,8 @@ body {
 
 #words,
 #typedText {
+    display: flex;
+    flex-wrap: wrap;
     font-size: 40px;
     padding: 10px;
     max-height: 160px;
@@ -70,7 +72,7 @@ words::-webkit-scrollbar,
     padding-top: 7px;
     word-wrap: normal;
     text-wrap: balance;
-    display: inline;
+    display: inline-flex;
 }
 #typedText>span {
     background-color: transparent;
@@ -305,15 +307,17 @@ letter.extra.last-extra {
 .cursor {
     display: inline-block;
     width: 0px;
-    height: 1em;
+    height: 100%;
     background: var(--main-text-color) !important;
     vertical-align: text-bottom;
     animation: blink 1s steps(1) infinite;
     z-index: 3;
-    margin-left: -5px !important;
+    /* margin-top: 0.1em;
+    margin-bottom: 0.1em; */
+    margin-left: -0.1em !important;
     padding-left: 0px !important;
     padding-right: 4px !important;
-    padding-bottom: 2px;
+    /* padding-bottom: 2px; */
 }
 .redcursor {
     background: red !important;
@@ -343,20 +347,31 @@ letter.extra.last-extra {
     border-bottom: 1px solid var(--outline-color);
 }
 
-.leaderboardUsername {
+.leaderboardUsername, .leaderboardHeaderUsername {
     font-weight: bold;
     flex: 2;
     text-align: left;
 }
 
-.leaderboardScore {
-    flex: 1;
+.leaderboardScore, .leaderboardHeaderScore {
+    flex: 1.5;
     text-align: center;
 }
 
-.leaderboardTimestamp {
+.leaderboardAccuracy, .leaderboardHeaderAccuracy {
+    flex: 1;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.leaderboardTimestamp, .leaderboardHeaderTimestamp {
     flex: 1.5;
     text-align: right;
     font-size: 0.9em;
+    opacity: 0.75;
+}
+
+.leaderboardHeader {
+    font-size: 0.9em !important;
     opacity: 0.75;
 }

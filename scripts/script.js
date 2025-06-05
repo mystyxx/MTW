@@ -17,7 +17,7 @@ let wordBox = document.getElementById('words');
 
 let typedTextElement = document.getElementById("typedText");
 let gamemode = sessionStorage.getItem('gm');
-let theme = localStorage.getItem('theme');
+let theme = localStorage.getItem('theme') || "light";
 let textColor = localStorage.getItem('textColor');
 changeClientTheme(theme);
 if (window.sessionStorage.getItem('sessionWpmArray') == undefined && sessionStorage.getItem('sessionWpmArray') == null) {
@@ -29,7 +29,7 @@ if(window.localStorage.getItem('pb') == null) {window.localStorage.setItem('pb',
 var langue = french;
 var wordList;
 let TimerObject;
-let wrongCharacters = 0; let totalspacePress = 0; var line = 0; let i = 0; let correctWords = 0; let correctCharacters = 0; var secondetenth = 0;
+let wrongCharacters = 0; let totalspacePress = 0; let i = 0; let correctWords = 0; let correctCharacters = 0; var secondetenth = 0;
 let hardmode = false; let testRunning = false; var words = false;
 inputbox.value = '';
 let testTime = 15;
@@ -261,7 +261,6 @@ function timer() {
         wordBox.textContent = '';
         wordList = chooseList(langue, hardmode);
         printWords(wordList);
-        line = 0;
     }
 }
 
@@ -537,7 +536,7 @@ function changeClientTheme(theme) {
         document.body.style.setProperty("--secondary-bg-color", '#d1e0e0');
         document.body.style.setProperty("--secondary-text-color", '#7f7f7f');
         document.body.style.setProperty("--outline-color", '#5f6c7b');
-        document.getElementById('words').style.outline = '1px transparent';
+        document.getElementById('words').style.outline = '1px solid';
         document.body.style.setProperty("--hover-color", '#5f6c7b');
         document.body.style.setProperty("--great-color", '#5f6c7b');
     }
@@ -571,73 +570,15 @@ function textwrap(){
     }
 };
 
-// Met à jour l'affichage superposé du texte à écrire et du texte tapé
-// function updateTypedColors() {
-//     let line = 0;
-//     const typedText = inputbox.value.replace(' ', ' ').match(/\S+\s*/g);
-//     typedTextElement.innerHTML = ''; // Réinitialise le texte tapé affiché
-//     let lineWidth = 0;
-//     const maxWidth = typedTextElement.offsetWidth;
-    
-//     for(let i = 0; i < typedText.length;i++) {
-//         // créer un span pour simuler le prochain mot
-//         var newtask = document.createElement('span');
-//         newtask.innerHTML = wordList[i];
-//         newtask.id = i;
-//         typedTextElement.appendChild(newtask);
-        
-//         const wordWidth = newtask.offsetWidth;
-        
-//         // si le prochain mot dépasse, retourner à la ligne
-//         if (lineWidth + wordWidth > maxWidth && lineWidth > 0) {
-//             line++;
-//             typedTextElement.appendChild(document.createElement('br'));
-//             lineWidth = wordWidth;
-//         }
-//         else {
-//             lineWidth += wordWidth
-//         }
-//         typedTextElement.removeChild(newtask);
-        
-//         //create a span for each word
-//         var newtask = document.createElement('span');
-//         newtask.innerHTML = typedText[i];
-//         newtask.id = `typed${i}`;
-//         newtask.className = '';
-
-//         if (i < wordList.length) {
-//             if (wordList[i].startsWith(typedText[i])) {}
-//             else {
-//                 newtask.style.color = "red"; // Texte incorrect
-//             }
-//         } else {
-//             newtask.style.color = 'rgba(0, 0, 0, 0.5)'; // Texte en trop
-//         }
-//         typedTextElement.appendChild(newtask);
-//     }
-//     // Ajoute le curseur
-//     var newTask = document.createElement('span');
-//     newTask.id = 'typedCursor';
-//     newTask.className = 'cursor';
-//     typedTextElement.appendChild(newTask);
-
-//     wordBox.scrollTop = line * 55; // Scroll pour que le mot en cours soit visible
-//     window.requestAnimationFrame(() => {
-//         typedTextElement.style.scrollBehavior = "smooth";
-//         typedTextElement.scrollTop = line * 55; // Synchronise le scroll du texte tapé avec celui des mots
-//     });
-//     typedTextElement.style.scrollBehavior = "auto";
-
-// }
 
 function updateTypedColors() {
     const typedText = inputbox.value.replace(' ', ' ').match(/\S+\s*/g) || '';
-    typedTextElement.innerHTML = ''; // Réinitialise le texte tapé affiché
     let cursorSet = false;
+    typedTextElement.innerHTML = ''; // Réinitialise le texte tapé affiché
     let cursor = document.createElement('span');
     cursor.classList.add('cursor');
     
-    for (let i = 0; i < wordList.length; i++) {
+    for (let i = 0; i < Math.min(wordList.length, typedText.length + 1); i++) {
         const letterElements = document.getElementById(i).getElementsByTagName('letter');
         let existingCursor = document.getElementById(i).querySelector('.cursor');
         if (existingCursor) existingCursor.remove();
@@ -645,16 +586,25 @@ function updateTypedColors() {
         const extraLetters = document.getElementById(i).querySelectorAll('letter.extra');
         extraLetters.forEach(letter => letter.remove());
 
-        // console.log(typedText[i], !cursorSet)
-        if (typedText[i] == undefined) {
+        if (typedText[i] != undefined) {
+            // Cas où un espace a été tapé alors que le mot est incomplet
+            if (typedText[i].endsWith(' ') && typedText[i].trim().length < wordList[i].length) {
+                if (!cursorSet && document.getElementById(i + 1) && typedText[i + 1] == undefined) {
+                    const nextWord = document.getElementById(i + 1);
+                    placeCursor(nextWord, nextWord.firstChild)
+                    cursorSet = true;
+                }
+                continue; // Ne pas modifier les lettres restantes
+            }
+        }
+        else {
             // tout nettoyer si mot pas commencé
             for (let j = 0; j < letterElements.length; j++) {
                 letterElements[j].classList.remove('correct', 'incorrect', 'extra', 'incorrect-underline');
                 letterElements[j].textContent = wordList[i][j]; // met la première lettre du mot
             }
             if (!cursorSet && letterElements.length > 0) {
-                console.log('curseur inséré au début du mot car pas de lettre tapée');
-                document.getElementById(i).insertBefore(cursor, letterElements[0]);
+                placeCursor(document.getElementById(i), letterElements[0])
                 cursorSet = true;
             }
             continue; // passe au mot suivant
@@ -665,8 +615,7 @@ function updateTypedColors() {
 
             if (typedText[i][j] == undefined) {
                 if (!cursorSet) {
-                    console.log('curseur inséré avant la lettre ' + j + ' car pas de lettre tapée');
-                    document.getElementById(i).insertBefore(cursor, letterElements[j]);
+                    placeCursor(document.getElementById(i), letterElements[j])
                     cursorSet = true;
                 }
                 letterElements[j].textContent = wordList[i][j]; // met la bonne lettre (sert en cas de suppression de lettre)
@@ -687,112 +636,75 @@ function updateTypedColors() {
             }
         }
 // positionner le curseur avant le premier caractère sans classe
-// console.log(typedText[i], wordList[i]);
             if(!cursorSet) {
                 for(let k = 0; k < letterElements.length; k++) {
-                    if(letterElements[k].classList == []) {
-                        console.log('curseur inséré avant le premier caractère sans classe');
-                        document.getElementById(i).insertBefore(cursor, letterElements[k]);
-                        cursorSet = true;
-                    }
-                }
-                for(let k = 0; k < letterElements.length; k++) {
-                    if (typedText[i][k] == undefined && !cursorSet) {
-                        console.log('curseur inséré au début du mot cat mot tapé complet');
-                        document.getElementById(i).insertBefore(cursor, letterElements[0]);
+                    if (typedText[i][k] == undefined) {
+                        placeCursor(document.getElementById(i), letterElements[0])
                         cursorSet = true;
                     }
                 }
             }
 
         // ajouter les lettres supplémentaires si le mot tapé est plus long que le mot à écrire
-        if (typedText[i].length >= wordList[i].length) {
-            // console.log(typedText[i], wordList[i]);
+        if (typedText[i].length >= wordList[i].length && typedText[i] != wordList[i]) {
             const spaceIndex = wordList[i].indexOf(' ');
             const spaceLetter = document.getElementById(i).getElementsByTagName('letter')[spaceIndex];
 
             for (let k = wordList[i].length-1; k < typedText[i].length; k++) {
                 if (typedText[i][k] === ' ') {
                     // valider l'espace comme correct
-                    console.log('espace validé');
                     document.getElementById(i).getElementsByTagName('letter')[k].classList.add('correct');
                     // set le curseur au mot suivant
-                    console.log('debug : ' + typedText[i][k+1] + ' ' + typedText[i+1]);
                     if (!cursorSet && typedText[i][k+1] == undefined && typedText[i+1] == undefined) {
                         // append de la façon normale
-                        window.requestAnimationFrame(() => {
-                        document.getElementById(i+1).insertBefore(cursor, document.getElementById(i+1).firstChild);
-                        // document.getElementById(i+1).innerHTML = '<span class="cursor"></span>' + document.getElementById(i+1).innerHTML;
-                        console.log('curseur inséré au mot suivant car espace tapé');
-                    });
+                    placeCursor(document.getElementById(i+1), document.getElementById(i+1).firstChild)
                     cursorSet = true;
                     }
                     continue;
                 }
-                else if(!cursorSet && typedText[i+1] == undefined && typedText[i][k] != ' ') {
+                else if(!cursorSet && typedText[i+1] == undefined && !typedText[i].includes(' ')) {
                     // il ne faut pas insérer le curseur avant l'espace si l'espace est tapé
-                    if(typedText[i][k+1] == ' ') {}
-                    window.requestAnimationFrame(() => {
-                        document.getElementById(i).insertBefore(cursor, spaceLetter);
-                        console.log('curseur inséré avant l\'espace car lettre extra tapée');
-                    });
-                    cursorSet = true;
+                    if(typedText[i][k+1] == ' ') {
+                        // ajouter le curseur au prochain mot
+                        const nextWord = document.getElementById(i + 1);
+                        if (nextWord) {
+                            placeCursor(nextWord, nextWord.firstChild)
+                            cursorSet = true;
+                        }
+                    }
+                    else {
+                        placeCursor(document.getElementById(i), spaceLetter)
+                        cursorSet = true;
+                    }
                 }
 
                 const extraLetter = document.createElement('letter');
                 extraLetter.classList.add('incorrect', 'extra');
                 extraLetter.textContent = typedText[i][k];
 
-                document.getElementById(i).insertBefore(extraLetter, spaceLetter);
-            }
-            // insert le curseur après la dernière lettre tapée (attention à)
-            // if (!cursorSet) {
-            //     window.requestAnimationFrame(() => {
-            //     console.log('curseur inséré après la dernière lettre tapée');
-            //     document.getElementById(i).insertBefore(cursor, spaceLetter);
-            //     cursorSet = true;
-            //     });
-            // }
-        }
-        // Cas où l'utilisateur a tapé un espace après un mot trop long
-        if (!cursorSet && typedText[i] && typedText[i].length > wordList[i].length) {
-            const nextWord = document.getElementById(i + 1);
-            if (nextWord) {
-                nextWord.insertBefore(cursor, nextWord.firstChild);
-                console.log('Curseur forcé au mot suivant après mot trop long + espace');
-                cursorSet = true;
+                if(spaceLetter) {
+                    document.getElementById(i).insertBefore(extraLetter, spaceLetter);
+                }
+                else { document.getElementById(i).appendChild(extraLetter);}
             }
         }
-
+        if (cursorSet && i >= typedText.length - 1) break;
     }
+    document.getElementById(i)?.scrollIntoView({ behavior: "smooth", block: "center" });
 
-    let line = 0;
-    let lineWidth = 0;
-    const maxWidth = typedTextElement.offsetWidth;
-    
-    for(let i = 0; i < typedText.length;i++) {
-        // créer un span pour simuler le prochain mot
-        var newtask = document.createElement('span');
-        newtask.innerHTML = wordList[i];
-        newtask.id = i;
-        typedTextElement.appendChild(newtask);
-        
-        const wordWidth = newtask.offsetWidth;
-        
-        // si le prochain mot dépasse, retourner à la ligne
-        if (lineWidth + wordWidth > maxWidth && lineWidth > 0) {
-            line++;
-            typedTextElement.appendChild(document.createElement('br'));
-            lineWidth = wordWidth;
-        }
-        else {
-            lineWidth += wordWidth
-        }
-        typedTextElement.removeChild(newtask);
-    }
+}
 
-    wordBox.scrollTop = line * 55; // Scroll pour que le mot en cours soit visible
-    // console.log(cursorSet);
+function placeCursor(targetElement, beforeElement = null) {
+    document.querySelectorAll('.cursor').forEach(c => c.remove());
+    const cursor = document.createElement('span');
+    cursor.classList.add('cursor');
+    window.requestAnimationFrame(() => {
+        if (beforeElement) {
+            targetElement.insertBefore(cursor, beforeElement);
+        } else {
+            targetElement.appendChild(cursor);
+        }
+    });
 }
 
 
@@ -802,17 +714,18 @@ inputbox.addEventListener('input', (event) => {
     // quick restart
     if(event.keyCode == 9) {switchGamemode();}
 
-    const currentValue = inputbox.value;
-    if (currentValue.endsWith(' ')) {
-        const currentWordIndex = i // déduire l'index du mot actuel
-        const wordLetters = document.getElementById(currentWordIndex).getElementsByTagName('letter');
-        const hasError = [...wordLetters].some(l => l.classList.contains('incorrect') || l.classList.contains('extra'));
-        if (hasError) {
-            // Retirer l'espace final
-            inputbox.value = currentValue.slice(0, -1);
-            return;
-        }
-    }
+    // strict mode - ne valide pas le mot s'il y a une erreur
+    // const currentValue = inputbox.value;
+    // if (currentValue.endsWith(' ')) {
+    //     const currentWordIndex = i // déduire l'index du mot actuel
+    //     const wordLetters = document.getElementById(currentWordIndex).getElementsByTagName('letter');
+    //     const hasError = [...wordLetters].some(l => l.classList.contains('incorrect') || l.classList.contains('extra'));
+    //     if (hasError) {
+    //         // Retirer l'espace final
+    //         inputbox.value = currentValue.slice(0, -1);
+    //         return;
+    //     }
+    // }
 
 
     updateTypedColors();
@@ -822,7 +735,6 @@ inputbox.addEventListener('input', (event) => {
     // test started when input detected
     if (testRunning == false && timeBox.textContent != 0 && i==0 && event.keyCode != 9) {
         document.getElementById('wpmjsp').innerHTML = '<span>' + wordList[i] + '<span>';
-        line = 0;
         i=0;
         testRunning = true;
         TimerObject = setInterval(timer, 200)

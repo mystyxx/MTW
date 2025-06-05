@@ -202,29 +202,47 @@ function timer() {
         // calculate the result
         let inputWords = inputbox.value.match(/\S+\s*/g);
         for(let j = 0; j < inputWords.length; j++) {
-            if( wordList[j] == inputWords[j]) {
-                correctWords++;
-                correctCharacters += wordList[j].length;
-            }
-            else {
-                for(let k = 0; k < wordList[j].length; k++) {
-                    if(inputWords[j][k] == undefined) {}
-                    else if(inputWords[j][k] != wordList[j][k]) {
-                        wrongCharacters++;
-                    }
-                    else {
-                        correctCharacters++;
-                    }
+            // mot correct si aucune lettre incorrecte
+            currentWordCorrectChars = 0
+            document.getElementById(j).querySelectorAll('letter').forEach((letter) => {
+                if (letter.classList.contains('correct')) {
+                    currentWordCorrectChars++;
                 }
+                if (letter.classList.contains('incorrect')) {
+                    wrongCharacters++;
+                }
+            });
+            if (currentWordCorrectChars == wordList[j].length - inputWords[j].includes(' ')) {
+                correctWords++;
             }
+            
+            if (inputWords[j].includes(' ')) { correctCharacters += currentWordCorrectChars + 1;} // + 1 pour l'espace
+
+            // if( wordList[j] == inputWords[j]) {
+            //     correctWords++;
+            //     correctCharacters += wordList[j].length;
+            // }
+            // else {
+            //     for(let k = 0; k < wordList[j].length; k++) {
+            //         if(inputWords[j][k] == undefined) {}
+            //         else if(inputWords[j][k] != wordList[j][k]) {
+            //             wrongCharacters++;
+            //         }
+            //         else {
+            //             correctCharacters++;
+            //         }
+            //     }
+            // }
         }
+        correctCharacters--; // - 1 car jamais d'espace final
 
         let timeUsed = (60/(testTime-timeBox.textContent));
         let result = Math.floor((correctCharacters/5)*timeUsed);
+        let accuracy = Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100);
 
         document.getElementById('resultCard').style.display = 'grid';
         document.getElementById('wpm').textContent = result + ' WPM';
-        document.getElementById('characters').innerHTML = '<span style="color:var(--great-color); display:inline;">' + correctCharacters + '</span> | <span style="color:red; display:inline;">' + wrongCharacters + '</span> (' + Math.floor(correctCharacters/(correctCharacters+wrongCharacters)*100) + '%)';
+        document.getElementById('characters').innerHTML = '<span style="color:var(--great-color); display:inline;">' + correctCharacters + '</span> | <span style="color:red; display:inline;">' + wrongCharacters + '</span> (' + accuracy + '%)';
         scorebox.innerHTML = '<p style="color:var(--great-color); display:inline;">' + correctWords + '</p> / ' + inputWords.length;  //update the score    
         document.getElementById('raw').textContent = Math.floor((correctWords)*timeUsed) + 'wpm'
         document.getElementById('timeResult').textContent = testTime - timeBox.textContent + 's'
@@ -233,7 +251,7 @@ function timer() {
         document.getElementById('wpm').style.textDecoration = '';
         if(result > localStorage.getItem('pb')) {localStorage.setItem('pb', Math.floor((correctCharacters/5)*timeUsed)); document.getElementById('wpm').style.textDecoration = 'underline';}
 
-        addTimeToLeaderboard(result);
+        addTimeToLeaderboard(result, accuracy);
         displayLeaderboard();
         
     }
@@ -279,15 +297,15 @@ function printWords(wordList) {
 }
 
 
-function createNewUser(userRef, username) {
+async function createNewUser(userRef, username) {
     // crée un nouvel utilisateur dans la base de données Firestore
     // cet utilisateur possède une array de map pour chaque catégorie de jeu
     const { setDoc } = window.firebase.firestore;
-    setDoc(userRef, {
+    await setDoc(userRef, {
         username: username,
         creationDate: new Date(),
         email: '',
-        personalBest: 0,
+        personalBest: {},
         scores: {
             tfa: [],
             shortQuote: [],
@@ -346,8 +364,9 @@ async function displayLeaderboard() {
                     // Cherche le meilleur score de l'utilisateur pour ce mode
                     let best = todayScores.reduce((max, curr) => curr.score > max.score ? curr : max, todayScores[0]);
                     scoresList.push({
-                        name: data.username,
+                        name: data.username || '???',
                         score: best.score,
+                        accuracy: best.accuracy || '?',
                         date: best.date
                     });
                 }
@@ -364,6 +383,7 @@ async function displayLeaderboard() {
                     scoresList.push({
                         name: data.username,
                         score: best.score,
+                        accuracy: best.accuracy,
                         date: best.date
                     });
                 }
@@ -372,16 +392,25 @@ async function displayLeaderboard() {
     }
     // affichage des scores
     scoresList.sort((a, b) => b.score - a.score);
-    let text = `<h3>Leaderboard ${gm}</h3><ol>`
+    let text = `
+    <h3>Leaderboard ${gm}</h3>
+    <ol>
+        <li>
+            <span class="leaderboardHeader leaderboardHeaderUsername">username</span>
+            <span class="leaderboardHeader leaderboardHeaderScore">score (wpm)</span>
+            <span class="leaderboardHeader leaderboardHeaderAccuracy">accuracy (%)</span>
+            <span class="leaderboardHeader leaderboardHeaderTimestamp">date</span>
+        </li>
+    `
     for (let i = 0; i < Math.min(10, scoresList.length); i++) {
-        text += `<li><span class="leaderboardUsername">${scoresList[i].name}</span>  <span class="leaderboardScore">${scoresList[i].score}</span>  <span class="leaderboardTimestamp">${new Date(scoresList[i].date.seconds * 1000).toLocaleDateString()}</span></li>`;
+        text += `<li><span class="leaderboardUsername">${scoresList[i].name}</span>  <span class="leaderboardScore">${scoresList[i].score}</span> <span class="leaderboardAccuracy">${scoresList[i].accuracy}%</span> <span class="leaderboardTimestamp">${new Date(scoresList[i].date.seconds * 1000).toLocaleDateString()}</span></li>`;
     }
     text += "</ol>"
     document.getElementById('leaderboard').innerHTML = text;
 
 }
 
-async function addTimeToLeaderboard(score) {
+async function addTimeToLeaderboard(score, accuracy) {
     let gm = sessionStorage.getItem('gm');
     const { getFirestore, doc, updateDoc, getDoc } = window.firebase.firestore;
     const db = getFirestore();
@@ -405,8 +434,15 @@ async function addTimeToLeaderboard(score) {
             return;
         }
 
-        let newScore = {score: score, date: new Date()};
+        let newScore = {score: score, accuracy: accuracy, date: new Date()};
         userData.scores[gm].push(newScore);
+
+        // gérer le pb
+        if (parseInt(score) < parseInt(localStorage.getItem('pb'))) {
+            localStorage.setItem('pb', score);
+            userData.personalBest = newScore;
+            await updateDoc(userRef, {personalBest: userData.personalBest})
+        }
         
         await updateDoc(userRef, {scores : userData.scores });
     }
@@ -423,6 +459,7 @@ function changeGamemode() {
     document.getElementById('wpmjsp').innerHTML = '';
     inputbox.focus();
     typedTextElement.textContent = '';
+    document.getElementById("leaderboard").innerHTML = "<h3>Chargement du leaderboard...</h3>"
 }
 function changeTestTime(time, hardmode, numberwords) {
     changeGamemode();
@@ -443,6 +480,7 @@ function changeTestTime(time, hardmode, numberwords) {
         document.getElementById('words60GamemodeButton').textContent = '50';
         timeBox.style.visibility= 'hidden';
     }
+    document.getElementById("leaderboard").style.display = "block";
 }
 
 function changeQuoteLength(size, langue) {
@@ -453,6 +491,7 @@ function changeQuoteLength(size, langue) {
     wordList = chooseQuote(size, langue);
     printWords(wordList);
     hideButtons('words');
+    document.getElementById("leaderboard").style.display = "none";
 }
 
 var frTfaDict;
@@ -488,6 +527,7 @@ function changeWikipediaType(mode, langue) {
     wordList = wordList.replace('–', '-').replace('«', '"').replace('»', '"').replace(' ', ' ').match(/\S+\s*/g);
     printWords(wordList);
     changeModeHighlight('wikipediaGamemodeButton');
+    document.getElementById("leaderboard").style.display = "block";
 }
 
 function changeClientTheme(theme) {

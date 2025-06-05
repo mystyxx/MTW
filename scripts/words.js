@@ -88,59 +88,60 @@ function capitalizeFirstLetter(string) {
 }
 
 function chooseList(language, hardmode, words = 150) {
-    let wordArray = []
-    for(let i =0; i<words; i++) {
-        let feur = Math.floor(Math.random() * language.words.length);
-        if(hardmode && i%2 == 1){let ponctuation = Math.floor(Math.random() * 25); let apagnan = '';
-            switch(ponctuation){
+    let wordArray = [];
+
+    while (wordArray.length < words) {
+        let word = language.words[Math.floor(Math.random() * language.words.length)];
+
+        if (hardmode && wordArray.length % 2 === 1) {
+            let punctuationType = Math.floor(Math.random() * 25);
+            switch (punctuationType) {
                 case 1:
                 case 2:
-                    apagnan = language.words[feur]+ ',';
+                    wordArray.push(word + ',');
                     break;
-                case 2:
                 case 3:
                 case 4:
                 case 12:
                 case 13:
-                    wordArray[wordArray.length] = language.words[feur] + '.';
-                    apagnan = capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)])
+                    wordArray.push(word + '.');
+                    wordArray.push(capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)]));
                     break;
                 case 5:
-                    wordArray[wordArray.length] = '!';
-                    apagnan = capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)])
+                    wordArray.push(word + '!');
+                    wordArray.push(capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)]));
                     break;
                 case 6:
                 case 7:
-                    wordArray[wordArray.length] = '?';
-                    apagnan = capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)])
+                    wordArray.push(word + '?');
+                    wordArray.push(capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)]));
                     break;
                 case 8:
-                    wordArray[wordArray.length] = ';';
-                    apagnan = capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)])
+                    wordArray.push(word + ';');
+                    wordArray.push(capitalizeFirstLetter(language.words[Math.floor(Math.random() * language.words.length)]));
                     break;
                 case 9:
-                    apagnan = '\"' + language.words[feur] + '\"';
+                    wordArray.push('"' + word + '"');
                     break;
                 case 10:
-                    apagnan = ':';
+                    wordArray.push(word + ':');
                     break;
                 case 11:
-                    apagnan = '('+language.words[feur]+')';
+                    wordArray.push('(' + word + ')');
                     break;
                 default:
-                    apagnan = language.words[feur];
-                    break
+                    wordArray.push(word);
+                    break;
             }
-            wordArray.push(apagnan);
+        } else {
+            wordArray.push(word);
         }
-        else{wordArray.push(language.words[feur] + ' ')}
     }
-    // Remove the last space or punctuation
-    if(wordArray[wordArray.length - 1].endsWith(' ')) {
-        wordArray[wordArray.length - 1] = wordArray[wordArray.length - 1].slice(0, -1);
-    }
-    return wordArray;
+
+    // Retirer l'espace final du dernier mot (s'il y en a un)
+    return wordArray.map((w, i) => i < wordArray.length - 1 ? w + ' ' : w);
 }
+
 
 const philoquotelist = [philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];
 const quotelist = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10, quote11, quote12, quote13, quote14, quote15, quote16, quote17, quote18, quote19, quote20, quote21, quote22, quote23, quote24, quote25, quote26, quote27, quote28, quote29, quote30, quote31, quote32, quote33, quote34, quote35, quote36, quote37, quote38, philoquote1, philoquote2, philoquote3, philoquote4, philoquote5, philoquote6, philoquote7, philoquote8, philoquote9, philoquote10, philoquote11, philoquote12, philoquote13, philoquote14, philoquote15];

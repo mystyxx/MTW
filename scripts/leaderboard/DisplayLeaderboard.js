@@ -81,7 +81,6 @@ export async function displayLeaderboard() {
     }
     text += "</ol>"
     document.getElementById('leaderboard').innerHTML = text;
-    console.log("leaderboard refreshed")
     document.getElementById("refreshLeaderboard").addEventListener("click", () => {
         displayLeaderboard();
     });

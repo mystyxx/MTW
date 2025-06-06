@@ -53,8 +53,8 @@ import { setSecondTenth } from "./utils/SecondTenth.js";
 
 window.addEventListener('DOMContentLoaded', () => {
     inputbox.focus();
-    displayLeaderboard()
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 
 // empêcher le scroll sur écran tactile et la molette de la souris
@@ -105,7 +105,6 @@ inputbox.addEventListener('input', (event) => {
     const currentWord = getWordList()[i]; // Mot actuel à écrire (index `i`)
 
     // test started when input detected
-    console.log(typedText, timeBox.textContent, i)
     if (!getTestRunning() && timeBox.textContent != 0 && i==0) {
         document.getElementById('wpmjsp').innerHTML = '<span>' + getWordList()[i] + '<span>';
         i=0;

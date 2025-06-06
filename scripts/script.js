@@ -44,6 +44,7 @@ import { updateTypedColors } from "./ui/UpdateTypedColors.js";
 import { getWordList, setWordList, wordList } from "./utils/WordList.js";
 import { getEnglishLang, getFrenchLang, selectLoadingTip } from "./words.js";
 import { fetchFeaturedArticle, getEnTfaDict } from "./wikipediascraper.js";
+import { displayLeaderboard } from "./leaderboard/DisplayLeaderboard.js";
 
 // export var wordList = getWordList;
 
@@ -57,16 +58,17 @@ document.getElementById('typedText').addEventListener('wheel', e => e.preventDef
 document.getElementById('words').addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 document.getElementById('typedText').addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 
-
-document.body.style.cursor = 'wait';
+if (localStorage.getItem("gm") == "tfa" || localStorage.getItem("gm") == "mostread" || localStorage.getItem("gm") == "onthisday") {
+    document.body.style.cursor = 'wait';
+}
 document.addEventListener('DOMContentLoaded', () => {
     fetchFeaturedArticle().then((data) => {
         frTfaDict = data.fr;
         enTfaDict = data.en;
         printWords(selectLoadingTip(langue).match(/\S+\s*/g));
         document.body.style.cursor = 'auto';
-        switchGamemode(langue, hardmode, timerObject, timeBox);
     });
+    switchGamemode(langue, hardmode, timerObject, timeBox);
 });
 
 
@@ -134,65 +136,78 @@ document.getElementById('retryButton').addEventListener('click', () => {switchGa
 document.getElementById('quoteGamemodeButton').addEventListener('click', (changeGamemodeToQuote)=> {
     sessionStorage.setItem('gm', 'quote');
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 
 document.getElementById('timeGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
     sessionStorage.setItem('gm', 'time15'); 
     words = false;
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
     sessionStorage.setItem('gm', 'words10'); 
     words = true;
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'shortQuote');
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 document.getElementById('mediumQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'mediumQuote');
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 document.getElementById('longQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
     sessionStorage.setItem('gm', 'longQuote');
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (changeGamemodeToPhiloQuote)=> {
     sessionStorage.setItem('gm', 'philo');
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 
 document.getElementById('wikipediaGamemodeButton').addEventListener('click', (changeGamemodeToWikipedia) => {
     sessionStorage.setItem('gm', 'mostread');
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 
 document.getElementById('mostreadGamemodeButton').addEventListener('click', (changeGamemodeToMostRead) => {
     sessionStorage.setItem('gm', 'mostread');
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 
 document.getElementById('onthisdayGamemodeButton').addEventListener('click', (changeGamemodeToMostRead) => {
     sessionStorage.setItem('gm', 'onthisday');
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 
 document.getElementById('tfaGamemodeButton').addEventListener('click', (changeGamemodeToTfa) => {
     sessionStorage.setItem('gm', 'tfa');
     switchGamemode(langue, hardmode, timerObject, timeBox);
+    displayLeaderboard();
 });
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
         sessionStorage.setItem('gm', 'time15')
         switchGamemode(langue, hardmode, timerObject, timeBox);
+        displayLeaderboard();
     }
     else{
         sessionStorage.setItem('gm', 'words10');
         switchGamemode(langue, hardmode, timerObject, timeBox);
+        displayLeaderboard();
     }
 });
 
@@ -200,20 +215,24 @@ document.getElementById('words30GamemodeButton').addEventListener('click', (chan
     if(!words) {
         sessionStorage.setItem('gm', 'time30');
         switchGamemode(langue, hardmode, timerObject, timeBox);
+        displayLeaderboard();
     }
     else{
         sessionStorage.setItem('gm', 'words25');
         switchGamemode(langue, hardmode, timerObject, timeBox);
+        displayLeaderboard();
     }
 });
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
         sessionStorage.setItem('gm', 'time60');
         switchGamemode(langue, hardmode, timerObject, timeBox);
+        displayLeaderboard();
     }
     else{
         sessionStorage.setItem('gm', 'words50');
         switchGamemode(langue, hardmode, timerObject, timeBox);
+        displayLeaderboard();
     }
 });
 document.getElementById('EnablePonctuation').addEventListener('click', (enablePonctuation)=> {

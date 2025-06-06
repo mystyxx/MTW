@@ -327,9 +327,22 @@ letter.extra.last-extra {
     51%, 100% { opacity: 0; }
 }
 
-#leaderboard h3 {
+#leaderboardHeader {
+    margin-top: 15px;
+    position: relative; /* important pour que l'enfant absolu se base sur ce conteneur */
+    text-align: center; /* centre le titre */
+    margin-bottom: 10px;
+    min-height: 40px;
+}
+
+#leaderboardHeader h3 {
     text-align: center;
     margin-bottom: 10px;
+    line-height: 40px;
+}
+
+#leaderboard h3 {
+    text-align: center;
 }
 
 #leaderboard ol {
@@ -371,7 +384,28 @@ letter.extra.last-extra {
     opacity: 0.75;
 }
 
-.leaderboardHeader {
+.leaderboardColumnHeader {
     font-size: 0.9em !important;
     opacity: 0.75;
+}
+
+#refreshLeaderboard {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: var(--main-text-color);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#refreshLeaderboard path {
+  stroke: var(--main-text-color);
+  fill: none; /* assure que l'intérieur est transparent */
+}
+
+#refreshLeaderboard:hover {
+    transform: rotate(45deg);
+    opacity: 1;
 }

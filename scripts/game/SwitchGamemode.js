@@ -1,4 +1,3 @@
-import { displayLeaderboard } from "../leaderboard/DisplayLeaderboard.js";
 import { updateTypedColors } from "../ui/UpdateTypedColors.js";
 import { changeModeHighlight } from "../ui/ChangeModeHighlight.js";
 import { changeQuoteLength } from "./ChangeQuoteLength.js"
@@ -76,7 +75,6 @@ export function switchGamemode(langue, hardmode=false, timerObject, timebox) {
             break;
     }
 
-    displayLeaderboard();
     // Attendre que les éléments soient présents avant d'appeler updateTypedColors
     const waitForElementsAndUpdate = () => {
         const inputbox = document.getElementById("typeInput");

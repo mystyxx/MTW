@@ -61,13 +61,19 @@ export async function displayLeaderboard() {
     // affichage des scores
     scoresList.sort((a, b) => b.score - a.score);
     let text = `
-    <h3>Leaderboard ${gm}</h3>
+    <div id="leaderboardHeader">
+        <h3>Leaderboard ${gm}</h3>
+        <svg id="refreshLeaderboard" src="res/refresh_logo.png" alt="refresh" title="refresh the leaderboard" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        
+    </div>
     <ol>
         <li>
-            <span class="leaderboardHeader leaderboardHeaderUsername">username</span>
-            <span class="leaderboardHeader leaderboardHeaderScore">score (wpm)</span>
-            <span class="leaderboardHeader leaderboardHeaderAccuracy">accuracy (%)</span>
-            <span class="leaderboardHeader leaderboardHeaderTimestamp">date</span>
+            <span class="leaderboardColumnHeader leaderboardHeaderUsername">username</span>
+            <span class="leaderboardColumnHeader leaderboardHeaderScore">score (wpm)</span>
+            <span class="leaderboardColumnHeader leaderboardHeaderAccuracy">accuracy (%)</span>
+            <span class="leaderboardColumnHeader leaderboardHeaderTimestamp">date</span>
         </li>
     `
     for (let i = 0; i < Math.min(10, scoresList.length); i++) {
@@ -75,7 +81,9 @@ export async function displayLeaderboard() {
     }
     text += "</ol>"
     document.getElementById('leaderboard').innerHTML = text;
-
+    document.getElementById("refreshLeaderboard").addEventListener("click", () => {
+        displayLeaderboard();
+    });
 }
 
 export function isSameDay(date1, date2) {

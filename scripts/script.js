@@ -65,12 +65,14 @@ if (localStorage.getItem("gm") == "tfa" || localStorage.getItem("gm") == "mostre
 }
 document.addEventListener('DOMContentLoaded', () => {
     fetchFeaturedArticle().then((data) => {
-        frTfaDict = data.fr;
-        enTfaDict = data.en;
-        printWords(selectLoadingTip(langue).match(/\S+\s*/g));
-        document.body.style.cursor = 'auto';
+        if(sessionStorage.getItem("gm") == "tfa" || sessionStorage.getItem("gm") == "mostread" || sessionStorage.getItem("gm") == "onthisday") {
+            frTfaDict = data.fr;
+            enTfaDict = data.en;
+            printWords(selectLoadingTip(langue).match(/\S+\s*/g));
+            document.body.style.cursor = 'auto';
+            switchGamemode(langue, hardmode, timerObject, timeBox);
+        }
     });
-    switchGamemode(langue, hardmode, timerObject, timeBox);
 });
 
 

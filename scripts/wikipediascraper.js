@@ -1,6 +1,8 @@
+import { printWords } from "./game/PrintWords.js";
+
 let wikipediaCache = null;
 
-async function fetchFeaturedArticle(mode) {
+export async function fetchFeaturedArticle(mode, inputbox=document.getElementById("typeInput")) {
     if (wikipediaCache) {
         return wikipediaCache; // Retourne le cache si déjà chargé
     }
@@ -38,3 +40,18 @@ async function fetchFeaturedArticle(mode) {
     }
 }
 
+// variables
+export let frTfaDict;
+export function getFrTfaDict() {
+    return frTfaDict;
+}
+export function setFrTfaDict(dict) {
+    frTfaDict = dict;
+}
+export let enTfaDict;
+export function getEnTfaDict() {
+    return enTfaDict;
+}
+export function setEnTfaDict(dict) {
+    enTfaDict = dict;
+}

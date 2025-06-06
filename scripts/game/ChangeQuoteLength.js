@@ -1,0 +1,17 @@
+import { changeGamemode } from "./ChangeGamemode.js";
+import { printWords } from "./PrintWords.js";
+import { hideButtons } from "../ui/HideButtons.js";
+import { getWordList, setWordList } from "../utils/WordList.js";
+import { setTestTime } from "../utils/TestTime.js";
+import { chooseQuote } from "../words.js";
+
+export function changeQuoteLength(size, langue, TimerObject, timeBox) {
+    changeGamemode(TimerObject);
+    timeBox.style.visibility = 'hidden';
+    setTestTime(500);
+    timeBox.textContent = '500';
+    setWordList(chooseQuote(size, langue));
+    printWords(getWordList());
+    hideButtons('words', langue);
+    document.getElementById("leaderboard").style.display = "none";
+}

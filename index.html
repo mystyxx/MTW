@@ -30,7 +30,7 @@
         <div id="mainContent">
             <div id="barUI">
                 <p id="time">15</p>
-                <button onClick="switchGamemode();" id="retryButton">Recommencer</button>
+                <button id="retryButton">Recommencer</button>
                 <input type="text" id="typeInput" autofocus>
             </div>
             <div id="typingContainer">
@@ -83,9 +83,9 @@
         const app = initializeApp(firebaseConfig);
         window.firebase = { firestore: { getFirestore, collection, query, orderBy, limit, getDocs, where, doc, getDoc, setDoc, updateDoc } };
         </script>
-        <script src="scripts/wikipediascraper.js"></script>
-        <script src="scripts/words.js"></script>
-        <script src="scripts/script.js"></script>
+        <script type="module" src="scripts/wikipediascraper.js"></script>
+        <script type="module" src="scripts/words.js"></script>
+        <script type="module" src="scripts/script.js"></script>
     </body>
 
 </html>

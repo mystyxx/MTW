@@ -87,7 +87,7 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function chooseList(language, hardmode, words = 150) {
+export function chooseList(language, hardmode, words = 150) {
     let wordArray = [];
 
     while (wordArray.length < words) {
@@ -150,7 +150,7 @@ const enphiloquotelist = [enphiloquote1, enphiloquote2, enphiloquote3, enphiloqu
 const enquotelist = [enquote1, enquote2, enquote3, enquote4, enquote5, enquote6, enquote7, enquote8, enquote9, enquote10, enquote11, enquote12, enquote13, enquote14, enquote15, enquote16, enquote17, enquote18, enquote19, enphiloquote1, enphiloquote2, enphiloquote3, enphiloquote4, enphiloquote5, enphiloquote6, enphiloquote7];
 const entiplist = ['tip : press tab to restart quickly !', 'tip : use all your fingers to type !', 'tip : celeste is an awesome game !'];
 
-class langage {
+export class langage {
     constructor(words, quotes, philoquotes, tiplist) {
         this.words = words;
         this.quotes = quotes;
@@ -169,26 +169,32 @@ class langage {
     }
 }
 
-const french = new langage(frenchWords, quotelist, philoquotelist, tiplist);
-const english = new langage(englishWords, enquotelist, enphiloquotelist, entiplist);
+export const french = new langage(frenchWords, quotelist, philoquotelist, tiplist);
+export const english = new langage(englishWords, enquotelist, enphiloquotelist, entiplist);
+export function getFrenchLang() {
+    return french;
+}
+export function getEnglishLang() {
+    return english;
+}
 
 let lastquote; let lastshortquote; let lastmediumquote; let lastlongquote; let lastphiloquote;
 let lastquoteIndex;
 
-function valIsInLang(arr) {
+function valIsInLang(arr, langue) {
     for(let i = 0 ; i<arr.length ; i++) {
         if(langue.quotes[i] == arr) {return(true)}
     }
 }
 
-function selectLoadingTip(langue) {
+export function selectLoadingTip(langue) {
     return(langue.tiplist[Math.floor(Math.random() * langue.tiplist.length)]);
 }
 
-function chooseQuote(size, langue) {
+export function chooseQuote(size, langue) {
     if(size == 'short') {
         lastquoteIndex = Math.floor(Math.random() * langue.shortQuoteList.length)
-        if (lastshortquote !== undefined && valIsInLang(lastshortquote)) {
+        if (lastshortquote !== undefined && valIsInLang(lastshortquote, langue)) {
             langue.shortQuoteList.push(lastshortquote)
         }
         lastshortquote = langue.shortQuoteList[lastquoteIndex]
@@ -196,7 +202,7 @@ function chooseQuote(size, langue) {
         return lastshortquote}
     if(size == 'medium') {
         lastquoteIndex = Math.floor(Math.random() * langue.mediumQuoteList.length)
-        if (lastmediumquote !== undefined && valIsInLang(lastmediumquote)) {
+        if (lastmediumquote !== undefined && valIsInLang(lastmediumquote, langue)) {
             langue.mediumQuoteList.push(lastmediumquote)
         }
         lastmediumquote = langue.mediumQuoteList[lastquoteIndex]
@@ -205,7 +211,7 @@ function chooseQuote(size, langue) {
     }
     if(size == 'long') {
         lastquoteIndex = Math.floor(Math.random() * langue.longQuoteList.length)
-        if (lastlongquote !== undefined && valIsInLang(lastlongquote)) {
+        if (lastlongquote !== undefined && valIsInLang(lastlongquote, langue)) {
             langue.longQuoteList.push(lastlongquote)
         }
         lastlongquote = langue.longQuoteList[lastquoteIndex]
@@ -214,7 +220,7 @@ function chooseQuote(size, langue) {
     }
     if(size == 'philo') {
         lastquoteIndex = Math.floor(Math.random() * langue.philoquotes.length)
-        if(lastphiloquote !== undefined && valIsInLang(lastphiloquote)) {
+        if(lastphiloquote !== undefined && valIsInLang(lastphiloquote, langue)) {
             langue.philoquotes.push(lastphiloquote)
         }
         lastphiloquote = langue.philoquotes[lastquoteIndex]

@@ -6,6 +6,7 @@ body {
     --hover-color: #5f6c7b;
     --outline-color: white;
     --great-color: #5f6c7b;
+    --main-bg-color-transparent: rgba(0, 0, 0, 0.5);
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -37,7 +38,7 @@ body {
     flex-wrap: wrap;
     font-size: 40px;
     padding: 10px;
-    max-height: 160px;
+    max-height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
@@ -52,6 +53,33 @@ body {
 words::-webkit-scrollbar,
 #typedText::-webkit-scrollbar {
     display: none;
+}
+
+/* Focus alert au-dessus de #words */
+#focusAlert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* même taille que parent */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+    background-color: var(--main-bg-color-transparent);
+    color: var(--main-text-color);
+    border-radius: 15px;
+    padding-right: 20px;
+    backdrop-filter: blur(4px);
+}
+
+/* Masquer le focusAlert quand le textarea est focus */
+#typeInput:focus ~ #focusAlert {
+    opacity: 0;
 }
 
 #wpmjspbox { 
@@ -252,6 +280,7 @@ words::-webkit-scrollbar,
 
 #container {
     margin: 0 auto;
+    margin-top: 5em;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -299,9 +328,8 @@ letter.extra.last-extra {
     margin-bottom: 2em; */
 
     width: 100%; /* prend toute la largeur de #mainContent */
-    min-height: 180px;
-    margin-bottom: 2em;
     position: relative;
+    height: auto;
 }
 
 .cursor {

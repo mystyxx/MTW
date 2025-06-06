@@ -10,7 +10,7 @@ import { getEnTfaDict, getFrTfaDict } from "../wikipediascraper.js";
 export function changeWikipediaType(mode, langue, TimerObject, timeBox, wordBox=document.getElementById("words")) {
     changeGamemode(TimerObject);
     hideButtons('wiki');
-    timeBox.style.visibility = 'hidden';
+    timeBox.style.display = 'none';
     setTestTime(500);
     timeBox.textContent = '500';
     wordBox.textContent = '';

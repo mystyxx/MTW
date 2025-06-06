@@ -7,7 +7,7 @@ import { chooseQuote } from "../words.js";
 
 export function changeQuoteLength(size, langue, TimerObject, timeBox) {
     changeGamemode(TimerObject);
-    timeBox.style.visibility = 'hidden';
+    timeBox.style.display = 'none';
     setTestTime(500);
     timeBox.textContent = '500';
     setWordList(chooseQuote(size, langue));

@@ -16,13 +16,13 @@ export function changeTestTime(time, hardmode, numberwords, langue, TimerObject,
         document.getElementById('words15GamemodeButton').textContent = '15';
         document.getElementById('words30GamemodeButton').textContent = '30';
         document.getElementById('words60GamemodeButton').textContent = '60';
-        timeBox.style.visibility = 'visible'
+        timeBox.style.display = 'block';
     }
     if(numberwords !== undefined){
         document.getElementById('words15GamemodeButton').textContent = '10';
         document.getElementById('words30GamemodeButton').textContent = '25';
         document.getElementById('words60GamemodeButton').textContent = '50';
-        timeBox.style.visibility= 'hidden';
+        timeBox.style.display= 'none';
     }
     document.getElementById("leaderboard").style.display = "block";
 }

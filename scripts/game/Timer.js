@@ -1,23 +1,30 @@
+import { getSecondTenth, setSecondTenth } from "../utils/SecondTenth.js";
+import { getTestRunning, setTestRunning } from "../utils/TestRunning.js";
 import { getWordList, setWordList } from "../utils/WordList.js";
 import { printWords } from "./PrintWords.js";
 
+let timeBox = document.getElementById("time");
+let input = document.getElementById("typeInput").value;
+let i = (input.match(/ /g) || []).length;
+
+
 export function timer() {
     //this function runs when a test is in progress.
-    secondetenth++; //actually 1/5 of a second lmao
-    if (timeBox.textContent > 0 && testRunning === true && secondetenth%5==0) {
+    setSecondTenth(getSecondTenth()+1); //actually 1/5 of a second lmao
+    if (timeBox.textContent > 0 && getTestRunning() === true && (getSecondTenth()%5)==0) {
         timeBox.textContent--;
     }
-    if(i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) {
+    if(i+1===getWordList().length && testTime == 500 && inputbox.value.length == getWordList()[i].length) {
         correctWords++;
-        correctCharacters += wordList[i].length;
+        correctCharacters += getWordList()[i].length;
         document.getElementById(i).className = "correct";
     }
-    if ((timeBox.textContent == '0') || (i+1===wordList.length && testTime == 500 && inputbox.value.length == wordList[i].length) || (i===wordList.length && testTime == 500) ) {
+    if ((timeBox.textContent == '0') || (i+1===getWordList().length && testTime == 500 && inputbox.value.length == getWordList()[i].length) || (i===getWordList().length && testTime == 500) ) {
         //end of the test
         let tmp = sessionStorage.getItem('sessionWpmArray')
         clearInterval(TimerObject);
-        testRunning = false;
-        //if(inputbox.value == wordList[i-1].slice(0, inputbox.value.length + '')) {correctCharacters = correctCharacters + inputbox.value.length}
+        setTestRunning(false);
+        //if(inputbox.value == getWordList()[i-1].slice(0, inputbox.value.length + '')) {correctCharacters = correctCharacters + inputbox.value.length}
         inputbox.style.visibility = 'hidden';
 
         // calculate the result
@@ -33,20 +40,20 @@ export function timer() {
                     wrongCharacters++;
                 }
             });
-            if (currentWordCorrectChars == wordList[j].length - inputWords[j].includes(' ')) {
+            if (currentWordCorrectChars == getWordList()[j].length - inputWords[j].includes(' ')) {
                 correctWords++;
             }
             
             if (inputWords[j].includes(' ')) { correctCharacters += currentWordCorrectChars + 1;} // + 1 pour l'espace
 
-            // if( wordList[j] == inputWords[j]) {
+            // if( getWordList()[j] == inputWords[j]) {
             //     correctWords++;
-            //     correctCharacters += wordList[j].length;
+            //     correctCharacters += getWordList()[j].length;
             // }
             // else {
-            //     for(let k = 0; k < wordList[j].length; k++) {
+            //     for(let k = 0; k < getWordList()[j].length; k++) {
             //         if(inputWords[j][k] == undefined) {}
-            //         else if(inputWords[j][k] != wordList[j][k]) {
+            //         else if(inputWords[j][k] != getWordList()[j][k]) {
             //             wrongCharacters++;
             //         }
             //         else {
@@ -76,7 +83,7 @@ export function timer() {
         displayLeaderboard();
         
     }
-    if (testRunning == true && i===wordList.length && testTime !=500) {
+    if (getTestRunning() == true && i===getWordList().length && testTime !=500) {
         //generate new words in case there's not enough
         i = 0;
         wordBox.textContent = '';

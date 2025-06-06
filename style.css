@@ -265,9 +265,6 @@ words::-webkit-scrollbar,
     grid-column: 3/3;
 }
 
-.margin-left {
-    /* margin-top: 20px; */
-}
 
 #wpm {
     color: var(--main-text-color);

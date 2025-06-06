@@ -38,13 +38,16 @@ var enTfaDict;
 
 // imports
 import { changeClientTheme } from "./ui/ChangeClientTheme.js";
+import { updateTypedColors } from "./ui/UpdateTypedColors.js";
 import { printWords } from "./game/PrintWords.js";
 import { switchGamemode } from "./game/SwitchGamemode.js";
-import { updateTypedColors } from "./ui/UpdateTypedColors.js";
+import { timer } from "./game/Timer.js";
 import { getWordList, setWordList, wordList } from "./utils/WordList.js";
 import { getEnglishLang, getFrenchLang, selectLoadingTip } from "./words.js";
 import { fetchFeaturedArticle, getEnTfaDict } from "./wikipediascraper.js";
 import { displayLeaderboard } from "./leaderboard/DisplayLeaderboard.js";
+import { getTestRunning, setTestRunning } from "./utils/TestRunning.js";
+import { setSecondTenth } from "./utils/SecondTenth.js";
 
 // export var wordList = getWordList;
 
@@ -89,7 +92,7 @@ inputbox.addEventListener('input', (event) => {
     //     const currentWordIndex = i // déduire l'index du mot actuel
     //     const wordLetters = document.getElementById(currentWordIndex).getElementsByTagName('letter');
     //     const hasError = [...wordLetters].some(l => l.classList.contains('incorrect') || l.classList.contains('extra'));
-    //     if (hasError) {
+    //     if (hasError) {timer
     //         // Retirer l'espace final
     //         inputbox.value = currentValue.slice(0, -1);
     //         return;
@@ -102,12 +105,13 @@ inputbox.addEventListener('input', (event) => {
     const currentWord = getWordList()[i]; // Mot actuel à écrire (index `i`)
 
     // test started when input detected
-    if (typedTextElement.value == "" && timeBox.textContent != 0 && i==0 && event.keyCode != 9) {
+    console.log(typedText, timeBox.textContent, i)
+    if (!getTestRunning() && timeBox.textContent != 0 && i==0) {
         document.getElementById('wpmjsp').innerHTML = '<span>' + getWordList()[i] + '<span>';
         i=0;
-        // testRunning = true;
+        setTestRunning(true);
         timerObject = setInterval(timer, 200)
-        secondetenth = 0;
+        setSecondTenth(0);
     }
 
     // if(testRunning) {

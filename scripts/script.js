@@ -73,10 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Remplace l'ancien event listener par la superposition
-inputbox.addEventListener('keydown', (event) => {
+inputbox.addEventListener('input', (event) => {
     // quick restart
-    if(event.key === 'Tab') {
-        event.preventDefault();
+    if (inputbox.value.includes('\n')) {
+        console.log("hello")
         switchGamemode(langue, hardmode, timerObject, timeBox);
     }
 

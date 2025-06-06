@@ -4,8 +4,9 @@ import { changeQuoteLength } from "./ChangeQuoteLength.js"
 import { changeWikipediaType } from "./ChangeWikipediaType.js"
 import { changeTestTime } from "./ChangeTestTime.js"
 import { getWordList } from "../utils/WordList.js";
+import { displayLeaderboard } from "../leaderboard/DisplayLeaderboard.js";
 
-export function switchGamemode(langue, hardmode=false, timerObject, timebox) {
+export function switchGamemode(langue, hardmode=false, timerObject, timebox, gamemodeHasChanged=false) {
     document.getElementById('words15GamemodeButton').className = ''; document.getElementById('words30GamemodeButton').className = ''; document.getElementById('words60GamemodeButton').className = ''; document.getElementById('shortQuoteGamemodeButton').className = ''; document.getElementById('mediumQuoteGamemodeButton').className = ''; document.getElementById('longQuoteGamemodeButton').className = ''; document.getElementById('philoQuoteGamemodeButton').className = ''; document.getElementById('wikipediaGamemodeButton').className = ''; document.getElementById('mostreadGamemodeButton').className = ''; document.getElementById('onthisdayGamemodeButton').className = ''; document.getElementById('tfaGamemodeButton').className = '';
     switch (sessionStorage.getItem('gm')) {
         case 'quote' :
@@ -74,6 +75,9 @@ export function switchGamemode(langue, hardmode=false, timerObject, timebox) {
             document.getElementById('words15GamemodeButton').className = 'titleHighlight';
             break;
     }
+    if (gamemodeHasChanged) {
+        displayLeaderboard();
+    }
 
     // Attendre que les éléments soient présents avant d'appeler updateTypedColors
     const waitForElementsAndUpdate = () => {
@@ -88,5 +92,4 @@ export function switchGamemode(langue, hardmode=false, timerObject, timebox) {
     };
 
     waitForElementsAndUpdate();
-
 }

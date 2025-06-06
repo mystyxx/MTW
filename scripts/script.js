@@ -50,6 +50,8 @@ import { displayLeaderboard } from "./leaderboard/DisplayLeaderboard.js";
 
 window.addEventListener('DOMContentLoaded', () => {
     inputbox.focus();
+    displayLeaderboard()
+    switchGamemode(langue, hardmode, timerObject, timeBox);
 });
 
 // empêcher le scroll sur écran tactile et la molette de la souris
@@ -76,8 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 inputbox.addEventListener('input', (event) => {
     // quick restart
     if (inputbox.value.includes('\n')) {
-        console.log("hello")
-        switchGamemode(langue, hardmode, timerObject, timeBox);
+        switchGamemode(langue, hardmode, timerObject, timeBox, false);
     }
 
     // strict mode - ne valide pas le mot s'il y a une erreur
@@ -140,20 +141,23 @@ document.getElementById('quoteGamemodeButton').addEventListener('click', (change
 });
 
 document.getElementById('timeGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
+    let gamemodeHasChanged = 'time15' != sessionStorage.getItem('gm');
     sessionStorage.setItem('gm', 'time15'); 
     words = false;
-    switchGamemode(langue, hardmode, timerObject, timeBox);
+    switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
     displayLeaderboard();
 });
 
 document.getElementById('wordsGamemodeButton').addEventListener('click', (changeGamemodeToWords) => {
+    let gamemodeHasChanged = 'words10' == sessionStorage.getItem('gm');
     sessionStorage.setItem('gm', 'words10'); 
     words = true;
-    switchGamemode(langue, hardmode, timerObject, timeBox);
+    switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
     displayLeaderboard();
 });
 
 document.getElementById('shortQuoteGamemodeButton').addEventListener('click', (changeGamemodeToShortQuote)=> {
+    let gamemodeHasChanged = 'shortQuote' == sessionStorage.getItem('gm');
     sessionStorage.setItem('gm', 'shortQuote');
     switchGamemode(langue, hardmode, timerObject, timeBox);
     displayLeaderboard();
@@ -175,63 +179,73 @@ document.getElementById('philoQuoteGamemodeButton').addEventListener('click', (c
 });
 
 document.getElementById('wikipediaGamemodeButton').addEventListener('click', (changeGamemodeToWikipedia) => {
+    let gamemodeHasChanged = 'mostread' == sessionStorage.getItem('gm');
     sessionStorage.setItem('gm', 'mostread');
-    switchGamemode(langue, hardmode, timerObject, timeBox);
+    switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
     displayLeaderboard();
 });
 
 document.getElementById('mostreadGamemodeButton').addEventListener('click', (changeGamemodeToMostRead) => {
+    let gamemodeHasChanged = 'mostread' == sessionStorage.getItem('gm');
     sessionStorage.setItem('gm', 'mostread');
-    switchGamemode(langue, hardmode, timerObject, timeBox);
+    switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
     displayLeaderboard();
 });
 
 document.getElementById('onthisdayGamemodeButton').addEventListener('click', (changeGamemodeToMostRead) => {
+    let gamemodeHasChanged = 'onthisday' == sessionStorage.getItem('gm');
     sessionStorage.setItem('gm', 'onthisday');
-    switchGamemode(langue, hardmode, timerObject, timeBox);
+    switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
     displayLeaderboard();
 });
 
 document.getElementById('tfaGamemodeButton').addEventListener('click', (changeGamemodeToTfa) => {
+    let gamemodeHasChanged = 'tfa' == sessionStorage.getItem('gm');
     sessionStorage.setItem('gm', 'tfa');
-    switchGamemode(langue, hardmode, timerObject, timeBox);
+    switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
     displayLeaderboard();
 });
 
 document.getElementById('words15GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
+        let gamemodeHasChanged = 'time15' == sessionStorage.getItem('gm');
         sessionStorage.setItem('gm', 'time15')
-        switchGamemode(langue, hardmode, timerObject, timeBox);
+        switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
         displayLeaderboard();
     }
     else{
+        let gamemodeHasChanged = 'words10' == sessionStorage.getItem('gm');
         sessionStorage.setItem('gm', 'words10');
-        switchGamemode(langue, hardmode, timerObject, timeBox);
+        switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
         displayLeaderboard();
     }
 });
 
 document.getElementById('words30GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
+        let gamemodeHasChanged = '30' == sessionStorage.getItem('gm');
         sessionStorage.setItem('gm', 'time30');
-        switchGamemode(langue, hardmode, timerObject, timeBox);
+        switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
         displayLeaderboard();
     }
     else{
+        let gamemodeHasChanged = '25' == sessionStorage.getItem('gm');
         sessionStorage.setItem('gm', 'words25');
-        switchGamemode(langue, hardmode, timerObject, timeBox);
+        switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
         displayLeaderboard();
     }
 });
 document.getElementById('words60GamemodeButton').addEventListener('click', (changeGamemodeToWords15) => {
     if(!words) {
+        let gamemodeHasChanged = 'time60' == sessionStorage.getItem('gm');
         sessionStorage.setItem('gm', 'time60');
-        switchGamemode(langue, hardmode, timerObject, timeBox);
+        switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
         displayLeaderboard();
     }
     else{
+        let gamemodeHasChanged = 'words50' == sessionStorage.getItem('gm');
         sessionStorage.setItem('gm', 'words50');
-        switchGamemode(langue, hardmode, timerObject, timeBox);
+        switchGamemode(langue, hardmode, timerObject, timeBox, gamemodeHasChanged);
         displayLeaderboard();
     }
 });

@@ -76,6 +76,200 @@ document.addEventListener('DOMContentLoaded', () => {
             switchGamemode(langue, hardmode, timerObject, timeBox);
         }
     });
+<<<<<<< HEAD
+=======
+}
+
+function isSameDay(date1, date2) {
+    return date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate();
+}
+
+async function displayLeaderboard() {
+    let gm = sessionStorage.getItem('gm');
+    const { getFirestore, collection, query, where, orderBy, limit, getDocs } = window.firebase.firestore;
+    const db = getFirestore();
+    let scoresList = []
+
+    if (gm == "shortQuote" || gm == "mediumQuote" || gm == "longQuote" || gm == "quote") {
+        /* pas de leaderboard pour les quotes
+        const leaderboardRef = collection(db, "leaderboard", gm, "scores");
+        const querySnapshot = await getDocs(query(leaderboardRef, where("quoteIndex", "==", lastquoteIndex), orderBy("score", "desc"), limit(10)));
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            scoresList.push({
+                name: getDoc(data.user).data().username,
+                score: data.score,
+                date: data.date
+            });
+        });
+        */
+    }
+    else {
+        const usersRef = collection(db, "users");
+        const querySnapshot = await getDocs(usersRef);
+
+        if (gm == "tfa") {
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                // Récupère le tableau de scores pour le mode courant
+                const userScores = data.scores && data.scores[gm] ? data.scores[gm] : [];
+                let todayScores = userScores.filter(score => isSameDay(new Date(score.date.seconds * 1000), new Date()));
+                if (Array.isArray(todayScores) && todayScores.length > 0) {
+                    // Cherche le meilleur score de l'utilisateur pour ce mode
+                    let best = todayScores.reduce((max, curr) => curr.score > max.score ? curr : max, todayScores[0]);
+                    scoresList.push({
+                        name: data.username || '???',
+                        score: best.score,
+                        accuracy: best.accuracy || '?',
+                        date: best.date
+                    });
+                }
+            });
+        }
+        else {
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                // Récupère le tableau de scores pour le mode courant
+                const userScores = data.scores && data.scores[gm] ? data.scores[gm] : [];
+                if (Array.isArray(userScores) && userScores.length > 0) {
+                    // Cherche le meilleur score de l'utilisateur pour ce mode
+                    let best = userScores.reduce((max, curr) => curr.score > max.score ? curr : max, userScores[0]);
+                    scoresList.push({
+                        name: data.username,
+                        score: best.score,
+                        accuracy: best.accuracy,
+                        date: best.date
+                    });
+                }
+            });
+        }
+    }
+    // affichage des scores
+    scoresList.sort((a, b) => b.score - a.score);
+    let text = `
+    <div id="leaderboardHeader">
+        <h3>Leaderboard ${gm}</h3>
+        <svg id="refreshLeaderboard" src="res/refresh_logo.png" alt="refresh" title="refresh the leaderboard" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        
+    </div>
+    <ol>
+        <li>
+            <span class="leaderboardColumnHeader leaderboardHeaderUsername">username</span>
+            <span class="leaderboardColumnHeader leaderboardHeaderScore">score (wpm)</span>
+            <span class="leaderboardColumnHeader leaderboardHeaderAccuracy">accuracy (%)</span>
+            <span class="leaderboardColumnHeader leaderboardHeaderTimestamp">date</span>
+        </li>
+    `
+    for (let i = 0; i < Math.min(10, scoresList.length); i++) {
+        text += `<li><span class="leaderboardUsername">${scoresList[i].name}</span>  <span class="leaderboardScore">${scoresList[i].score}</span> <span class="leaderboardAccuracy">${scoresList[i].accuracy}%</span> <span class="leaderboardTimestamp">${new Date(scoresList[i].date.seconds * 1000).toLocaleDateString()}</span></li>`;
+    }
+    text += "</ol>"
+    document.getElementById('leaderboard').innerHTML = text;
+    document.getElementById("refreshLeaderboard").addEventListener('click', () => {
+        displayLeaderboard();
+    })
+    console.log("coucou")
+}
+
+async function addTimeToLeaderboard(score, accuracy) {
+    let gm = sessionStorage.getItem('gm');
+    const { getFirestore, doc, updateDoc, getDoc } = window.firebase.firestore;
+    const db = getFirestore();
+    
+
+    if (gm == "shortQuote" || gm == "mediumQuote" || gm == "longQuote" || gm == "quote") {}
+    else {
+        if (localStorage.getItem('username') == null || localStorage.getItem('username') == '' || localStorage.getItem('username') == undefined) {
+            localStorage.setItem('username', prompt('Entrez votre nom d\'utilisateur pour enregistrer votre score :'));
+        }
+        const userRef = doc(db, "users", localStorage.getItem('username'));
+        let userDoc = await getDoc(userRef);
+        
+        if (!userDoc.exists() || userDoc.data === undefined || userDoc.data === null ) {
+            createNewUser(userRef, localStorage.getItem('username'));
+            userDoc = await getDoc(userRef);
+        }
+        const userData = userDoc.data();
+
+        if (userData.username == null || userData.username == 'null' || userData.username == undefined || userData.username == '') {
+            return;
+        }
+
+        let newScore = {score: score, accuracy: accuracy, date: new Date()};
+        userData.scores[gm].push(newScore);
+
+        // gérer le pb
+        if (parseInt(score) < parseInt(localStorage.getItem('pb'))) {
+            localStorage.setItem('pb', score);
+            userData.personalBest = newScore;
+            await updateDoc(userRef, {personalBest: userData.personalBest})
+        }
+        
+        await updateDoc(userRef, {scores : userData.scores });
+    }
+}
+function changeGamemode() {
+    //operations to do each time the gamemode is changed
+    i=0;
+    clearInterval(TimerObject);
+    inputbox.style.visibility = 'visible';
+    testRunning = false;
+    wordBox.textContent = '';
+    inputbox.value = '';
+    totalspacePress = 0; correctCharacters = 0; correctWords = 0; wrongCharacters = 0; line=0;
+    document.getElementById('wpmjsp').innerHTML = '';
+    inputbox.focus();
+    typedTextElement.textContent = '';
+    document.getElementById("leaderboard").innerHTML = "<h3>Chargement du leaderboard...</h3>"
+}
+function changeTestTime(time, hardmode, numberwords) {
+    changeGamemode();
+    wordList = chooseList(langue, hardmode, numberwords)
+    printWords(wordList)
+    testTime = time;
+    timeBox.textContent = time;
+    hideButtons('quote');
+    if(numberwords === undefined) {
+        document.getElementById('words15GamemodeButton').textContent = '15';
+        document.getElementById('words30GamemodeButton').textContent = '30';
+        document.getElementById('words60GamemodeButton').textContent = '60';
+        timeBox.style.visibility = 'visible'
+    }
+    if(numberwords !== undefined){
+        document.getElementById('words15GamemodeButton').textContent = '10';
+        document.getElementById('words30GamemodeButton').textContent = '25';
+        document.getElementById('words60GamemodeButton').textContent = '50';
+        timeBox.style.visibility= 'hidden';
+    }
+    document.getElementById("leaderboard").style.display = "block";
+}
+
+function changeQuoteLength(size, langue) {
+    changeGamemode();
+    timeBox.style.visibility = 'hidden';
+    testTime = 500;
+    timeBox.textContent = '500';
+    wordList = chooseQuote(size, langue);
+    printWords(wordList);
+    hideButtons('words');
+    document.getElementById("leaderboard").style.display = "none";
+}
+
+var frTfaDict;
+var enTfaDict;
+
+document.body.style.cursor = 'wait';
+fetchFeaturedArticle().then((data) => {
+    frTfaDict = data.fr;
+    enTfaDict = data.en;
+    printWords(selectLoadingTip(langue).match(/\S+\s*/g));
+    document.body.style.cursor = 'auto';
+    switchGamemode();
+>>>>>>> f72d83a93ccf6774945a60d05f4e8332296c85da
 });
 
 

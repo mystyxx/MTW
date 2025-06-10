@@ -5,8 +5,8 @@ import { getWordList, setWordList } from "../utils/WordList.js";
 import { setTestTime } from "../utils/TestTime.js";
 import { chooseQuote } from "../words.js";
 
-export function changeQuoteLength(size, langue, TimerObject, timeBox) {
-    changeGamemode(TimerObject);
+export function changeQuoteLength(size, langue, timeBox) {
+    changeGamemode();
     timeBox.style.display = 'none';
     setTestTime(500);
     timeBox.textContent = '500';

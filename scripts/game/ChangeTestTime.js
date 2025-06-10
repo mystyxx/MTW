@@ -5,8 +5,8 @@ import { getWordList, setWordList } from "../utils/WordList.js";
 import { setTestTime } from "../utils/TestTime.js";
 import { chooseList } from "../words.js";
 
-export function changeTestTime(time, hardmode, numberwords, langue, TimerObject, timeBox) {
-    changeGamemode(TimerObject);
+export function changeTestTime(time, hardmode, numberwords, langue, timeBox) {
+    changeGamemode();
     setWordList(chooseList(langue, hardmode, numberwords));
     printWords(getWordList())
     setTestTime(time);

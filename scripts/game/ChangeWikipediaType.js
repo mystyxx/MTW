@@ -7,8 +7,8 @@ import { setTestTime } from "../utils/TestTime.js";
 import { getFrenchLang } from "../words.js";
 import { getEnTfaDict, getFrTfaDict } from "../wikipediascraper.js";
 
-export function changeWikipediaType(mode, langue, TimerObject, timeBox, wordBox=document.getElementById("words")) {
-    changeGamemode(TimerObject);
+export function changeWikipediaType(mode, langue, timeBox, wordBox=document.getElementById("words")) {
+    changeGamemode();
     hideButtons('wiki');
     timeBox.style.display = 'none';
     setTestTime(500);

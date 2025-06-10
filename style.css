@@ -86,6 +86,13 @@ words::-webkit-scrollbar,
     opacity: 0;
 }
 
+#typeInput.hidden {
+    visibility: hidden;
+}
+#typeInput.visible {
+    visibility: visible;
+}
+
 #wpmjspbox { 
     margin-left: 10%;
     margin-right: 10%;

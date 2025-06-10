@@ -20,11 +20,11 @@ export function timer() {
     if (timeBox.textContent > 0 && getTestRunning() === true && (getSecondTenth()%5)==0) {
         timeBox.textContent--;
     }
-    if(i+1===getWordList().length && getTestTime() == 500 && inputbox.value.length == getWordList()[i].length) {
-        setCorrectWords(getCorrectWords() + 1);
-        setCorrectCharacters(getCorrectCharacters() + getWordList()[i].length);
-        document.getElementById(i).className = "correct";
-    }
+    // if(i+1===getWordList().length && getTestTime() == 500 && inputbox.value.length == getWordList()[i].length) {
+    //     setCorrectWords(getCorrectWords() + 1);
+    //     setCorrectCharacters(getCorrectCharacters() + getWordList()[i].length);
+    //     document.getElementById(i).className = "correct";
+    // }
     if ((timeBox.textContent == '0') || (i+1===getWordList().length && getTestTime() == 500 && inputbox.value.match(/\S+\s*/g)[i].length == getWordList()[i].length) || (i===getWordList().length && getTestTime() == 500) ) {
         // end of the test
         displayResult();        
@@ -39,6 +39,7 @@ export function timer() {
 }
 
 export function displayResult() {
+    setCorrectCharacters(0); setCorrectWords(0); setWrongCharacters(0);
     let tmp = sessionStorage.getItem('sessionWpmArray');
     if (!tmp) {
         tmp = ''
@@ -46,7 +47,7 @@ export function displayResult() {
     clearInterval(getTimerObject());
     setTestRunning(false);
     //if(inputbox.value == getWordList()[i-1].slice(0, inputbox.value.length + '')) {correctCharacters = correctCharacters + inputbox.value.length}
-    inputbox.style.visibility = 'hidden';
+    inputbox.className = 'hidden';
 
     // calculate the result
     let inputWords = inputbox.value.match(/\S+\s*/g);

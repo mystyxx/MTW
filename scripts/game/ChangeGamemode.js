@@ -4,7 +4,7 @@ import { getTimerObject } from "../utils/TimerObject.js";
 export function changeGamemode(wordBox=document.getElementById("words"), inputbox=document.getElementById("typeInput")) {
     //operations to do each time the gamemode is changed
     clearInterval(getTimerObject());
-    inputbox.style.visibility = 'visible';
+    inputbox.className = 'visible';
     setTestRunning(false);
     wordBox.textContent = '';
     inputbox.value = '';

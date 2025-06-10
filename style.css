@@ -77,8 +77,12 @@ words::-webkit-scrollbar,
     backdrop-filter: blur(4px);
 }
 
+#typeInput.hidden ~ #focusAlert {
+    opacity: 0;
+}
+
 /* Masquer le focusAlert quand le textarea est focus */
-#typeInput:focus ~ #focusAlert {
+#typeInput.visible:focus ~ #focusAlert {
     opacity: 0;
 }
 

@@ -1,3 +1,4 @@
+import { setPersonalBest } from "../game/SetPersonalBest.js";
 import { createNewUser } from "./CreateNewUser.js";
 
 export async function addTimeToLeaderboard(score, accuracy) {
@@ -10,6 +11,7 @@ export async function addTimeToLeaderboard(score, accuracy) {
     else {
         if (localStorage.getItem('username') == null || localStorage.getItem('username') == '' || localStorage.getItem('username') == undefined) {
             localStorage.setItem('username', prompt('Entrez votre nom d\'utilisateur pour enregistrer votre score :'));
+            setPersonalBest();
         }
         const userRef = doc(db, "users", localStorage.getItem('username'));
         let userDoc = await getDoc(userRef);
@@ -28,7 +30,7 @@ export async function addTimeToLeaderboard(score, accuracy) {
         userData.scores[gm].push(newScore);
 
         // gérer le pb
-        if (parseInt(score) < parseInt(localStorage.getItem('pb'))) {
+        if (parseInt(score) > parseInt(localStorage.getItem('pb'))) {
             localStorage.setItem('pb', score);
             userData.personalBest = newScore;
             await updateDoc(userRef, {personalBest: userData.personalBest})

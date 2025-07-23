@@ -256,6 +256,7 @@ words::-webkit-scrollbar,
     outline-color: var(--outline-color);
     inset-inline-start: 5px;
     border-radius: 15px;
+    overflow: scroll;
 }
 
 #resultCard {

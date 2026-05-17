@@ -10,28 +10,22 @@
 |=========================|
 */
 let inputbox = document.getElementById('typeInput');
-let input = inputbox.textContent;
-let scorebox = document.getElementById('score');
 let timeBox = document.getElementById('time');
 let wordBox = document.getElementById('words');
 
 let typedTextElement = document.getElementById("typedText");
-let gamemode = sessionStorage.getItem('gm');
 let theme = localStorage.getItem('theme') || "light";
-let textColor = localStorage.getItem('textColor');
 changeClientTheme(theme);
 if (window.sessionStorage.getItem('sessionWpmArray') == undefined && sessionStorage.getItem('sessionWpmArray') == null) {
     window.sessionStorage.setItem('sessionWpmArray', '');   //initialise pb if it exists not yet
 }
-let personalBest = localStorage.getItem('pb');
 if(window.localStorage.getItem('pb') == null) {window.localStorage.setItem('pb', 0)}
 
 var langue = getFrenchLang();
-let wrongCharacters = 0; let totalspacePress = 0; let i = 0; let correctWords = 0; let correctCharacters = 0; var secondetenth = 0;
-let hardmode = false; let testRunning = false; var words = false;
+let i = 0; 
+let hardmode = false; var words = false;
 inputbox.value = '';
 let testTime = 15;
-var tfaDict = {}
 var frTfaDict;
 var enTfaDict;
 
@@ -91,9 +85,9 @@ import { updateTypedColors } from "./ui/UpdateTypedColors.js";
 import { printWords } from "./game/PrintWords.js";
 import { switchGamemode } from "./game/SwitchGamemode.js";
 import { timer } from "./game/Timer.js";
-import { getWordList, setWordList, wordList } from "./utils/WordList.js";
+import { getWordList } from "./utils/WordList.js";
 import { getEnglishLang, getFrenchLang, selectLoadingTip } from "./words.js";
-import { fetchFeaturedArticle, getEnTfaDict } from "./wikipediascraper.js";
+import { fetchFeaturedArticle } from "./wikipediascraper.js";
 import { displayLeaderboard } from "./leaderboard/DisplayLeaderboard.js";
 import { getTestRunning, setTestRunning } from "./utils/TestRunning.js";
 import { setSecondTenth } from "./utils/SecondTenth.js";
@@ -130,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Remplace l'ancien event listener par la superposition
-inputbox.addEventListener('input', (event) => {
+inputbox.addEventListener('input', () => {
     // quick restart
     if (inputbox.value.includes('\n')) {
         switchGamemode(langue, hardmode, timeBox, false);
@@ -152,7 +146,6 @@ inputbox.addEventListener('input', (event) => {
 
     updateTypedColors(inputbox, typedTextElement, getWordList());
     const typedText = inputbox.value; // Texte tapé par l'utilisateur
-    const currentWord = getWordList()[i]; // Mot actuel à écrire (index `i`)
 
     // test started when input detected
     if (!getTestRunning() && timeBox.textContent != 0 && i==0) {
@@ -179,10 +172,10 @@ inputbox.addEventListener('input', (event) => {
     }
 });
 
-typedTextElement.addEventListener('click', (event) => {
+typedTextElement.addEventListener('click', () => {
     inputbox.focus();
 });
-wordBox.addEventListener('click', (event) => {
+wordBox.addEventListener('click', () => {
     inputbox.focus();
 });
 
@@ -206,24 +199,16 @@ document.getElementById('EnablePonctuation').addEventListener('click', ()=> {
 });
 
 document.getElementById('switchLanguageButton').addEventListener('click', ()=> {
-    translations.forEach(([key, value]) => {
-        if(key == fr && langue == getFrenchLang()) {
-            value.forEach(([elementId, translation]) => {
-                document.getElementById(elementId).textContent = translation;
-            });
-            return;
-        }
-        else {
-            value.forEach(([elementId, translation]) => {
-                document.getElementById(elementId).textContent = translation;
-            });
-            return;
-        }
+    langue = langue === getFrenchLang() ? getEnglishLang() : getFrenchLang();
+    const langKey = langue === getFrenchLang() ? 'fr' : 'en';
+    Object.entries(translations[langKey]).forEach(([elementId, translation]) => {
+        const element = document.getElementById(elementId);
+        if (element) element.textContent = translation;
     });
     switchGamemode(langue, hardmode, timeBox);
 });
 
-document.getElementById('switchThemeButton').addEventListener('click', (changeTheme)=> {
+document.getElementById('switchThemeButton').addEventListener('click', ()=> {
     if(localStorage.getItem('theme') == 'light') {
         changeClientTheme('dark');
         localStorage.setItem('theme', 'dark');

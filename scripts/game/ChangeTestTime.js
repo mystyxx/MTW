@@ -11,17 +11,21 @@ export function changeTestTime(time, hardmode, numberwords, langue, timeBox) {
     printWords(getWordList())
     setTestTime(time);
     timeBox.textContent = time;
-    hideButtons('quote', langue);
+    
     if(numberwords === undefined) {
-        document.getElementById('words15GamemodeButton').textContent = '15';
-        document.getElementById('words30GamemodeButton').textContent = '30';
-        document.getElementById('words60GamemodeButton').textContent = '60';
+        // Time mode
+        hideButtons('time', langue);
+        document.getElementById('time15GamemodeButton').textContent = '15';
+        document.getElementById('time30GamemodeButton').textContent = '30';
+        document.getElementById('time60GamemodeButton').textContent = '60';
         timeBox.style.display = 'block';
     }
     if(numberwords !== undefined){
-        document.getElementById('words15GamemodeButton').textContent = '10';
-        document.getElementById('words30GamemodeButton').textContent = '25';
-        document.getElementById('words60GamemodeButton').textContent = '50';
+        // Words mode
+        hideButtons('quote', langue);
+        document.getElementById('words10GamemodeButton').textContent = '10';
+        document.getElementById('words25GamemodeButton').textContent = '25';
+        document.getElementById('words50GamemodeButton').textContent = '50';
         timeBox.style.display= 'none';
     }
     document.getElementById("leaderboard").style.display = "block";

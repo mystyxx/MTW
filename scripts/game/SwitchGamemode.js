@@ -7,7 +7,22 @@ import { getWordList } from "../utils/WordList.js";
 import { displayLeaderboard } from "../leaderboard/DisplayLeaderboard.js";
 
 export function switchGamemode(langue, hardmode=false, timebox, gamemodeHasChanged=false) {
-    document.getElementById('words15GamemodeButton').className = ''; document.getElementById('words30GamemodeButton').className = ''; document.getElementById('words60GamemodeButton').className = ''; document.getElementById('shortQuoteGamemodeButton').className = ''; document.getElementById('mediumQuoteGamemodeButton').className = ''; document.getElementById('longQuoteGamemodeButton').className = ''; document.getElementById('philoQuoteGamemodeButton').className = ''; document.getElementById('wikipediaGamemodeButton').className = ''; document.getElementById('mostreadGamemodeButton').className = ''; document.getElementById('onthisdayGamemodeButton').className = ''; document.getElementById('tfaGamemodeButton').className = '';
+    // Reset all buttons
+    document.getElementById('time15GamemodeButton').className = '';
+    document.getElementById('time30GamemodeButton').className = '';
+    document.getElementById('time60GamemodeButton').className = '';
+    document.getElementById('words10GamemodeButton').className = '';
+    document.getElementById('words25GamemodeButton').className = '';
+    document.getElementById('words50GamemodeButton').className = '';
+    document.getElementById('shortQuoteGamemodeButton').className = '';
+    document.getElementById('mediumQuoteGamemodeButton').className = '';
+    document.getElementById('longQuoteGamemodeButton').className = '';
+    document.getElementById('philoQuoteGamemodeButton').className = '';
+    document.getElementById('wikipediaGamemodeButton').className = '';
+    document.getElementById('mostreadGamemodeButton').className = '';
+    document.getElementById('onthisdayGamemodeButton').className = '';
+    document.getElementById('tfaGamemodeButton').className = '';
+    
     switch (sessionStorage.getItem('gm')) {
         case 'quote' :
             changeQuoteLength('', langue, timebox)
@@ -45,34 +60,38 @@ export function switchGamemode(langue, hardmode=false, timebox, gamemodeHasChang
         case 'time15':
             changeTestTime(15, hardmode, undefined, langue, timebox);
             changeModeHighlight('timeGamemodeButton');
-            document.getElementById('words15GamemodeButton').className = 'titleHighlight';
+            document.getElementById('time15GamemodeButton').className = 'titleHighlight';
             break;
         case 'time30':
             changeTestTime(30, hardmode, undefined, langue, timebox);
-            document.getElementById('words30GamemodeButton').className = 'titleHighlight';
+            changeModeHighlight('timeGamemodeButton');
+            document.getElementById('time30GamemodeButton').className = 'titleHighlight';
             break;
         case 'time60':
             changeTestTime(60, hardmode, undefined, langue, timebox);
-            document.getElementById('words60GamemodeButton').className = 'titleHighlight';
+            changeModeHighlight('timeGamemodeButton');
+            document.getElementById('time60GamemodeButton').className = 'titleHighlight';
             break;
         case 'words10':
             changeTestTime(500, hardmode, 10, langue, timebox);
             changeModeHighlight('wordsGamemodeButton');
-            document.getElementById('words15GamemodeButton').className = 'titleHighlight';
+            document.getElementById('words10GamemodeButton').className = 'titleHighlight';
             break;
         case 'words25':
             changeTestTime(500, hardmode, 25, langue, timebox);
-            document.getElementById('words30GamemodeButton').className = 'titleHighlight';
+            changeModeHighlight('wordsGamemodeButton');
+            document.getElementById('words25GamemodeButton').className = 'titleHighlight';
             break;
         case 'words50':
             changeTestTime(500, hardmode, 50, langue, timebox);
-            document.getElementById('words60GamemodeButton').className = 'titleHighlight';
+            changeModeHighlight('wordsGamemodeButton');
+            document.getElementById('words50GamemodeButton').className = 'titleHighlight';
             break;
         default:
             sessionStorage.setItem('gm', 'time15')
             changeTestTime(15, hardmode, undefined, langue, timebox);
             changeModeHighlight('timeGamemodeButton');
-            document.getElementById('words15GamemodeButton').className = 'titleHighlight';
+            document.getElementById('time15GamemodeButton').className = 'titleHighlight';
             break;
     }
     if (gamemodeHasChanged) {

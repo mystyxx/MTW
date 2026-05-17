@@ -1,43 +1,24 @@
 import { getEnglishLang } from "../words.js";
 
+const allButtons = ['time15GamemodeButton', 'time30GamemodeButton', 'time60GamemodeButton', 'words10GamemodeButton', 'words25GamemodeButton', 'words50GamemodeButton', 'shortQuoteGamemodeButton', 'mediumQuoteGamemodeButton', 'longQuoteGamemodeButton', 'philoQuoteGamemodeButton', 'EnablePonctuation', 'tfaGamemodeButton', 'mostreadGamemodeButton', 'onthisdayGamemodeButton'];
+
+const buttonVisibility = {
+    quote: ['words10GamemodeButton', 'words25GamemodeButton', 'words50GamemodeButton', 'EnablePonctuation'],
+    wiki: ['mostreadGamemodeButton', 'onthisdayGamemodeButton'],
+    words: ['shortQuoteGamemodeButton', 'mediumQuoteGamemodeButton', 'longQuoteGamemodeButton', 'philoQuoteGamemodeButton'],
+    time: ['time15GamemodeButton', 'time30GamemodeButton', 'time60GamemodeButton'],
+};
+
 export function hideButtons(mode, langue) {
-    if(mode == 'quote') {
-        document.getElementById('shortQuoteGamemodeButton').style.display = 'none';
-        document.getElementById('mediumQuoteGamemodeButton').style.display = 'none';
-        document.getElementById('longQuoteGamemodeButton').style.display = 'none';
-        document.getElementById('philoQuoteGamemodeButton').style.display = 'none';
-        document.getElementById('words15GamemodeButton').style.display = 'inline-block';
-        document.getElementById('words30GamemodeButton').style.display = 'inline-block';
-        document.getElementById('words60GamemodeButton').style.display = 'inline-block';
-        document.getElementById('EnablePonctuation').style.display = 'inline-block';
-        document.getElementById('tfaGamemodeButton').style.display = 'none';
-        document.getElementById('mostreadGamemodeButton').style.display = 'none';
-        document.getElementById('onthisdayGamemodeButton').style.display = 'none';
-    }
-    if(mode == 'wiki') {
-        document.getElementById('shortQuoteGamemodeButton').style.display = 'none';
-        document.getElementById('mediumQuoteGamemodeButton').style.display = 'none';
-        document.getElementById('longQuoteGamemodeButton').style.display = 'none';
-        document.getElementById('philoQuoteGamemodeButton').style.display = 'none';
-        document.getElementById('words15GamemodeButton').style.display = 'none'
-        document.getElementById('words30GamemodeButton').style.display = 'none';
-        document.getElementById('words60GamemodeButton').style.display = 'none';
-        document.getElementById('EnablePonctuation').style.display = 'none';
-        if(langue == getEnglishLang()) {document.getElementById('tfaGamemodeButton').style.display = 'inline-block';}
-        document.getElementById('mostreadGamemodeButton').style.display = 'inline-block';
-        document.getElementById('onthisdayGamemodeButton').style.display = 'inline-block';
-    }
-    if(mode == 'words') {
-        document.getElementById('shortQuoteGamemodeButton').style.display = 'inline-block';
-        document.getElementById('mediumQuoteGamemodeButton').style.display = 'inline-block';
-        document.getElementById('longQuoteGamemodeButton').style.display = 'inline-block';
-        document.getElementById('philoQuoteGamemodeButton').style.display = 'inline-block';
-        document.getElementById('words15GamemodeButton').style.display = 'none'
-        document.getElementById('words30GamemodeButton').style.display = 'none';
-        document.getElementById('words60GamemodeButton').style.display = 'none';
-        document.getElementById('EnablePonctuation').style.display = 'none';
-        document.getElementById('tfaGamemodeButton').style.display = 'none';
-        document.getElementById('mostreadGamemodeButton').style.display = 'none';
-        document.getElementById('onthisdayGamemodeButton').style.display = 'none';
-    }
+    allButtons.forEach(btnId => {
+        document.getElementById(btnId).style.display = 'none';
+    });
+    
+    buttonVisibility[mode].forEach(btnId => {
+        if (btnId === 'tfaGamemodeButton' && langue !== getEnglishLang()) {
+            document.getElementById(btnId).style.display = 'none';
+        } else {
+            document.getElementById(btnId).style.display = 'inline-block';
+        }
+    });
 }
